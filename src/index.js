@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// import fonts for use
+import './fonts/bw/BwModelicaCyrillicDEMO-Regular.ttf'
+import './fonts/bw/BwModelicaCyrillicDEMO-Medium.ttf' 
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

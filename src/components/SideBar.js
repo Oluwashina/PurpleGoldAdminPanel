@@ -1,7 +1,16 @@
 import './SideBar.css'
 import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
 
 function SideBar(){
+
+
+    const [isActive, setActive] = useState(false);
+
+    const handleNav = () =>{
+        setActive(!isActive);
+    }
+
     return(
        <>
           {/* Navbar */}
@@ -42,13 +51,13 @@ function SideBar(){
             <div className="sidenav">
                 
                 {/* home icon */}
-                <div className="text-center activeNav" style={{marginTop: 150}}>
+                <div onClick={handleNav} className={isActive ? "text-center Nav" : "text-center activeNav"} style={{marginTop: 150}}>
                     <img alt=""  src="/img/home-icon.png" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10}}>Home</p>
                 </div>
 
                 {/* Withdrawal icon */}
-                <div className="text-center Nav">
+                <div onClick={handleNav}  className={isActive ? "text-center activeNav" : "text-center Nav"} >
                     <img alt="" src="/img/withdrawal.png" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10}}>Withdrawal</p>
                 </div>
@@ -62,16 +71,32 @@ function SideBar(){
                 {/* plans icon */}
                 <div className="text-center Nav">
                     <img alt="" src="/img/plans.png" className="img-fluid" />
-                    <p className="mb-0" style={{fontSize: 10}}>Plans</p>
+                    <p className="mb-0 mt-1" style={{fontSize: 10}}>Plans</p>
                 </div>
 
                 {/* users */}
                 <div className="text-center Nav">
                     <img  alt="" src="/img/users.png" className="img-fluid" />
-                    <p className="mb-0" style={{fontSize: 10}}>Users</p>
+                    <p className="mb-0 mt-1" style={{fontSize: 10}}>Users</p>
                 </div>
-                
 
+                  {/* Marketers */}
+                  <div className="text-center Nav">
+                    <img  alt="" src="/img/marketers.png" className="img-fluid" />
+                    <p className="mb-0" style={{fontSize: 10}}>Marketers</p>
+                </div>
+
+                  {/* Admin */}
+                  <div className="text-center Nav">
+                    <img  alt="" src="/img/admin.png" className="img-fluid" />
+                    <p className="mb-0" style={{fontSize: 10}}>Admin</p>
+                </div>
+
+                 {/* Admin */}
+                 <div className="text-center Nav">
+                    <img  alt="" src="/img/logout.png" className="img-fluid" />
+                    <p className="mb-0" style={{fontSize: 10}}>Logout</p>
+                </div>
 
             </div>
 

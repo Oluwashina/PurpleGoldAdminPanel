@@ -1,6 +1,6 @@
 
  .main {
-    margin-left: 60px;/* Same as the width of the sidenav */
+    margin-left: 66px;/* Same as the width of the sidenav */
     /* font-size: 10px; Increased text to enable scrolling */
     padding: 10px 10px;
   }
@@ -11,6 +11,34 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  /* marketers div */
+  .title-div{
+    background: #FFFFFF;
+    border: 1px solid #AFAFAF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .title-heading{
+      padding: 15px 0px;
+  }
+  .active-div{
+    background-image: url('./img/users.png');
+    background-size: cover;
+    border-radius: 10px;
+  }
+  .active-div h5{
+      color: white
+  }
+  .marketers-div{
+    background-image: url('./img/marketers.png');
+    background-size: cover;
+    border-radius: 10px;  
+  }
+  .marketers-div h5{
+      color: white;
   }
 
   /* cards layout */
@@ -28,10 +56,36 @@
       cursor: pointer;
   }
 
+  /* filter div */
+  .filter-div{
+    background: rgba(226, 223, 242, 0.82);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    cursor: pointer;
+  }
+  .active-filter{
+      background-color: #A030A8;
+      border-radius: 10px;
+      border-right:  0.2px solid #9286E9;
+      padding: 10px 30px;
+  }
+  .active-filter p{
+      color: white;
+  }
+  .filter-tab{
+      border-right:  0.2px solid #9286E9;
+      padding: 10px 30px;
+  }
+
   /* table layout */
   .table-style{
     background: #FFFFFF;
     padding: 30px 30px;
+  }
+  .table-style div{
+      justify-content: flex-start;
   }
   .btn-view{
     background: #A030A8;

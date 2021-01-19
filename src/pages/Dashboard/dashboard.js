@@ -1,18 +1,47 @@
 import SideBar from '../../components/SideBar'
 import './dashboard.css'
+import React, {useState} from 'react'
+
 
 const Dashboard = () =>{
+
+    const [isActive, setActive] = useState(false);
+    
+    const [isCardActive, setCardActive] = useState(false);
+  
+
+    const handleToggle = () =>{
+        setActive(!isActive);
+    }
+
+    const handleCardToggle = () =>{
+        setCardActive(!isCardActive)
+    }
+
+   
+
     return(
         <div style={{backgroundColor: '#e5e5e5'}}>
         <SideBar />
             <div className="main">
                 <div className="contain">
+
+                    {/* swicth between the users and markteters tab */}
+                    <div className="mt-3 title-div" style={{display: 'flex'}}>
+                        <div onClick={handleToggle} className={isActive ? "title-heading" : "title-heading active-div"}  style={{flex: 1}}>
+                            <h5 className="text-center mb-0">User</h5>
+                        </div>
+                        <div onClick={handleToggle} className={isActive ? "title-heading marketers-div" : "title-heading"} style={{flex: 1,}}>
+                            <h5 className="text-center mb-0">Marketer</h5>
+                        </div>
+                    </div>
                     
                     {/* cards layout */}
                     <div className="row mt-5">
 
+                            {/* funding */}
                         <div className="col-lg-2">
-                            <div className="card-div-active">
+                            <div onClick={handleCardToggle} className={isCardActive ? "card-div" : "card-div-active"}>
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Funding</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
@@ -22,9 +51,10 @@ const Dashboard = () =>{
                                 </div>
                             </div>
                         </div>
-
+                        
+                        {/* inflow */}
                         <div className="col-lg-2">
-                            <div className="card-div">
+                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"} >
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>In-Flow</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
@@ -35,9 +65,9 @@ const Dashboard = () =>{
                             </div>
                         </div>
 
-                        
+                            {/* outflow */}
                         <div className="col-lg-2">
-                            <div className="card-div">
+                            <div  onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"}>
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Out-Flow</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
@@ -48,9 +78,9 @@ const Dashboard = () =>{
                             </div>
                         </div>
 
-                        
+                        {/* active */}
                         <div className="col-lg-2">
-                            <div className="card-div">
+                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"}>
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Active</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
@@ -62,9 +92,9 @@ const Dashboard = () =>{
                             </div>
                         </div>
 
-                        
+                        {/* inactive */}
                         <div className="col-lg-2">
-                            <div className="card-div">
+                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"} >
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Inactive</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
@@ -76,9 +106,9 @@ const Dashboard = () =>{
                             </div>
                         </div>
 
-                        
+                            {/* suspended */}
                         <div className="col-lg-2">
-                            <div className="card-div">
+                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"}>
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Suspended</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
@@ -90,9 +120,24 @@ const Dashboard = () =>{
                         </div>
                     </div>
 
+                {/* filter tabs */}
+                <div className="filter-div mt-5">
+                    <div className="filter-tab active-filter">   
+                        <p className="mb-0">Today</p>
+                    </div>
+                    <div className="filter-tab">   
+                        <p className="mb-0">This week</p>
+                    </div>
+                    <div className="filter-tab" >   
+                        <p className="mb-0">Month</p>
+                    </div>
+                    <div style={{padding: '10px 30px'}}>   
+                        <p className="mb-0 text-center">Year</p>
+                    </div>
+                </div>
 
                     {/* Users details */}
-                    <div className="row mt-5">
+                    <div className="row mt-3">
                         <div className="col-lg-8">
                                 <div className="table-style">
                                     <div style={{display: 'flex', justifyContent: 'space-between',}}>
@@ -197,7 +242,7 @@ const Dashboard = () =>{
                                             <div>
                                                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                                     <div>
-                                                     <h6 style={{fontWeight: 700}}>Total: N 2,031,564.00</h6>
+                                                     <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
                                                     </div>
                                                     <div className="ml-3">
                                                      <button className="btn btn-view">View All</button>

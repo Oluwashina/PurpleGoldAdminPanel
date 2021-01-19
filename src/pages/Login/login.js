@@ -1,6 +1,7 @@
 import "./login.css";
 import {Form, Formik} from 'formik'
-import {loginValidator} from '../../validationSchema/authValidator';
+import { loginValidator } from "../../validationSchema/authValidator";
+
 
 function Login(props) {
 

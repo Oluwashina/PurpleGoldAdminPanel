@@ -1,0 +1,53 @@
+
+.request-div{
+    display: flex;
+    width: 80%;
+    justify-content: center;
+}
+.active-request{
+    background: #A030A8;
+    color: white;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.active-count{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    right: 15px;
+    top: 7px;    
+   background: #FF0000;
+   font-size: 12px;
+}
+.newRequest{
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 12px 30px;
+    color:  #910691;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* request data styles */
+.request-table{
+    background: rgba(226, 223, 242, 0.82);
+    padding: 10px 20px;
+    display: flex;
+}
+.request-head{
+  flex: 1 1 auto
+}
+.request-data-table{
+    background: #FFFFFF;
+    padding: 10px 20px;
+}
+.request-data{
+    display: flex;
+    align-items: center;
+}

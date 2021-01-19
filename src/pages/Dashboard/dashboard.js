@@ -140,25 +140,25 @@ const Dashboard = () =>{
                     <div className="row mt-3">
                         <div className="col-lg-8">
                                 <div className="table-style">
-                                    <div style={{display: 'flex', justifyContent: 'space-between',}}>
+                                    <div style={{display: 'flex',}}>
 
-                                        <div>
+                                        <div className="table-data">
                                             <img src="/img/avatar.png" className="img-fluid" alt="" />
                                         </div>
 
-                                        <div>
+                                        <div  className="table-data">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
                                         </div>
 
-                                        <div>
+                                        <div  className="table-data"> 
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
                                         </div>
 
-                                        <div>
+                                        <div  className="table-data">
                                             <p className="mb-0">femiemmanuel@gmail.com</p>
                                         </div>
 
-                                        <div>
+                                        <div  className="table-data">
                                             <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                         </div>
                                     </div>
@@ -166,23 +166,23 @@ const Dashboard = () =>{
 
                                     <div style={{display: 'flex', justifyContent: 'space-between', }}>
 
-                                        <div>
+                                        <div  className="table-data">
                                             <img className="img-fluid" src="/img/avatar.png" alt="" />
                                         </div>
 
-                                        <div>
+                                        <div  className="table-data">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
                                         </div>
 
-                                        <div>
+                                        <div  className="table-data">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
                                         </div>
 
-                                        <div>
+                                        <div className="table-data">
                                             <p className="mb-0">femiemmanuel@gmail.com</p>
                                         </div>
 
-                                        <div>
+                                        <div className="table-data">
                                             <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                         </div>
                                     </div>
@@ -190,23 +190,23 @@ const Dashboard = () =>{
 
                                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
 
-                                            <div>
+                                            <div className="table-data"> 
                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0">femiemmanuel@gmail.com</p>
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                             </div>
                                             </div>
@@ -214,23 +214,23 @@ const Dashboard = () =>{
 
                                             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0">femiemmanuel@gmail.com</p>
                                             </div>
 
-                                            <div>
+                                            <div  className="table-data">
                                                 <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                             </div>
                                             </div>

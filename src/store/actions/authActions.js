@@ -1,0 +1,2 @@
+import {apiUrl} from '../config'
+

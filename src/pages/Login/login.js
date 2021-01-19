@@ -2,7 +2,7 @@ import "./login.css";
 import {Form, Formik} from 'formik'
 import {loginValidator} from '../../validationSchema/authValidator';
 
-function Login() {
+function Login(props) {
 
     
 
@@ -11,6 +11,7 @@ const handleSubmit = (values, setSubmitting) =>{
     alert("Submitted");
     console.log(values)
     setSubmitting(false)
+    props.history.push("/dashboard");
   }
   
 
@@ -56,7 +57,7 @@ const handleSubmit = (values, setSubmitting) =>{
                              <div className="form-group input-container mt-4">
                                 <i className="mdi mdi-email icon"></i>
                                 <input
-                                    className="form-control"
+                                    className="form-control input-style"
                                     type="text"
                                     placeholder="Email Address"
                                     onBlur={handleBlur}
@@ -76,7 +77,7 @@ const handleSubmit = (values, setSubmitting) =>{
                             <div className="form-group input-container mt-3">
                             <i className="mdi mdi-lock icon"></i>
                             <input
-                                className="form-control"
+                                className="form-control input-style"
                                 type="password"
                                 placeholder="Password"
                                     id="password"

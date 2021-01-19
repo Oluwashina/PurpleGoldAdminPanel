@@ -1,0 +1,45 @@
+
+ .main {
+    margin-left: 60px;/* Same as the width of the sidenav */
+    /* font-size: 10px; Increased text to enable scrolling */
+    padding: 10px 10px;
+  }
+
+  .contain{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  /* cards layout */
+  .card-div{
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 10px 10px;
+    cursor: pointer;
+  }
+  .card-div-active{
+      background-color: transparent;
+      border-radius: 5px;
+      border:  1px solid #000000;
+      padding: 10px 10px;
+      cursor: pointer;
+  }
+
+  /* table layout */
+  .table-style{
+    background: #FFFFFF;
+    padding: 30px 30px;
+  }
+  .btn-view{
+    background: #A030A8;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 30px;
+    transition: all ease-in 0.5s;
+  }
+  .btn-view:hover{
+    color: white;     
+} 

@@ -62,9 +62,9 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    width: 40%;
     cursor: pointer;
   }
+  
   .active-filter{
       background-color: #A030A8;
       border-radius: 10px;
@@ -85,7 +85,7 @@
     padding: 30px 30px;
   }
   .table-data{
-      flex: 1 1 auto
+      /* flex: 1 1 auto */
   }
   
   .btn-view{

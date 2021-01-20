@@ -58,8 +58,8 @@ const Withdrawal = () =>{
                     </div>
 
                     {/* requests duration filter*/}
-                    <div className="text-center">
-                        <div className="filter-div mx-auto mt-4" style={{justifyContent: 'center'}}>
+                    <div className="" style={{ width: '40%', margin: 'auto'}}>
+                        <div className="filter-div mt-4">
                         <div className="filter-tab active-filter">   
                             <p className="mb-0">Today</p>
                         </div>
@@ -119,7 +119,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
                             25/01/2020
                         </div>
-                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400, fontStyle: 'italic'}}>
                             pending...
                         </div>
                         <div className="request-head" >
@@ -145,7 +145,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
                             25/01/2020
                         </div>
-                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400, fontStyle: 'italic'}}>
                             pending...
                         </div>
                         <div className="request-head" >
@@ -170,7 +170,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
                             25/01/2020
                         </div>
-                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400, fontStyle: 'italic'}}>
                             pending...
                         </div>
                         <div className="request-head" >
@@ -196,7 +196,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
                             25/01/2020
                         </div>
-                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#9E079E', fontWeight: 400, fontStyle: 'italic'}}>
                             pending...
                         </div>
                         <div className="request-head" >

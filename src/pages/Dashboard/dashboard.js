@@ -129,27 +129,48 @@ const Dashboard = () =>{
                         </div>
                     </div>
 
-                {/* filter tabs */}
-                <div className="filter-div mt-5">
-                    <div className="filter-tab active-filter">   
-                        <p className="mb-0">Today</p>
-                    </div>
-                    <div className="filter-tab">   
-                        <p className="mb-0">This week</p>
-                    </div>
-                    <div className="filter-tab" >   
-                        <p className="mb-0">Month</p>
-                    </div>
-                    <div style={{padding: '10px 30px'}}>   
-                        <p className="mb-0 text-center">Year</p>
-                    </div>
+
+                {/* charts display */}
+
+                <div className="mt-4">
+                    <Chart />
                 </div>
+
+
+
+                {/* funding display */}
+                
+                {/* filter tabs */}
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div className="filter-div mt-5">
+                        <div className="filter-tab active-filter">   
+                            <p className="mb-0">Today</p>
+                        </div>
+                        <div className="filter-tab">   
+                            <p className="mb-0">This week</p>
+                        </div>
+                        <div className="filter-tab" >   
+                            <p className="mb-0">Month</p>
+                        </div>
+                        <div style={{padding: '10px 30px'}}>   
+                            <p className="mb-0 text-center">Year</p>
+                        </div>
+                    </div>
+
+                    {/* name */}
+                    <div className="mt-5 ml-3">
+                     <h5 style={{color: '#A030A8', fontWeight: 'bold'}}>Funding</h5>
+                    </div>
+
+                </div>
+
+              
 
                     {/* Users details */}
                     <div className="row mt-3">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                                 <div className="table-style">
-                                    <div style={{display: 'flex',}}>
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
 
                                         <div className="table-data">
                                             <img src="/img/avatar.png" className="img-fluid" alt="" />
@@ -261,9 +282,152 @@ const Dashboard = () =>{
                                 </div>
                         </div>
 
-                        {/* charts display */}
-                        <div className="col-lg-4">
-                            <Chart />
+                    </div>
+
+                    {/* Up-coming payouts display */}
+                    
+                {/* funding display */}
+                
+                {/* filter tabs */}
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div className="filter-div mt-5">
+                        <div className="filter-tab active-filter">   
+                            <p className="mb-0">Today</p>
+                        </div>
+                        <div className="filter-tab">   
+                            <p className="mb-0">This week</p>
+                        </div>
+                        <div className="filter-tab" >   
+                            <p className="mb-0">Month</p>
+                        </div>
+                        <div style={{padding: '10px 30px'}}>   
+                            <p className="mb-0 text-center">Year</p>
+                        </div>
+                    </div>
+
+                    {/* name */}
+                    <div className="mt-5 ml-3">
+                     <h5 style={{color: '#A030A8', fontWeight: 'bold'}}>Up-Coming Payouts</h5>
+                    </div>
+
+                </div>
+
+              
+
+                    {/* Users details */}
+                    <div className="row mt-3">
+                        <div className="col-lg-12">
+                                <div className="table-style">
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+
+                                        <div className="table-data">
+                                            <img src="/img/avatar.png" className="img-fluid" alt="" />
+                                        </div>
+
+                                        <div  className="table-data">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                        </div>
+
+                                        <div  className="table-data"> 
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                        </div>
+
+                                        <div  className="table-data">
+                                            <p className="mb-0">femiemmanuel@gmail.com</p>
+                                        </div>
+
+                                        <div  className="table-data">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div style={{display: 'flex', justifyContent: 'space-between', }}>
+
+                                        <div  className="table-data">
+                                            <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                        </div>
+
+                                        <div  className="table-data">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
+                                        </div>
+
+                                        <div  className="table-data">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                        </div>
+
+                                        <div className="table-data">
+                                            <p className="mb-0">femiemmanuel@gmail.com</p>
+                                        </div>
+
+                                        <div className="table-data">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+
+                                            <div className="table-data"> 
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0">femiemmanuel@gmail.com</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            </div>
+                                            </div>
+                                            <hr />
+
+                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+
+                                            <div  className="table-data">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0">femiemmanuel@gmail.com</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            </div>
+                                            </div>
+                                            <hr />
+
+                                            
+
+                                            {/* total count */}
+                                            <div>
+                                                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
+                                                    <div>
+                                                     <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
+                                                    </div>
+                                                    <div className="ml-3">
+                                                     <button className="btn btn-view">View All</button>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                </div>
                         </div>
 
                     </div>

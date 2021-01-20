@@ -1,0 +1,11 @@
+
+.admin-card{
+    width: 50%;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.admin-div{
+    padding: 50px 80px;
+}

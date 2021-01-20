@@ -1,0 +1,94 @@
+
+.fund-card{
+    width: 60%;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.fund-confirm-card{
+    width: 40%;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+.fund-confirm-div{
+    padding: 50px 30px 40px 30px;
+}
+
+.fund-div{
+    padding: 80px 100px;
+}
+
+.fund-style{
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    background: #F5F5F5;
+    padding: 24px 5px 24px 60px;
+  }
+
+  .fund-style:focus {
+    border: none;
+    box-shadow: none;
+    outline: 0 none;
+    background: #F5F5F5;
+  }
+
+  .fund-style::placeholder{
+      font-size: 12px;
+      color: #000000;
+  }
+
+  .icon-fund{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    text-align: center;
+    background: rgba(158, 7, 158, 0.15);
+    border-radius: 5px;
+    background-color: #7031BD;
+    color: white;
+    font-size: 18px;
+    width: 50px;
+}
+
+  .btn-fund{
+    background:  #7031BD;
+    border-radius: 5px;
+    color: white;
+    padding: 12px 40px;
+    width: 100%;
+    font-weight: bold;
+    transition: all ease-in 0.5s;
+  }
+
+  .btn-fund:hover{
+    color: white;     
+}
+
+.btn-confirm{
+    background:  #7031BD;
+    border-radius: 5px;
+    color: white;
+    padding: 12px 40px;
+    width: 100%;
+    font-weight: bold;
+    transition: all ease-in 0.5s; 
+}
+.btn-confirm:hover{
+    color: white;
+}
+.btn-cancel{
+    background-color: #9E079E;
+    border-radius: 5px;
+    color: white;
+    padding: 12px 40px;
+    width: 100%;
+    font-weight: bold;
+    transition: all ease-in 0.
+}
+.btn-cancel:hover{
+    color: white
+}

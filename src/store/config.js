@@ -1,1 +1,1 @@
-export const apiUrl = "https://kdbizhubpi.online/v1/api/v1/";
+export const apiUrl = "https://purple-gold.herokuapp.com/";

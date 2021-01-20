@@ -1,9 +1,9 @@
 import SideBar from '../../components/SideBar/SideBar'
 import React, {useState} from 'react'
-import './fund.css'
+import './admin.css'
 
 
-const Fund = (props) =>{
+const Admin = (props) =>{
 
     const [isActive, setActive] = useState(false);
     
@@ -36,12 +36,12 @@ const Fund = (props) =>{
 
                     {/* Fund user design layout */}
 
-                    <div className="fund-card mt-5">
+                    <div className="admin-card mt-5">
 
-                        <div className="fund-div">
+                        <div className="admin-div">
 
                             <div>
-                                <h5 className="text-center" style={{color: '#7031BD', fontWeight: 'bold'}}>Fund User</h5>
+                                <h5 className="text-center" style={{color: '#7031BD', fontWeight: 'bold'}}>Create New Admin</h5>
                             </div>
 
                             <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ const Fund = (props) =>{
                                     <input
                                         className="form-control fund-style"
                                         type="email"
-                                        placeholder="Please Enter Users Email Address"
+                                        placeholder="Staff Email Address"
                                         id="email"
                                         required
                                     />
@@ -60,12 +60,12 @@ const Fund = (props) =>{
                                     </div>
 
                                     <div className="form-group input-container mt-4">
-                                    <i className="mdi mdi-wallet icon-fund"></i>
+                                    <i className="mdi mdi-lock icon-fund"></i>
                                     <input
                                         className="form-control fund-style"
-                                        type="text"
-                                        placeholder="Please Enter Amount you want to Fund into Users PurpleVest Wallet"
-                                        id="wallet"
+                                        type="password"
+                                        placeholder="Password"
+                                        id="password"
                                         required
                                     />
                                     </div>
@@ -74,7 +74,7 @@ const Fund = (props) =>{
                                 type="submit"
                                
                                 className="btn btn-fund mt-2">
-                                    Proceed to Fund Users Wallet
+                                    Create New Admin
                                     </button>
                                 
                             </form>
@@ -95,4 +95,4 @@ const Fund = (props) =>{
     )
 }
 
-export default Fund;
+export default Admin;

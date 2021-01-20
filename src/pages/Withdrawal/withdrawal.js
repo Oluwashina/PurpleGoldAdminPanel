@@ -1,4 +1,4 @@
-import SideBar from '../../components/SideBar'
+import SideBar from '../../components/SideBar/SideBar'
 import React, {useState} from 'react'
 import './withdrawal.css'
 

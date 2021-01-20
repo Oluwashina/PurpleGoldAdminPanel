@@ -1,6 +1,8 @@
-import SideBar from '../../components/SideBar'
+import SideBar from '../../components/SideBar/SideBar'
 import './dashboard.css'
 import React, {useState} from 'react'
+import CountUp from 'react-countup'
+import Chart from '../../components/Charts/Chart'
 
 
 const Dashboard = () =>{
@@ -100,7 +102,14 @@ const Dashboard = () =>{
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
                                 </div>
                                 <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>29</h5>
+                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>
+                                        <CountUp
+                                        start={0}
+                                        end={29}
+                                        duration={2.5}
+                                        separator=","
+                                         />
+                                    </h5>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p>
                                 </div>
                             </div>
@@ -252,10 +261,14 @@ const Dashboard = () =>{
                                 </div>
                         </div>
 
+                        {/* charts display */}
+                        <div className="col-lg-4">
+                            <Chart />
+                        </div>
+
                     </div>
 
-
-
+                    
 
                 </div>
             </div>

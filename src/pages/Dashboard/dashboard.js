@@ -23,7 +23,7 @@ const Dashboard = () =>{
    
 
     return(
-        <div style={{backgroundColor: '#e5e5e5'}}>
+        <div style={{backgroundColor: '#f5f6f8'}}>
         <SideBar />
             <div className="main">
                 <div className="contain">
@@ -39,7 +39,7 @@ const Dashboard = () =>{
                     </div>
                     
                     {/* cards layout */}
-                    <div className="row mt-5">
+                    <div className="row mt-3">
 
                             {/* funding */}
                         <div className="col-lg-2">
@@ -139,10 +139,19 @@ const Dashboard = () =>{
 
 
                 {/* funding display */}
-                
+
+                 
+
+
                 {/* filter tabs */}
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <div className="filter-div mt-5">
+
+                     {/* name */}
+                    <div className="mt-5">
+                        <h5 style={{color: '#A030A8', fontWeight: 'bold'}}>Funding</h5>
+                        </div>
+
+                    <div className="filter-div mt-5 ml-3">
                         <div className="filter-tab active-filter">   
                             <p className="mb-0">Today</p>
                         </div>
@@ -157,11 +166,7 @@ const Dashboard = () =>{
                         </div>
                     </div>
 
-                    {/* name */}
-                    <div className="mt-5 ml-3">
-                     <h5 style={{color: '#A030A8', fontWeight: 'bold'}}>Funding</h5>
-                    </div>
-
+                  
                 </div>
 
               
@@ -170,7 +175,7 @@ const Dashboard = () =>{
                     <div className="row mt-3">
                         <div className="col-lg-12">
                                 <div className="table-style">
-                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div style={{display: 'flex',}}>
 
                                         <div className="table-data">
                                             <img src="/img/avatar.png" className="img-fluid" alt="" />
@@ -189,12 +194,16 @@ const Dashboard = () =>{
                                         </div>
 
                                         <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>00:23:55</p>
+                                        </div>
+
+                                        <div  className="table-data">
+                                            <p className="mb-0" style={{color: '#9E079E',  textAlign: 'right'}}>25/01/2020</p>
                                         </div>
                                     </div>
                                     <hr />
 
-                                    <div style={{display: 'flex', justifyContent: 'space-between', }}>
+                                    <div style={{display: 'flex', }}>
 
                                         <div  className="table-data">
                                             <img className="img-fluid" src="/img/avatar.png" alt="" />
@@ -212,13 +221,17 @@ const Dashboard = () =>{
                                             <p className="mb-0">femiemmanuel@gmail.com</p>
                                         </div>
 
+                                        <div  className="table-data">
+                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>17:46:55</p>
+                                        </div>
+
                                         <div className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>25/01/2020</p>
                                         </div>
                                     </div>
                                     <hr />
 
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                                    <div style={{display: 'flex',}}>
 
                                             <div className="table-data"> 
                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
@@ -237,12 +250,16 @@ const Dashboard = () =>{
                                             </div>
 
                                             <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>20:16:55</p>
+                                             </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>25/01/2020</p>
                                             </div>
                                             </div>
                                             <hr />
 
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                                            <div style={{display: 'flex',}}>
 
                                             <div  className="table-data">
                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
@@ -261,7 +278,11 @@ const Dashboard = () =>{
                                             </div>
 
                                             <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>23:12:55</p>
+                                            </div>
+
+                                            <div  className="table-data">
+                                                <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>25/01/2020</p>
                                             </div>
                                             </div>
                                             <hr />
@@ -290,7 +311,13 @@ const Dashboard = () =>{
                 
                 {/* filter tabs */}
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <div className="filter-div mt-5">
+
+                     {/* name */}
+                     <div className="mt-5">
+                     <h5 style={{color: '#A030A8', fontWeight: 'bold'}}>Up-Coming Payouts</h5>
+                    </div>
+
+                    <div className="filter-div mt-5 ml-3">
                         <div className="filter-tab active-filter">   
                             <p className="mb-0">Today</p>
                         </div>
@@ -305,10 +332,7 @@ const Dashboard = () =>{
                         </div>
                     </div>
 
-                    {/* name */}
-                    <div className="mt-5 ml-3">
-                     <h5 style={{color: '#A030A8', fontWeight: 'bold'}}>Up-Coming Payouts</h5>
-                    </div>
+                   
 
                 </div>
 
@@ -318,7 +342,7 @@ const Dashboard = () =>{
                     <div className="row mt-3">
                         <div className="col-lg-12">
                                 <div className="table-style">
-                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div style={{display: 'flex'}}>
 
                                         <div className="table-data">
                                             <img src="/img/avatar.png" className="img-fluid" alt="" />
@@ -336,13 +360,17 @@ const Dashboard = () =>{
                                             <p className="mb-0">femiemmanuel@gmail.com</p>
                                         </div>
 
+                                        <div className="table-data">
+                                            <p className="mb-0" style={{fontWeight: 'bold'}}>GT Bank - 0015738102</p>
+                                        </div>
+
                                         <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            <p className="mb-0" style={{color: '#9E079E',  textAlign: 'right'}}>Today</p>
                                         </div>
                                     </div>
                                     <hr />
 
-                                    <div style={{display: 'flex', justifyContent: 'space-between', }}>
+                                    <div style={{display: 'flex', }}>
 
                                         <div  className="table-data">
                                             <img className="img-fluid" src="/img/avatar.png" alt="" />
@@ -361,12 +389,16 @@ const Dashboard = () =>{
                                         </div>
 
                                         <div className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            <p className="mb-0" style={{fontWeight: 'bold'}}>Stanbic Bank - 0015738102</p>
+                                        </div>
+
+                                        <div className="table-data">
+                                            <p className="mb-0" style={{color: '#9E079E',  textAlign: 'right'}}>Today</p>
                                         </div>
                                     </div>
                                     <hr />
 
-                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                                    <div style={{display: 'flex',}}>
 
                                             <div className="table-data"> 
                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
@@ -384,13 +416,17 @@ const Dashboard = () =>{
                                                 <p className="mb-0">femiemmanuel@gmail.com</p>
                                             </div>
 
+                                            <div className="table-data">
+                                            <p className="mb-0" style={{fontWeight: 'bold'}}>Fidelity  Bank - 0015738102</p>
+                                        </div>
+
                                             <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                                <p className="mb-0" style={{color: '#9E079E',textAlign: 'right'}}>Today</p>
                                             </div>
                                             </div>
                                             <hr />
 
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                                            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
 
                                             <div  className="table-data">
                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
@@ -408,8 +444,12 @@ const Dashboard = () =>{
                                                 <p className="mb-0">femiemmanuel@gmail.com</p>
                                             </div>
 
+                                            <div className="table-data">
+                                            <p className="mb-0" style={{fontWeight: 'bold'}}>Access Bank - 0015738102</p>
+                                        </div>
+
                                             <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                                <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>Today</p>
                                             </div>
                                             </div>
                                             <hr />

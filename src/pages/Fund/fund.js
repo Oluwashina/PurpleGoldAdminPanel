@@ -18,7 +18,7 @@ const Fund = (props) =>{
 
 
     return(
-        <div style={{backgroundColor: '#e5e5e5', height: '100vh'}}>
+        <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
         <SideBar />
             <div className="main">
                 <div className="contain">

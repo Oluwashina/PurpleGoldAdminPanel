@@ -13,7 +13,7 @@ const FundConfirm = () =>{
 
 
     return(
-        <div style={{backgroundColor: '#e5e5e5', height: '100vh'}}>
+        <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
         <SideBar />
             <div className="main">
                 <div className="contain">
@@ -36,11 +36,11 @@ const FundConfirm = () =>{
                         <div className="fund-confirm-div">
 
                             <div>
-                                <p className="text-center" style={{color: '#000000;'}}>
+                                <p className="text-center mb-0" style={{color: '#000000',}}>
                                 You are about to Fund <span style={{fontWeight: 'bold'}}>Akinyemi Ogungbaro’s</span> wallet 
-                                <span style={{fontWeight: 'bold'}}> (akinyemiogungbaro@gmail.com)</span> with N200,000
-                                Please click <span style={{fontWeight: 'bold'}}>‘Confirmed’</span> to <span style={{fontWeight: 'bold'}}>“Complete’</span> or <span style={{fontWeight: 'bold'}}>‘Cancel’</span> to <span style={{fontWeight: 'bold'}}>‘Decline’.</span>
-                                            </p>
+                                    </p>
+                                    <p className="text-center mb-0"><span style={{fontWeight: 'bold', fontStyle: 'italic'}}> (akinyemiogungbaro@gmail.com)</span> with N200,000</p>
+                                    <p className="text-center mb-0"> Please click <span style={{fontWeight: 'bold'}}>‘Confirmed’</span> to <span style={{fontWeight: 'bold'}}>“Complete’</span> or <span style={{fontWeight: 'bold'}}>‘Cancel’</span> to <span style={{fontWeight: 'bold'}}>‘Decline’.</span></p>
                                 </div>
 
                                 <div className="mt-4" style={{display: 'flex',}}>

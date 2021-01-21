@@ -41,7 +41,7 @@
     display: flex;
 }
 .request-head{
-  flex: 1 1 auto
+  flex: 1 1 auto;
 }
 .request-data-table{
     background: #FFFFFF;

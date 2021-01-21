@@ -9,3 +9,21 @@
 .admin-div{
     padding: 50px 80px;
 }
+
+.users-card{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+}
+.user-filter{
+    padding: 10px 40px;
+    position: relative;
+}
+
+.user-active{
+    background: #7331D5;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 30px;
+}

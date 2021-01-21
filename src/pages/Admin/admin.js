@@ -18,7 +18,7 @@ const Admin = (props) =>{
 
 
     return(
-        <div style={{backgroundColor: '#e5e5e5', height: '100vh'}}>
+        <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
         <SideBar />
             <div className="main">
                 <div className="contain">
@@ -30,6 +30,33 @@ const Admin = (props) =>{
                         </div>
                         <div onClick={handleToggle} className={isActive ? "title-heading marketers-div" : "title-heading"} style={{flex: 1,}}>
                             <h5 className="text-center mb-0">Marketer</h5>
+                        </div>
+                    </div>
+
+
+                    <div className="mt-4" style={{ width: '60%', margin: 'auto'}}>
+                        <div className="users-card">
+
+                            <div className="user-filter user-active" style={{borderRight: '0.2px solid #9286E9'}}>
+                                New
+                            </div>
+                            <div  className="user-filter " style={{borderRight: '0.2px solid #9286E9'}}>
+                                
+                                View All
+                            </div>
+
+                            <div  className="user-filter" style={{borderRight: '0.2px solid #9286E9'}} >
+                                Suspended
+                            </div>
+
+                            <div  className="user-filter" style={{borderRight: '0.2px solid #9286E9'}} >
+                                All Activities
+                            </div>
+
+                            <div className="user-filter">
+                                Profile
+                            </div>
+
                         </div>
                     </div>
                     

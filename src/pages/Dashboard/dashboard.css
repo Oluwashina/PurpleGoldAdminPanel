@@ -85,7 +85,8 @@
     padding: 30px 30px;
   }
   .table-data{
-      /* flex: 1 1 auto */
+      flex: 1 1 auto;
+
   }
   
   .btn-view{

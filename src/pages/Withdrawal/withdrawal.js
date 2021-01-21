@@ -13,7 +13,7 @@ const Withdrawal = () =>{
 
 
     return(
-        <div style={{backgroundColor: '#e5e5e5',}}>
+        <div style={{backgroundColor: '#f5f6f8',}}>
         <SideBar />
             <div className="main">
                 <div className="contain">
@@ -104,13 +104,15 @@ const Withdrawal = () =>{
                 <div className="request-data-table mt-1">
                     
                      <div className="request-data">
+
                         <div className="request-head">
                         <img className="img-fluid" src="/img/avatar.png" alt="" />
                         </div>
-                        <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
+
+                        <div className="request-head" style={{color: '#000000',}}>
                             Femi Emmanuel
                         </div>
-                        <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#000000', fontWeight: 'bold'}}>
                             N 235,198.00
                         </div>
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
@@ -136,7 +138,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
                             Femi Emmanuel
                         </div>
-                        <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#000000', fontWeight: 'bold'}}>
                             N 235,198.00
                         </div>
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
@@ -161,7 +163,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
                             Femi Emmanuel
                         </div>
-                        <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#000000', fontWeight: 'bold'}}>
                             N 235,198.00
                         </div>
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
@@ -187,7 +189,7 @@ const Withdrawal = () =>{
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
                             Femi Emmanuel
                         </div>
-                        <div className="request-head" style={{color: '#000000', fontWeight: 400}}>
+                        <div className="request-head" style={{color: '#000000', fontWeight: 'bold'}}>
                             N 235,198.00
                         </div>
                         <div className="request-head" style={{color: '#000000', fontWeight: 400}}>

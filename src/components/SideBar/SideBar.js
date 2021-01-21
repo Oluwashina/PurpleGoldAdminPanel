@@ -49,7 +49,7 @@ function SideBar(){
             <div className="sidenav">
                 
                 {/* home icon */}
-                <div className={isActive === "/dashboard"  ? "text-center activeNav" : "text-center Nav"} style={{marginTop: 150}}>
+                <div className={isActive === "/dashboard"  ? "text-center activeNav" : "text-center Nav"} style={{marginTop: 75}}>
                     <Link to="/dashboard" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/home.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Home</p>

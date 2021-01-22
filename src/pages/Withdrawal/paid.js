@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import './withdrawal.css'
 
 
-const Withdrawal = (props) =>{
+const Paid = (props) =>{
 
     const [isActive, setActive] = useState(false);
     
@@ -11,12 +11,12 @@ const Withdrawal = (props) =>{
         setActive(!isActive);
     }
 
-    const handleProcessing = () =>{
-        props.history.push("/withdrawal/processing");
+    const handleRequest = () =>{
+        props.history.push("/withdrawal");
     }
 
-    const handlePaid = () =>{
-        props.history.push('/withdrawal/paid')
+    const handleProcessing = () =>{
+        props.history.push("/withdrawal/processing");
     }
 
     const handleDeclined = () =>{
@@ -63,21 +63,21 @@ const Withdrawal = (props) =>{
                     
                     {/* Requests tab */}
                     <div className="request-div mx-auto mt-5">
-                        <div className="active-request" style={{position: 'relative'}}>
-                            <div className="active-count">
+                        <div className="newRequest" style={{position: 'relative'}}  onClick={handleRequest}>
+                            <div className="active-count" style={{color: 'white'}}>
                                 6
                             </div>
                             <p className="mb-0">New Request</p>
                         </div>
                         <div className="processing" onClick={handleProcessing}>
-                            <div style={{display: 'flex', alignItems: 'center'}}>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
                                 <p className="mb-0" style={{background: '#E5E3F3',borderRadius: 10, padding: '2px 10px', color: '#AAAAAA', fontSize: 12}}>89</p>
                                  <p className="mb-0 ml-2">Processing</p>
                             </div>
                         </div>  
-                        <div className="paid" onClick={handlePaid}>
+                        <div className="active-paid">
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <p className="mb-0" style={{background: '#E5E3F3',borderRadius: 10, padding: '2px 10px', color: '#AAAAAA', fontSize: 12}}>265</p>
+                                <p className="mb-0" style={{background: '#ff0000',borderRadius: 10, padding: '2px 10px', color: '#fff', fontSize: 12}}>265</p>
                                  <p className="mb-0 ml-2">Paid</p>
                             </div>
                         </div> 
@@ -122,9 +122,6 @@ const Withdrawal = (props) =>{
                                             <div className="withdrawColumn">
                                                     Status
                                             </div>
-                                            <div className="withdrawColumn">
-
-                                            </div>
                                         </div>
                                      </div>
                              </div>
@@ -152,11 +149,9 @@ const Withdrawal = (props) =>{
                                     <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>pending</p>
+                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>paid</p>
                                 </div>
-                                <div className="myColumn" style={{alignItems: 'center'}}>
-                                    <button className="btn btn-view">Process</button>
-                                </div>
+                               
                             </div>
                             {/* secomd row */}
                             <div className="myRow">
@@ -176,11 +171,9 @@ const Withdrawal = (props) =>{
                                     <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>pending</p>
+                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>paid</p>
                                 </div>
-                                <div className="myColumn" style={{alignItems: 'center'}}>
-                                    <button className="btn btn-view">Process</button>
-                                </div>
+                                
                             </div>
                             {/* third row */}
                             <div className="myRow">
@@ -200,11 +193,9 @@ const Withdrawal = (props) =>{
                                     <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>pending</p>
+                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>paid</p>
                                 </div>
-                                <div className="myColumn" style={{alignItems: 'center'}}>
-                                    <button className="btn btn-view">Process</button>
-                                </div>
+                              
                             </div>
                             {/* fourth row */}
                             <div className="myRow">
@@ -224,11 +215,9 @@ const Withdrawal = (props) =>{
                                     <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>pending</p>
+                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>paid</p>
                                 </div>
-                                <div className="myColumn" style={{alignItems: 'center'}}>
-                                    <button className="btn btn-view">Process</button>
-                                </div>
+                                
                             </div>
                         </div>
                      </div>
@@ -246,4 +235,4 @@ const Withdrawal = (props) =>{
     )
 }
 
-export default Withdrawal;
+export default Paid;

@@ -61,6 +61,7 @@
     background: rgba(226, 223, 242, 0.82);
     border-radius: 10px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     cursor: pointer;
   }
@@ -78,11 +79,15 @@
       border-right:  0.2px solid #9286E9;
       padding: 10px 30px;
   }
+  .filter-tab:nth-last-child(1){
+    padding: 10px 30px;
+    border-right: none;
+  }
 
   /* table layout */
   .table-style{
     background: #FFFFFF;
-    padding: 30px 30px;
+    padding: 5px 30px 30px 30px;
   }
   .table-data{
       flex: 1 1 auto;
@@ -99,3 +104,35 @@
   .btn-view:hover{
     color: white;     
 } 
+
+
+.myTable{
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  display: table;
+  text-indent: initial;
+}
+
+.myHead{
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+.myRow{
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.myTable .myHead .myColumn{
+  /* vertical-align: bottom; */
+  border-bottom: 0.4px solid rgba(0,0,0,.1);
+}
+.myColumn{
+  display: table-cell;
+}
+.myTable .myColumn{
+  padding: 18px;
+  /* vertical-align: top; */
+}

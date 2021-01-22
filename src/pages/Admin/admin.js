@@ -5,16 +5,48 @@ import './admin.css'
 
 const Admin = (props) =>{
 
-    const [isActive, setActive] = useState(false);
-    
-    const handleToggle = () =>{
-        setActive(!isActive);
-    }
+    const [fund] = useState(1);
 
     const handleSubmit = (event) =>{
         event.preventDefault()
         props.history.push("/confirm/fund");
     }
+
+    const [fundData] = useState([
+        { id: 1, name: 'tab-1', text: 'New', value: '1' },
+        { id: 2, name: 'tab-2', text: 'View All', value: '2' },
+        { id: 3, name: 'tab-3', text: 'Suspended', value: '3' },
+        { id: 4, name: 'tab-4', text: 'All Activities', value: '4' },
+        { id: 5, name: 'tab-5', text: 'Profile', value: '5' },
+    ])
+
+    const FundToggle = (id) =>{
+        // route to all admin
+        if(id === 2){
+            props.history.push('/admin/all')
+        }
+        // route to suspended admin
+        if(id === 3){
+            props.history.push('/admin/suspended') 
+        }
+        // route to all activities
+        if(id === 4){
+            props.history.push('/admin/activities') 
+        }
+        // route to admin profile
+        if(id === 5){
+            props.history.push('/admin/profile') 
+        }
+     }
+
+    const funding = fundData.map((item)=>
+    <div key={item.id}
+        className={fund === item.id ? 'filter-tab active-admin' : 'filter-tab'}
+        onClick={() => FundToggle(item.id)}
+        >   
+        <p className="mb-0">{item.text}</p>
+    </div>
+    )
 
 
     return(
@@ -23,42 +55,13 @@ const Admin = (props) =>{
             <div className="main">
                 <div className="contain">
 
-                    {/* swicth between the users and markteters tab */}
-                    <div className="mt-3 title-div" style={{display: 'flex'}}>
-                        <div onClick={handleToggle} className={isActive ? "title-heading" : "title-heading active-div"}  style={{flex: 1}}>
-                            <h5 className="text-center mb-0">User</h5>
-                        </div>
-                        <div onClick={handleToggle} className={isActive ? "title-heading marketers-div" : "title-heading"} style={{flex: 1,}}>
-                            <h5 className="text-center mb-0">Marketer</h5>
-                        </div>
+
+                <div className="mt-4" style={{display: 'flex', justifyContent: 'center', alignItems:'center'}}>
+                    <div className="chart-filter">
+                            {funding}
                     </div>
+                </div>
 
-
-                    <div className="mt-4" style={{ width: '60%', margin: 'auto'}}>
-                        <div className="users-card">
-
-                            <div className="user-filter user-active" style={{borderRight: '0.2px solid #9286E9'}}>
-                                New
-                            </div>
-                            <div  className="user-filter " style={{borderRight: '0.2px solid #9286E9'}}>
-                                
-                                View All
-                            </div>
-
-                            <div  className="user-filter" style={{borderRight: '0.2px solid #9286E9'}} >
-                                Suspended
-                            </div>
-
-                            <div  className="user-filter" style={{borderRight: '0.2px solid #9286E9'}} >
-                                All Activities
-                            </div>
-
-                            <div className="user-filter">
-                                Profile
-                            </div>
-
-                        </div>
-                    </div>
                     
 
                     {/* Fund user design layout */}
@@ -72,6 +75,17 @@ const Admin = (props) =>{
                             </div>
 
                             <form onSubmit={handleSubmit}>
+
+                            <div className="form-group input-container mt-4">
+                                    <i className="mdi mdi-account icon-fund"></i>
+                                    <input
+                                        className="form-control fund-style"
+                                        type="email"
+                                        placeholder="Staff Name"
+                                        id="email"
+                                        required
+                                    />
+                                </div>
 
                                 <div className="form-group input-container mt-4">
                                     <i className="mdi mdi-email icon-fund"></i>

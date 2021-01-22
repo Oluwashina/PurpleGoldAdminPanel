@@ -58,7 +58,7 @@ function SideBar(){
 
                
                 {/* Withdrawal icon */}
-                <div className={isActive === "/withdrawal"  ? "text-center activeNav" : "text-center Nav"}>
+                <div className={isActive.includes("/withdrawal")   ? "text-center activeNav" : "text-center Nav"}>
                     <Link to="/withdrawal" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/withdrawal.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Withdrawal</p>
@@ -67,7 +67,7 @@ function SideBar(){
 
           
                 {/* fund icon */}
-                <div className={isActive === "/fund"  ? "text-center activeNav" : "text-center Nav"}>
+                <div className={isActive.includes("/fund")   ? "text-center activeNav" : "text-center Nav"}>
                     <Link to="/fund" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/fund.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Fund</p>
@@ -77,12 +77,12 @@ function SideBar(){
                
 
                 {/* plans icon */}
-                <div className={isActive === "/plans"  ? "text-center activeNav" : "text-center Nav"}>
+                {/* <div className={isActive === "/plans"  ? "text-center activeNav" : "text-center Nav"}>
                     <Link to="/plans" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/plans.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Plans</p>
                     </Link>
-                </div>
+                </div> */}
                
 
                 {/* users */}
@@ -105,7 +105,7 @@ function SideBar(){
                  
 
                   {/* Admin */}
-                  <div className={isActive === "/admin"  ? "text-center activeNav" : "text-center Nav"}>
+                  <div className={isActive.includes("/admin")  ? "text-center activeNav" : "text-center Nav"}>
                     <Link to="/admin" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/admin.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Admin</p>

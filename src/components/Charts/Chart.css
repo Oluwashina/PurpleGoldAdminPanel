@@ -1,4 +1,14 @@
 
 .line-div{
-   
+    background: #F1EFFF;
+    padding: 25px 30px;
+}   
+
+.chart-filter{
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
 }

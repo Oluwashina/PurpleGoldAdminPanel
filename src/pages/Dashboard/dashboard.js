@@ -8,9 +8,21 @@ import Chart from '../../components/Charts/Chart'
 const Dashboard = () =>{
 
     const [isActive, setActive] = useState(false);
-    
+
     const [isCardActive, setCardActive] = useState(false);
-  
+    
+    const [fund, setFund] = useState(1);
+
+    const [pay, setPayout] = useState(1);
+
+    const [fundData] = useState([
+        { id: 1, name: 'tab-1', text: 'Today', value: '1' },
+        { id: 2, name: 'tab-2', text: 'This Week', value: '2' },
+        { id: 3, name: 'tab-3', text: 'Month', value: '3' },
+        { id: 4, name: 'tab-4', text: 'Year', value: '4' },
+    ])
+
+
 
     const handleToggle = () =>{
         setActive(!isActive);
@@ -19,6 +31,32 @@ const Dashboard = () =>{
     const handleCardToggle = () =>{
         setCardActive(!isCardActive)
     }
+
+    const FundToggle = (id) =>{
+       setFund(id)
+    }
+
+    const PayToggle = (id) =>{
+        setPayout(id)
+    }
+
+    const funding = fundData.map((item)=>
+        <div key={item.id}
+        className={fund === item.id ? 'filter-tab active-filter' : 'filter-tab'}
+        onClick={() => FundToggle(item.id)}
+        >   
+        <p className="mb-0">{item.text}</p>
+    </div>
+    )
+
+    const payouts = fundData.map((item)=>
+            <div key={item.id}
+            className={pay === item.id ? 'filter-tab active-filter' : 'filter-tab'}
+            onClick={() => PayToggle(item.id)}
+            >   
+            <p className="mb-0">{item.text}</p>
+        </div>
+        )
 
    
 
@@ -152,154 +190,120 @@ const Dashboard = () =>{
                         </div>
 
                     <div className="filter-div mt-5 ml-3">
-                        <div className="filter-tab active-filter">   
-                            <p className="mb-0">Today</p>
-                        </div>
-                        <div className="filter-tab">   
-                            <p className="mb-0">This week</p>
-                        </div>
-                        <div className="filter-tab" >   
-                            <p className="mb-0">Month</p>
-                        </div>
-                        <div style={{padding: '10px 30px'}}>   
-                            <p className="mb-0 text-center">Year</p>
-                        </div>
+                         {funding}
                     </div>
 
                   
                 </div>
-
-              
-
-                    {/* Users details */}
+ 
+                    {/* Funding details */}
                     <div className="row mt-3">
-                        <div className="col-lg-12">
-                                <div className="table-style">
-                                    <div style={{display: 'flex',}}>
-
-                                        <div className="table-data">
-                                            <img src="/img/avatar.png" className="img-fluid" alt="" />
-                                        </div>
-
-                                        <div  className="table-data">
+                    <div className="col-lg-12">
+                            <div className="table-style">
+                                <div className="myTable mt-4">
+                                        <div className="myHead">
+                                            {/* first row */}
+                                            <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                        </div>
-
-                                        <div  className="table-data"> 
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                                <p className="mb-0" style={{color: '#9E079E'}}>00:23:55</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
                                         </div>
-
-                                        <div  className="table-data">
-                                            <p className="mb-0">femiemmanuel@gmail.com</p>
+                                        {/* second row */}
+                                        <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>17:46:12</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
                                         </div>
-
-                                        <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>00:23:55</p>
-                                        </div>
-
-                                        <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E',  textAlign: 'right'}}>25/01/2020</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-
-                                    <div style={{display: 'flex', }}>
-
-                                        <div  className="table-data">
-                                            <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                        </div>
-
-                                        <div  className="table-data">
+                                        {/* third row */}
+                                        <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
-                                        </div>
-
-                                        <div  className="table-data">
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>20:16:00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
+                                        </div>
+                                        {/* fourth row */}
+                                        <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{ color: '#9E079E'}}>23:12:57</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
                                         </div>
 
-                                        <div className="table-data">
-                                            <p className="mb-0">femiemmanuel@gmail.com</p>
-                                        </div>
-
-                                        <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>17:46:55</p>
-                                        </div>
-
-                                        <div className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>25/01/2020</p>
-                                        </div>
                                     </div>
-                                    <hr />
+                                </div>
 
-                                    <div style={{display: 'flex',}}>
-
-                                            <div className="table-data"> 
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0">femiemmanuel@gmail.com</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>20:16:55</p>
-                                             </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>25/01/2020</p>
-                                            </div>
-                                            </div>
-                                            <hr />
-
-                                            <div style={{display: 'flex',}}>
-
-                                            <div  className="table-data">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0">femiemmanuel@gmail.com</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E', textAlign: 'center'}}>23:12:55</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>25/01/2020</p>
-                                            </div>
-                                            </div>
-                                            <hr />
-
+                                    
                                             
 
-                                            {/* total count */}
+                                    {/* total count */}
+                                    <div>
+                                        <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                             <div>
-                                                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
-                                                    <div>
-                                                     <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
-                                                    </div>
-                                                    <div className="ml-3">
-                                                     <button className="btn btn-view">View All</button>
-                                                     </div>
-                                                </div>
+                                                <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
                                             </div>
+                                            <div className="ml-3">
+                                                <button className="btn btn-view">View All</button>
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                         </div>
 
@@ -318,18 +322,7 @@ const Dashboard = () =>{
                     </div>
 
                     <div className="filter-div mt-5 ml-3">
-                        <div className="filter-tab active-filter">   
-                            <p className="mb-0">Today</p>
-                        </div>
-                        <div className="filter-tab">   
-                            <p className="mb-0">This week</p>
-                        </div>
-                        <div className="filter-tab" >   
-                            <p className="mb-0">Month</p>
-                        </div>
-                        <div style={{padding: '10px 30px'}}>   
-                            <p className="mb-0 text-center">Year</p>
-                        </div>
+                         {payouts}
                     </div>
 
                    
@@ -341,138 +334,115 @@ const Dashboard = () =>{
                     {/* Users details */}
                     <div className="row mt-3">
                         <div className="col-lg-12">
-                                <div className="table-style">
-                                    <div style={{display: 'flex'}}>
-
-                                        <div className="table-data">
-                                            <img src="/img/avatar.png" className="img-fluid" alt="" />
-                                        </div>
-
-                                        <div  className="table-data">
+                            <div className="table-style">
+                                <div className="myTable mt-4">
+                                        <div className="myHead">
+                                            {/* first row */}
+                                            <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                        </div>
-
-                                        <div  className="table-data"> 
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>GTBank -0015738102</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
                                         </div>
-
-                                        <div  className="table-data">
-                                            <p className="mb-0">femiemmanuel@gmail.com</p>
+                                        {/* second row */}
+                                        <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Stanbic Bank -0015738102</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
                                         </div>
-
-                                        <div className="table-data">
-                                            <p className="mb-0" style={{fontWeight: 'bold'}}>GT Bank - 0015738102</p>
-                                        </div>
-
-                                        <div  className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E',  textAlign: 'right'}}>Today</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-
-                                    <div style={{display: 'flex', }}>
-
-                                        <div  className="table-data">
-                                            <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                        </div>
-
-                                        <div  className="table-data">
+                                        {/* third row */}
+                                        <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
-                                        </div>
-
-                                        <div  className="table-data">
+                                            </div>
+                                            <div className="myColumn">
                                             <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Access Bank -0015738102</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
+                                        </div>
+                                        {/* fourth row */}
+                                        <div className="myRow">
+                                                <div className="myColumn">
+                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="myColumn">
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Fidelity Bank -0015738102</p>
+                                            </div>
+                                            <div className="myColumn">
+                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                            </div>
                                         </div>
 
-                                        <div className="table-data">
-                                            <p className="mb-0">femiemmanuel@gmail.com</p>
-                                        </div>
-
-                                        <div className="table-data">
-                                            <p className="mb-0" style={{fontWeight: 'bold'}}>Stanbic Bank - 0015738102</p>
-                                        </div>
-
-                                        <div className="table-data">
-                                            <p className="mb-0" style={{color: '#9E079E',  textAlign: 'right'}}>Today</p>
-                                        </div>
                                     </div>
-                                    <hr />
+                                </div>
 
-                                    <div style={{display: 'flex',}}>
-
-                                            <div className="table-data"> 
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0">femiemmanuel@gmail.com</p>
-                                            </div>
-
-                                            <div className="table-data">
-                                            <p className="mb-0" style={{fontWeight: 'bold'}}>Fidelity  Bank - 0015738102</p>
-                                        </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E',textAlign: 'right'}}>Today</p>
-                                            </div>
-                                            </div>
-                                            <hr />
-
-                                            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-
-                                            <div  className="table-data">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0">femiemmanuel@gmail.com</p>
-                                            </div>
-
-                                            <div className="table-data">
-                                            <p className="mb-0" style={{fontWeight: 'bold'}}>Access Bank - 0015738102</p>
-                                        </div>
-
-                                            <div  className="table-data">
-                                                <p className="mb-0" style={{color: '#9E079E', textAlign: 'right'}}>Today</p>
-                                            </div>
-                                            </div>
-                                            <hr />
-
+                                    
                                             
 
-                                            {/* total count */}
+                                    {/* total count */}
+                                    <div>
+                                        <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                             <div>
-                                                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
-                                                    <div>
-                                                     <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
-                                                    </div>
-                                                    <div className="ml-3">
-                                                     <button className="btn btn-view">View All</button>
-                                                     </div>
-                                                </div>
+                                                <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
                                             </div>
+                                            <div className="ml-3">
+                                                <button className="btn btn-view">View All</button>
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                         </div>
 
-                    </div>
-
-                    
+                    </div>                    
 
                 </div>
             </div>

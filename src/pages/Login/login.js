@@ -1,18 +1,25 @@
 import "./login.css";
 import {Form, Formik} from 'formik'
+import {connect } from 'react-redux'
 import { loginValidator } from "../../validationSchema/authValidator";
+import { loginUser } from "../../store/actions/authActions";
 
 
 function Login(props) {
 
-    
 
-
-const handleSubmit = (values, setSubmitting) =>{
-    alert("Submitted");
+const handleSubmit = async (values, setSubmitting) =>{
     console.log(values)
-    setSubmitting(false)
-    props.history.push("/dashboard");
+    await props.signIn(values);
+      props.history.push("/dashboard");
+    // if(props.isAuthenticated === false){
+    //   alert('Invalid credentias')
+    //   setSubmitting(false)
+    // }
+    // else{
+    //   props.history.push("/dashboard");
+    //   setSubmitting(false)
+    // }
   }
   
 
@@ -118,4 +125,16 @@ const handleSubmit = (values, setSubmitting) =>{
   );
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+      isAuthenticated: state.auth.isAuthenticated
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      signIn: (creds) => dispatch(loginUser(creds)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

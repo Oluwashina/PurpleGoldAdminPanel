@@ -1,8 +1,8 @@
 import SideBar from "../../components/SideBar/SideBar";
 import React, {useState} from 'react'
-import './users.css'
+import './marketers.css'
 
-function Users(){
+function Marketers(){
 
     const [isActive, setActive] = useState(false);
     const [fund, setFund] = useState(1);
@@ -59,7 +59,7 @@ function Users(){
                         </div>
                     </div>
 
-                   {/* Data tables to be populated with all admin layout */}
+                     {/* Data tables to be populated with all admin layout */}
                  <div className="admin-head mt-5">
                         <div className="myTable" style={{marginBottom: 0}}>
                             <div className="myHead" >
@@ -237,7 +237,7 @@ function Users(){
                                                 </div>
                                             </div>
                                             <div className="adminColumn">
-                                                 <button className="btn btn-suspend"><i className="mdi mdi-close" style={{fontSize: 20}}></i></button>
+                                            <button className="btn btn-suspend"><i className="mdi mdi-close" style={{fontSize: 20}}></i></button>
                                             </div>
                                     </div>
                                  
@@ -250,10 +250,12 @@ function Users(){
                              </div>
                     </div>
 
+
+
              </div>
          </div>
       </div>
     )
 }
 
-export default Users;
+export default  Marketers;

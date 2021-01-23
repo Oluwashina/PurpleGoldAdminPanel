@@ -3,6 +3,7 @@ import './dashboard.css'
 import React, {useState} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
+// import {connect} from 'react-redux'
 
 
 const Dashboard = () =>{
@@ -126,7 +127,14 @@ const Dashboard = () =>{
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
                                 </div>
                                 <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>568</h5>
+                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>
+                                    <CountUp
+                                        start={0}
+                                        end={569}
+                                        duration={2.5}
+                                        separator=","
+                                         />
+                                    </h5>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p>
                                 </div>
                             </div>
@@ -161,7 +169,14 @@ const Dashboard = () =>{
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
                                 </div>
                                 <div className="mt-4">
-                                    <h5 style={{fontWeight: 'bold', color: '#FF3535'}}>12</h5>
+                                    <h5 style={{fontWeight: 'bold', color: '#FF3535'}}>
+                                    <CountUp
+                                        start={0}
+                                        end={12}
+                                        duration={2.5}
+                                        separator=","
+                                         />
+                                    </h5>
                                 </div>
                             </div>
                         </div>
@@ -449,5 +464,9 @@ const Dashboard = () =>{
         </div>
     )
 }
+
+
+
+  
 
 export default Dashboard;

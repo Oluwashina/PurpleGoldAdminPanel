@@ -14,6 +14,7 @@ import SuspendedAdmin from './pages/Admin/suspendedAdmin'
 import AdminActivities from './pages/Admin/AdminActivities'
 import AdminProfile from './pages/Admin/AdminProfile'
 import Users from  './pages/Users/users'
+import Marketers from './pages/Marketers/marketers'
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
              <Route  path="/admin/activities" component={AdminActivities} />
              <Route  path="/admin/profile" component={AdminProfile} />
              <Route path="/users" component={Users} />
+             <Route path="/marketers" component={Marketers} />
            </Switch>
        </BrowserRouter>
      );

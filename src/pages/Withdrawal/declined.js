@@ -98,12 +98,12 @@ const Declined = (props) =>{
 
                     </div>
 
-                    {/* Data tables to be populated with the withdrawal request layout */}
-                    <div className="withdrawal-head mt-4">
+                   {/* Data tables to be populated with the withdrawal request layout */}
+                   <div className="declined-head mt-4">
                              <div className="myTable" style={{marginBottom: 0}}>
                                 <div className="myHead">
                                         {/* first row */}
-                                        <div className="myRow">
+                                        <div className="myRow" style={{background: 'rgba(226, 223, 242, 0.82)'}}>
                                             <div className="withdrawColumn">
                                                 
                                              </div>
@@ -123,106 +123,106 @@ const Declined = (props) =>{
                                                     Status
                                             </div>
                                         </div>
+
+                                           {/* actual data row */}
+                                     <div className="myRow" style={{background: '#fff'}}>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                                </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
+                                            </div>
+                                            
+                                    </div>
+
+                                    {/* second row */}
+                                    <div className="myRow" style={{background: '#fff'}}>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                                </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
+                                            </div>
+                                            
+                                    </div>
+
+                                    {/* third row */}
+                                    <div className="myRow" style={{background: '#fff'}}>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                                </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
+                                            </div>         
+                                    </div>
+
+                                    {/* fourth row */}
+                                    <div className="myRow" style={{background: '#fff'}}>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                                </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
+                                            </div>
+                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                femiemmanuel@gmail.com
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
+                                            </div>
+                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
+                                            </div>
+                                            
+                                    </div>
+
+
+
+
+
+
                                      </div>
                              </div>
                     </div>
-
-                    {/* request data display */}
-                <div className="request-data-table mt-1">
-                        <div className="myTable">
-                            <div className="myHead">
-                        {/* first row */}
-                            <div className="myRow">
-                                    <div className="myColumn">
-                                    <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                </div>
-                                <div className="myColumn">
-                                    femiemmanuel@gmail.com
-                                </div>
-                                <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
-                                </div>
-                               
-                            </div>
-                            {/* secomd row */}
-                            <div className="myRow">
-                                    <div className="myColumn">
-                                    <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                </div>
-                                <div className="myColumn">
-                                    femiemmanuel@gmail.com
-                                </div>
-                                <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
-                                </div>
-                              
-                            </div>
-                            {/* third row */}
-                            <div className="myRow">
-                                    <div className="myColumn">
-                                    <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                </div>
-                                <div className="myColumn">
-                                    femiemmanuel@gmail.com
-                                </div>
-                                <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
-                                </div>
-                                
-                            </div>
-                            {/* fourth row */}
-                            <div className="myRow">
-                                    <div className="myColumn">
-                                    <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                </div>
-                                <div className="myColumn">
-                                    femiemmanuel@gmail.com
-                                </div>
-                                <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                </div>
-                                <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>Declined</p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                     </div>
-
-                </div>
 
                 
                    

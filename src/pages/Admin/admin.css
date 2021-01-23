@@ -33,3 +33,41 @@
     padding: 10px 18px 10px 18px;
     vertical-align: top;
 }
+
+
+/* adminprofile styles */
+.password-style{
+  background: #F5F0FC;
+  border-radius: 5px;
+  padding: 23px 23px 23px 55px;
+  border: none;
+}
+.password-style::placeholder{
+  color: #aaaaaa;
+}
+
+ .password-style:focus {
+    box-shadow: none;
+    outline: 0 none;
+    background: #F5F0FC;
+  }
+
+  .password_icon {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    color: #C979CC;
+    cursor: pointer;
+  }
+
+  .btn-save{
+    background: #7331D5;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 30px;
+    transition: all ease-in 0.5s;
+  }
+
+  .btn-save:hover{
+    color: white;
+  }

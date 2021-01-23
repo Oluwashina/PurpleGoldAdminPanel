@@ -9,32 +9,51 @@
     padding: 10px 40px;
     position: relative;
 }
-
+.user-tab{
+    border-right:  0.2px solid #9286E9;
+    padding: 10px 30px;
+}
+.user-tab:nth-of-type(1){
+    padding: 10px 45px;
+    border-right:  0.2px solid #9286E9;
+}
+.user-tab:nth-of-type(2){
+    padding: 10px 40px;
+    border-right:  0.2px solid #9286E9; 
+}
+.user-tab:nth-last-child(2){
+    padding: 10px 40px;
+    border-right:  0.2px solid #9286E9;
+}
+.user-tab:nth-last-child(1){
+    padding: 10px 40px;
+    border-right: none;
+  }
 .user-active{
     background: #7331D5;
     border-radius: 10px;
     color: white;
-    padding: 10px 30px;
 }
 
-.user-count{
+.count-active{
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    right: 14px;
+    right: 7px;
     top: 5px;    
     background: #FF0000;
     font-size: 12px;
     border-radius:  10px;
-     padding: 2px 10px;
+    padding: 2px 10px;
 }
+
 .count{
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    right: 8px;
+    right: 7px;
     top: 5px;    
     background: #C4C4C4;
     color: white;
@@ -82,4 +101,16 @@
     text-align: center;
     width: 50px;
     cursor: pointer;
+}
+
+/* buttons */
+.btn-suspend{
+    background: #FF5959;
+    border-radius: 15px;
+    color: white;
+    padding: 8px 15px;
+    transition: all ease-in 0.5s;
+}
+.btn-suspend:hover{
+    color: white;
 }

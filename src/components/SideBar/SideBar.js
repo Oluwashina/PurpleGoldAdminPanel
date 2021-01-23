@@ -1,8 +1,9 @@
 import './SideBar.css'
 import {Link, useLocation} from 'react-router-dom'
+import { connect } from 'react-redux';
 
 
-function SideBar(){
+function SideBar(props){
 
 
         // check for which path you are on
@@ -37,7 +38,7 @@ function SideBar(){
                         <img src="/img/avatar.png" alt="user" />
                         </div>
                         <div>
-                            <p className="ml-4 mb-0 text-white" style={{fontWeight: 400}}>Akinyemi Ogungbaro</p>
+                            <p className="ml-4 mb-0 text-white" style={{fontWeight: 400}}>{props.firstname} {props.lastname}</p>
                         </div>
                     </div>
                     
@@ -128,4 +129,11 @@ function SideBar(){
     )
 }
 
-export default SideBar;
+const mapStateToProps = (state) => {
+    return {
+        firstname: state.auth.profile.firstname,
+        lastname: state.auth.profile.lastname
+    };
+  };
+
+export default connect(mapStateToProps)(SideBar);

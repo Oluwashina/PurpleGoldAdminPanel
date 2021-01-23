@@ -14,8 +14,6 @@ const handleSubmit = async (values, setSubmitting) =>{
     await signIn(values);
   }
 
-
-  
   
   useEffect(() =>{
       if(isAuthenticated){

@@ -16,7 +16,7 @@ export const loginUser = (user) => {
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "User_LoggedIn", data: res.data.data });
-          cogoToast.success('Login successful!')
+          cogoToast.success('Login Successful!', { position: 'bottom-right', })
         }
       } catch (err) {
         dispatch({ type: "User_Error", err: err.response?.data?.message });

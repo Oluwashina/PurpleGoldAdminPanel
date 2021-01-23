@@ -1,27 +1,28 @@
 import "./login.css";
 import {Form, Formik} from 'formik'
+import React, {useEffect} from 'react'
 import {connect } from 'react-redux'
 import { loginValidator } from "../../validationSchema/authValidator";
 import { loginUser } from "../../store/actions/authActions";
 
 
-function Login(props) {
+function Login({isAuthenticated, history, signIn}) {
 
 
 const handleSubmit = async (values, setSubmitting) =>{
     console.log(values)
-    await props.signIn(values);
-      props.history.push("/dashboard");
-    // if(props.isAuthenticated === false){
-    //   alert('Invalid credentias')
-    //   setSubmitting(false)
-    // }
-    // else{
-    //   props.history.push("/dashboard");
-    //   setSubmitting(false)
-    // }
+    await signIn(values);
   }
+
+
   
+  
+  useEffect(() =>{
+      if(isAuthenticated){
+        history.push('/dashboard');
+      }
+  },[isAuthenticated, history])
+
 
 
   return (

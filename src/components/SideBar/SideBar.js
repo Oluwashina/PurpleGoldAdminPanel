@@ -1,13 +1,18 @@
 import './SideBar.css'
 import {Link, useLocation} from 'react-router-dom'
 import { connect } from 'react-redux';
+import { logOut } from "../../store/actions/authActions";
 
 
-function SideBar(props){
+function SideBar({Logout, firstname,lastname}){
 
 
         // check for which path you are on
     const isActive = useLocation().pathname
+
+    const ToggleLogout = () =>{
+        Logout()
+    }
 
 
     return(
@@ -38,7 +43,7 @@ function SideBar(props){
                         <img src="/img/avatar.png" alt="user" />
                         </div>
                         <div>
-                            <p className="ml-4 mb-0 text-white" style={{fontWeight: 400}}>{props.firstname} {props.lastname}</p>
+                            <p className="ml-4 mb-0 text-white" style={{fontWeight: 400}}>{firstname} {lastname}</p>
                         </div>
                     </div>
                     
@@ -115,8 +120,8 @@ function SideBar(props){
 
 
                  {/* Logout */}
-                 <div className="text-center Nav">
-                    <Link to="/" style={{textDecoration: 'none'}}>
+                 <div className="text-center Nav" >
+                     <Link to="/" style={{textDecoration: 'none'}} onClick={ToggleLogout}>
                     <img  alt="" src="/img/logout.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Logout</p>
                     </Link>
@@ -136,4 +141,10 @@ const mapStateToProps = (state) => {
     };
   };
 
-export default connect(mapStateToProps)(SideBar);
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        Logout: () => dispatch(logOut()),
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

@@ -10,9 +10,11 @@ const Dashboard = () =>{
 
     const [isActive, setActive] = useState(false);
 
-    const [isCardActive, setCardActive] = useState(false);
+    const [isCardActive] = useState(false);
     
     const [fund, setFund] = useState(1);
+
+    const [cards, setCards] = useState(1);
 
     const [pay, setPayout] = useState(1);
 
@@ -23,14 +25,23 @@ const Dashboard = () =>{
         { id: 4, name: 'tab-4', text: 'Year', value: '4' },
     ])
 
+    const [dashCard] = useState([
+        {id: 1, name: 'Funding', value: 2031564},
+        {id: 2, name: 'In-Flow', value: 1890325},
+        {id: 3, name: 'Out-Flow', value: 5084123},
+        {id: 4, name: 'Active', value: 569},
+        {id: 5, name: 'Inactive', value: 29},
+        {id: 6, name: 'Suspended', value: 12},
+    ])
+
 
 
     const handleToggle = () =>{
         setActive(!isActive);
     }
 
-    const handleCardToggle = () =>{
-        setCardActive(!isCardActive)
+    const handleCardToggle = (id) =>{
+        setCards(id)
     }
 
     const FundToggle = (id) =>{
@@ -76,9 +87,43 @@ const Dashboard = () =>{
                             <h5 className="text-center mb-0">Marketer</h5>
                         </div>
                     </div>
+
+                    <div className="row mt-3">
+                        {dashCard.length ? dashCard.map((card)=>{
+                            return(
+                            <div key={card.id} className="col-lg-2">
+                            <div 
+                                onClick={() => handleCardToggle(card.id)}
+                               className={cards === card.id ? 'card-div-active' : 'card-div'}
+                            >
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>{card.name}</p>
+                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
+                                </div>
+                                <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
+                                      <h5
+                                    className={card.id === 6 ? 'value-suspend' : 'value'}
+                                     >
+                                      <CountUp
+                                        start={0}
+                                        end={card.value}
+                                        duration={2.5}
+                                        separator=","
+                                         />
+                                     </h5>
+                                     {card.id === 5 ? <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p> : "" }
+                                     {card.id === 4 ? <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p> : "" }
+                                </div>
+                            </div> 
+                        </div>
+                            )
+                        }):
+                        <p>No data</p>
+                    }
+                    </div>
                     
                     {/* cards layout */}
-                    <div className="row mt-3">
+              <div className="row mt-3">
 
                             {/* funding */}
                         <div className="col-lg-2">
@@ -180,7 +225,7 @@ const Dashboard = () =>{
                                 </div>
                             </div>
                         </div>
-                    </div>
+             </div>
 
 
                 {/* charts display */}

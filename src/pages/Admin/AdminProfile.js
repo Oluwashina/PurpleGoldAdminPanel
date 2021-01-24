@@ -1,9 +1,10 @@
 import SideBar from '../../components/SideBar/SideBar'
 import React, {useState} from 'react'
 import './admin.css'
+import { connect } from 'react-redux';
 
 
-const AdminProfile = (props) =>{
+const AdminProfile = ({profile, history}) =>{
 
     const [fund] = useState(5);
     const [passwordShown, setPasswordShown] = useState(false);
@@ -38,19 +39,19 @@ const AdminProfile = (props) =>{
     const FundToggle = (id) =>{
         // route t all admin
         if(id === 1){
-            props.history.push('/admin')
+            history.push('/admin')
         }
         // route to all admin
         if(id === 2){
-            props.history.push('/admin/all') 
+            history.push('/admin/all') 
         }
         // route to all activities
         if(id === 3){
-            props.history.push('/admin/suspended') 
+            history.push('/admin/suspended') 
         }
         // route to activities
         if(id === 4){
-            props.history.push('/admin/activities') 
+            history.push('/admin/activities') 
         }
      }
 
@@ -96,13 +97,13 @@ const AdminProfile = (props) =>{
 
                               <div className="text-center mt-3">
                                   <div style={{background: '#F5F0FC', borderRadius: '5px', padding: '10px 20px', width: '50%', margin: 'auto'}}>
-                                  <p className="mb-0" style={{color: 'rgba(158, 7, 158, 0.51)'}}>Akinyemi Ogungbaro</p>
+                                  <p className="mb-0" style={{color: 'rgba(158, 7, 158, 0.51)'}}>{profile.firstname} {profile.lastname}</p>
                                   </div> 
                               </div> 
 
                               <div className="text-center mt-3">
                                   <div style={{background: '#F5F0FC', borderRadius: '5px', padding: '10px 20px', width: '70%', margin: 'auto'}}>
-                                  <p className="mb-0" style={{color: 'rgba(158, 7, 158, 0.51)'}}>akinyemiogungbaro@gmail.com</p>
+                                  <p className="mb-0" style={{color: 'rgba(158, 7, 158, 0.51)'}}>{profile.email}</p>
                                   </div> 
                               </div> 
 
@@ -190,4 +191,10 @@ const AdminProfile = (props) =>{
     )
 }
 
-export default AdminProfile;
+const mapStateToProps = (state) =>{
+    return{
+        profile: state.auth.profile
+    };
+}
+
+export default connect(mapStateToProps)(AdminProfile);

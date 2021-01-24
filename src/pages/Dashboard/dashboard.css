@@ -55,6 +55,14 @@
       padding: 10px 10px;
       cursor: pointer;
   }
+  .value-suspend{
+    color: #FF3535;
+    font-weight: bold;
+  }
+  .value{
+    color: #000000;
+    font-weight: bold;
+  }
 
   /* filter div */
   .filter-div{

@@ -2,6 +2,7 @@ import {apiUrl} from '../config'
 import axios from 'axios'
 import cogoToast from 'cogo-toast';
 
+
 const getToken = () => {
 	const token = localStorage.getItem("token");
 	return token
@@ -23,7 +24,7 @@ export const Funding = (values) => {
         });
       if (res.status === 200) {
           console.log(res)
-        dispatch({ type: "Funding", data: res.data.data });
+        dispatch({ type: "Funding", data: res.data.data});
       }
     } catch (err) {
       dispatch({ type: "Funding_Error", err: err.response?.data?.message });

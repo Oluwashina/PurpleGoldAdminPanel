@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import { Funding } from "../../store/actions/fundActions";
 
 
-const Dashboard = ({Funding}) =>{
+const Dashboard = ({getFunding, funding, fundingSum}) =>{
 
     const [isActive, setActive] = useState(false);
     
@@ -51,7 +51,7 @@ const Dashboard = ({Funding}) =>{
         setPayout(id)
     }
 
-    const funding = fundData.map((item)=>
+    const fundDayToggle = fundData.map((item)=>
         <div key={item.id}
         className={fund === item.id ? 'filter-tab active-filter' : 'filter-tab'}
         onClick={() => FundToggle(item.id)}
@@ -60,7 +60,7 @@ const Dashboard = ({Funding}) =>{
     </div>
     )
 
-    const payouts = fundData.map((item)=>
+    const payoutDayToggle = fundData.map((item)=>
             <div key={item.id}
             className={pay === item.id ? 'filter-tab active-filter' : 'filter-tab'}
             onClick={() => PayToggle(item.id)}
@@ -76,9 +76,8 @@ const Dashboard = ({Funding}) =>{
             time: 'today',
             user: 'INVESTOR'
         }
-        Funding(values)
-
-    })
+        getFunding(values)
+    },[getFunding])
 
    
 
@@ -157,7 +156,7 @@ const Dashboard = ({Funding}) =>{
                         </div>
 
                     <div className="filter-div mt-5 ml-3">
-                         {funding}
+                         {fundDayToggle}
                     </div>
 
                   
@@ -165,119 +164,58 @@ const Dashboard = ({Funding}) =>{
  
                     {/* Funding details */}
                     <div className="row mt-3">
-                    <div className="col-lg-12">
+                         <div className="col-lg-12">
                             <div className="table-style">
                                 <div className="myTable mt-4">
                                         <div className="myHead">
-                                            {/* first row */}
-                                            <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                                <p className="mb-0" style={{color: '#9E079E'}}>00:23:55</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-                                        {/* second row */}
-                                        <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>17:46:12</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-                                        {/* third row */}
-                                        <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>20:16:00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-                                        {/* fourth row */}
-                                        <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{ color: '#9E079E'}}>23:12:57</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                        {funding.length ? funding.map((fund, index)=>{
+                        return(
+                            <div key={index} className="myRow">
+                            <div className="myColumn">
+                            <img className="img-fluid" src="/img/avatar.png" alt="" />
                                 </div>
-
-                                    
-                                            
-
-                                    {/* total count */}
+                                <div className="myColumn">
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{fund.firstname} {fund.lastname}</p>
+                                </div>
+                                <div className="myColumn">
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {fund.amount}</p>
+                                </div>
+                                <div className="myColumn">
+                                    {fund.email}
+                                </div>
+                                <div className="myColumn">
+                                    <p className="mb-0" style={{color: '#9E079E'}}>{fund.createdAt}</p>
+                                </div>
+                                <div className="myColumn">
+                                <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                </div>
+                            </div>
+                        )
+                    }):
+                   <p>Loading data</p>
+                }
+                                    </div>
+                         </div>
+                    {/* total count */}
+                    <div>
+                                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                     <div>
-                                        <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
-                                            <div>
-                                                <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
-                                            </div>
-                                            <div className="ml-3">
-                                                <button className="btn btn-view">View All</button>
-                                                </div>
-                                        </div>
+                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum}</h6>
                                     </div>
+                                    <div className="ml-3">
+                                        <button className="btn btn-view">View All</button>
+                                        </div>
                                 </div>
-                        </div>
-
+                            </div>
                     </div>
+                </div> 
+            </div>
 
-                    {/* Up-coming payouts display */}
-                    
+
+
+
+        {/* Up-coming payouts display */}
+                 
                 {/* funding display */}
                 
                 {/* filter tabs */}
@@ -289,7 +227,7 @@ const Dashboard = ({Funding}) =>{
                     </div>
 
                     <div className="filter-div mt-5 ml-3">
-                         {payouts}
+                         {payoutDayToggle}
                     </div>
 
                    
@@ -421,13 +359,14 @@ const Dashboard = ({Funding}) =>{
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        funding: state.fund.funding,
+        fundingSum: state.fund.fundingSum
     };
   };
   
 const mapDispatchToProps = (dispatch) => {
 return {
-    Funding: (value) => dispatch(Funding(value)),
+    getFunding: (value) => dispatch(Funding(value)),
  };
 };
 

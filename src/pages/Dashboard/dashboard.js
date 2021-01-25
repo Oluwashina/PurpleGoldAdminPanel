@@ -5,9 +5,10 @@ import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
 import { Funding, DashboardCount } from "../../store/actions/fundActions";
+import { Payouts } from "../../store/actions/dashboardActions";
 
 
-const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count}) =>{
+const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, getPayouts}) =>{
 
     const [isActive, setActive] = useState(false);
     
@@ -77,8 +78,9 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count}) 
             user: 'INVESTOR'
         }
         getFunding(values)
+        getPayouts(values)
         getDashboardCount(values.user)
-    },[getFunding,getDashboardCount])
+    },[getFunding,getDashboardCount, getPayouts])
 
    
 
@@ -185,7 +187,7 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count}) 
                                     {fund.email}
                                 </div>
                                 <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>{fund.createdAt}</p>
+                                    <p className="mb-0" style={{color: '#9E079E'}}>{fund.createdAt.slice(11, 19)}</p>
                                 </div>
                                 <div className="myColumn">
                                 <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
@@ -369,7 +371,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 return {
     getFunding: (value) => dispatch(Funding(value)),
-    getDashboardCount: (value) => dispatch(DashboardCount(value))
+    getDashboardCount: (value) => dispatch(DashboardCount(value)),
+    getPayouts: (value) =>dispatch(Payouts(value)),
  };
 };
 

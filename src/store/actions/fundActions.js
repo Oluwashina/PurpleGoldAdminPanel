@@ -32,6 +32,28 @@ export const Funding = (values) => {
   };
 };
 
+// dashboard count
+export const DashboardCount = (values) => {
+  return async (dispatch, getState) => {
+    try {
+        const user = values
+      const res = await axios.get(apiUrl + "dahboard_count?time=year&user="+user, {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+        dispatch({ type: "Dashboard_Count", data: res.data.data});
+      }
+    } catch (err) {
+      dispatch({ type: "Count_Error", err: err.response?.data?.message });
+    }
+  };
+};
+
 
 // verify email actions functionality
 export const VerifyEmail = (values) => {

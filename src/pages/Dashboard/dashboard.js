@@ -4,10 +4,10 @@ import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
-import { Funding } from "../../store/actions/fundActions";
+import { Funding, DashboardCount } from "../../store/actions/fundActions";
 
 
-const Dashboard = ({getFunding, funding, fundingSum}) =>{
+const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count}) =>{
 
     const [isActive, setActive] = useState(false);
     
@@ -77,7 +77,8 @@ const Dashboard = ({getFunding, funding, fundingSum}) =>{
             user: 'INVESTOR'
         }
         getFunding(values)
-    },[getFunding])
+        getDashboardCount(values.user)
+    },[getFunding,getDashboardCount])
 
    
 
@@ -178,7 +179,7 @@ const Dashboard = ({getFunding, funding, fundingSum}) =>{
                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{fund.firstname} {fund.lastname}</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {fund.amount}</p>
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {fund.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                 </div>
                                 <div className="myColumn">
                                     {fund.email}
@@ -200,7 +201,7 @@ const Dashboard = ({getFunding, funding, fundingSum}) =>{
                     <div>
                                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                     <div>
-                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum}</h6>
+                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
                                     </div>
                                     <div className="ml-3">
                                         <button className="btn btn-view">View All</button>
@@ -360,13 +361,15 @@ const Dashboard = ({getFunding, funding, fundingSum}) =>{
 const mapStateToProps = (state) => {
     return {
         funding: state.fund.funding,
-        fundingSum: state.fund.fundingSum
+        fundingSum: state.fund.fundingSum,
+        count: state.fund.count
     };
   };
   
 const mapDispatchToProps = (dispatch) => {
 return {
     getFunding: (value) => dispatch(Funding(value)),
+    getDashboardCount: (value) => dispatch(DashboardCount(value))
  };
 };
 

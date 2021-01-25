@@ -31,9 +31,9 @@ const FundConfirm = ({firstname,lastname,amount,email, Cancel, history, Confirm}
 
                             <div>
                                 <p className="text-center mb-0" style={{color: '#000000',}}>
-                                You are about to Fund <span style={{fontWeight: 'bold'}}>{firstname} {lastname}</span> wallet 
+                                You are about to Fund <span style={{fontWeight: 'bold'}}>{firstname} {lastname + "'s"}</span> wallet 
                                     </p>
-                                    <p className="text-center mb-0"><span style={{fontWeight: 'bold', fontStyle: 'italic'}}> ({email})</span> with N{amount}</p>
+                                    <p className="text-center mb-0"><span style={{fontWeight: 'bold', fontStyle: 'italic'}}> ({email})</span> with N {amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                     <p className="text-center mb-0"> Please click <span style={{fontWeight: 'bold'}}>‘Confirmed’</span> to <span style={{fontWeight: 'bold'}}>“Complete’</span> or <span style={{fontWeight: 'bold'}}>‘Cancel’</span> to <span style={{fontWeight: 'bold'}}>‘Decline’.</span></p>
                                 </div>
 

@@ -1,16 +1,32 @@
 import SideBar from '../../components/SideBar/SideBar'
-
+import React,{useState, useEffect} from 'react'
+import {connect} from 'react-redux'
 import './fund.css'
+import { VerifyEmail } from "../../store/actions/fundActions";
 
 
-const Fund = (props) =>{
 
+const Fund = ({verify, history, loading}) =>{
+
+    const [email, setEmail] = useState("")
+    const [amount, setAmount] = useState('')
 
     const handleSubmit = (event) =>{
         event.preventDefault()
-        props.history.push("/fund/confirm");
+        const values = {
+            email,
+            amount
+        }
+        console.log(values)
+        verify(values)
     }
 
+    useEffect(() =>{
+        if(loading){
+          history.push('/fund/confirm');
+        }
+    },[loading, history])
+  
 
     return(
         <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
@@ -41,6 +57,8 @@ const Fund = (props) =>{
                                         placeholder="Please Enter Users Email Address"
                                         id="email"
                                         required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
 
 
@@ -54,6 +72,8 @@ const Fund = (props) =>{
                                         placeholder="Please Enter Amount you want to Fund into Users PurpleVest Wallet"
                                         id="wallet"
                                         required
+                                        value={amount}
+                                        onChange={(e) => setAmount(e.target.value)}
                                     />
                                     </div>
 
@@ -82,4 +102,17 @@ const Fund = (props) =>{
     )
 }
 
-export default Fund;
+const mapStateToProps = (state) =>{
+    return{
+        loading: state.fund.loading,
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        verify: (creds) => dispatch(VerifyEmail(creds))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Fund);

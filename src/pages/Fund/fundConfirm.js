@@ -1,8 +1,20 @@
 import SideBar from '../../components/SideBar/SideBar'
 import './fund.css'
+import {connect} from 'react-redux'
+import { CancelFund, ConfirmFund } from "../../store/actions/fundActions";
 
 
-const FundConfirm = () =>{
+const FundConfirm = ({firstname,lastname,amount,email, Cancel, history, Confirm}) =>{
+
+
+    const CancelFund = () =>{
+        Cancel()
+        history.push('/fund')
+    }
+
+    const confirmFund = () =>{
+        Confirm()
+    }
 
     return(
         <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
@@ -19,19 +31,23 @@ const FundConfirm = () =>{
 
                             <div>
                                 <p className="text-center mb-0" style={{color: '#000000',}}>
-                                You are about to Fund <span style={{fontWeight: 'bold'}}>Akinyemi Ogungbaro’s</span> wallet 
+                                You are about to Fund <span style={{fontWeight: 'bold'}}>{firstname} {lastname}</span> wallet 
                                     </p>
-                                    <p className="text-center mb-0"><span style={{fontWeight: 'bold', fontStyle: 'italic'}}> (akinyemiogungbaro@gmail.com)</span> with N200,000</p>
+                                    <p className="text-center mb-0"><span style={{fontWeight: 'bold', fontStyle: 'italic'}}> ({email})</span> with N{amount}</p>
                                     <p className="text-center mb-0"> Please click <span style={{fontWeight: 'bold'}}>‘Confirmed’</span> to <span style={{fontWeight: 'bold'}}>“Complete’</span> or <span style={{fontWeight: 'bold'}}>‘Cancel’</span> to <span style={{fontWeight: 'bold'}}>‘Decline’.</span></p>
                                 </div>
 
                                 <div className="mt-4" style={{display: 'flex',}}>
                                     <div style={{flex: 1}}>
-                                        <button className="btn btn-confirm">Confirmed</button>
+                                        <button 
+                                        onClick={confirmFund}
+                                        className="btn btn-confirm">Confirmed</button>
                                     </div>
 
                                     <div className="ml-2" style={{flex: 1}}>
-                                        <button className="btn btn-cancel">Cancel</button>
+                                        <button 
+                                        onClick={CancelFund}
+                                        className="btn btn-cancel">Cancel</button>
                                     </div>
 
                                 </div>
@@ -54,4 +70,21 @@ const FundConfirm = () =>{
     )
 }
 
-export default FundConfirm;
+const mapStateToProps = (state) =>{
+    return{
+        firstname: state.fund.firstname,
+        lastname: state.fund.lastname,
+        amount: state.fund.amount,
+        email: state.fund.email
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+     Cancel: () => dispatch(CancelFund()),
+     Confirm: () => dispatch(ConfirmFund()),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FundConfirm);

@@ -1,16 +1,15 @@
 import SideBar from '../../components/SideBar/SideBar'
 import './dashboard.css'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
-// import {connect} from 'react-redux'
+import {connect} from 'react-redux'
+import { Funding } from "../../store/actions/fundActions";
 
 
-const Dashboard = () =>{
+const Dashboard = ({Funding}) =>{
 
     const [isActive, setActive] = useState(false);
-
-    const [isCardActive] = useState(false);
     
     const [fund, setFund] = useState(1);
 
@@ -26,12 +25,12 @@ const Dashboard = () =>{
     ])
 
     const [dashCard] = useState([
-        {id: 1, name: 'Funding', value: 2031564},
-        {id: 2, name: 'In-Flow', value: 1890325},
-        {id: 3, name: 'Out-Flow', value: 5084123},
-        {id: 4, name: 'Active', value: 569},
-        {id: 5, name: 'Inactive', value: 29},
-        {id: 6, name: 'Suspended', value: 12},
+        {id: 1, name: 'Funding', value: 0},
+        {id: 2, name: 'In-Flow', value: 0},
+        {id: 3, name: 'Out-Flow', value: 0},
+        {id: 4, name: 'Active', value: 0},
+        {id: 5, name: 'Inactive', value: 0},
+        {id: 6, name: 'Suspended', value: 0},
     ])
 
 
@@ -69,6 +68,17 @@ const Dashboard = () =>{
             <p className="mb-0">{item.text}</p>
         </div>
         )
+
+
+    // Get all funding data
+    useEffect(() =>{
+        const values = {
+            time: 'today',
+            user: 'INVESTOR'
+        }
+        Funding(values)
+
+    })
 
    
 
@@ -123,110 +133,7 @@ const Dashboard = () =>{
                     </div>
                     
                     {/* cards layout */}
-              <div className="row mt-3">
-
-                            {/* funding */}
-                        <div className="col-lg-2">
-                            <div onClick={handleCardToggle} className={isCardActive ? "card-div" : "card-div-active"}>
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Funding</p>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>N 2,031,564</h5>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        {/* inflow */}
-                        <div className="col-lg-2">
-                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"} >
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>In-Flow</p>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>N 1,890,325</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                            {/* outflow */}
-                        <div className="col-lg-2">
-                            <div  onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"}>
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Out-Flow</p>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>N 5,084,123</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* active */}
-                        <div className="col-lg-2">
-                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"}>
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Active</p>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
-                                </div>
-                                <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>
-                                    <CountUp
-                                        start={0}
-                                        end={569}
-                                        duration={2.5}
-                                        separator=","
-                                         />
-                                    </h5>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* inactive */}
-                        <div className="col-lg-2">
-                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"} >
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Inactive</p>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
-                                </div>
-                                <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <h5 style={{color: '#000000', fontWeight: 'bold'}}>
-                                        <CountUp
-                                        start={0}
-                                        end={29}
-                                        duration={2.5}
-                                        separator=","
-                                         />
-                                    </h5>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p>
-                                </div>
-                            </div>
-                        </div>
-
-                            {/* suspended */}
-                        <div className="col-lg-2">
-                            <div onClick={handleCardToggle} className={isCardActive ? "card-div-active" : "card-div"}>
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>Suspended</p>
-                                    <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h5 style={{fontWeight: 'bold', color: '#FF3535'}}>
-                                    <CountUp
-                                        start={0}
-                                        end={12}
-                                        duration={2.5}
-                                        separator=","
-                                         />
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-             </div>
-
+         
 
                 {/* charts display */}
 
@@ -512,6 +419,18 @@ const Dashboard = () =>{
 
 
 
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    };
+  };
   
+const mapDispatchToProps = (dispatch) => {
+return {
+    Funding: (value) => dispatch(Funding(value)),
+ };
+};
 
-export default Dashboard;
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

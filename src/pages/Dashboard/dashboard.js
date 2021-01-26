@@ -14,7 +14,7 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
     
     const [fund, setFund] = useState(1);
 
-    const [cards, setCards] = useState(1);
+    const [cards, setCards] = useState(0);
 
     const [pay, setPayout] = useState(1);
 
@@ -25,14 +25,14 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
         { id: 4, name: 'tab-4', text: 'Year', value: '4' },
     ])
 
-    const [dashCard] = useState([
-        {id: 1, name: 'Funding', value: 0},
-        {id: 2, name: 'In-Flow', value: 0},
-        {id: 3, name: 'Out-Flow', value: 0},
-        {id: 4, name: 'Active', value: 0},
-        {id: 5, name: 'Inactive', value: 0},
-        {id: 6, name: 'Suspended', value: 0},
-    ])
+    // const [dashCard] = useState([
+    //     {id: 1, name: 'Funding', value: 0},
+    //     {id: 2, name: 'In-Flow', value: 0},
+    //     {id: 3, name: 'Out-Flow', value: 0},
+    //     {id: 4, name: 'Active', value: 0},
+    //     {id: 5, name: 'Inactive', value: 0},
+    //     {id: 6, name: 'Suspended', value: 0},
+    // ])
 
 
 
@@ -40,8 +40,8 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
         setActive(!isActive);
     }
 
-    const handleCardToggle = (id) =>{
-        setCards(id)
+    const handleCardToggle = (index) =>{
+        setCards(index)
     }
 
     const FundToggle = (id) =>{
@@ -101,30 +101,56 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
                     </div>
 
                     <div className="row mt-3">
-                        {dashCard.length ? dashCard.map((card)=>{
+                        {count.length ? count.map((card, index)=>{
+                            var name;
+                            
+                            switch(card.name){
+                                case "funding":
+                                    name = "Funding";
+                                    break;
+                                case "inflow":
+                                    name = "In-Flow";
+                                    break;
+                                case "outflow":
+                                    name = "Out-Flow";
+                                    break;
+                                case "activeUsers":
+                                    name = "Active";
+                                    break;
+                                case "inactiveUsers":
+                                    name = "Inactive"
+                                    break;
+                                case "suspendedUsers":
+                                    name = "Suspended"
+                                    break;
+                                default:
+                                    name = ""
+                            }
+        
                             return(
-                            <div key={card.id} className="col-lg-2">
+                            <div key={index} className="col-lg-2">
                             <div 
-                                onClick={() => handleCardToggle(card.id)}
-                               className={cards === card.id ? 'card-div-active' : 'card-div'}
+                                onClick={() => handleCardToggle(index)}
+                               className={cards === index ? 'card-div-active' : 'card-div'}
                             >
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>{card.name}</p>
+                                    <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>{name}</p>
                                     <p className="mb-0" style={{color: '#000000', fontSize: 14}}>Today</p>
                                 </div>
                                 <div className="mt-4" style={{display: 'flex', justifyContent: 'space-between'}}>
                                       <h5
-                                    className={card.id === 6 ? 'value-suspend' : 'value'}
+                                    className={index === 5 ? 'value-suspend' : 'value'}
                                      >
+                                         {index < 3 && 'N '}
                                       <CountUp
                                         start={0}
-                                        end={card.value}
+                                        end={ card.value}
                                         duration={2.5}
                                         separator=","
                                          />
                                      </h5>
-                                     {card.id === 5 ? <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p> : "" }
-                                     {card.id === 4 ? <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p> : "" }
+                                     {index === 3 ? <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p> : "" }
+                                     {index === 4 ? <p className="mb-0" style={{color: '#000000', fontSize: 14}}>0 New</p> : "" }
                                 </div>
                             </div> 
                         </div>
@@ -195,7 +221,7 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
                             </div>
                         )
                     }):
-                   <p>Loading data</p>
+                   <p className="text-center mt-3" style={{fontStyle: 'italic'}}>No data available for today.</p>
                 }
                                     </div>
                          </div>

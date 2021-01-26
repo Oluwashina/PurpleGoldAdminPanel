@@ -50,7 +50,7 @@ const Admin = (props) =>{
 
 
     return(
-        <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
+        <div style={{backgroundColor: '#f5f6f8',}}>
         <SideBar />
             <div className="main">
                 <div className="contain">
@@ -66,7 +66,7 @@ const Admin = (props) =>{
 
                     {/* Fund user design layout */}
 
-                    <div className="admin-card mt-5">
+                    <div className="admin-card mt-5 mb-5">
 
                         <div className="admin-div">
 
@@ -81,11 +81,34 @@ const Admin = (props) =>{
                                     <input
                                         className="form-control fund-style"
                                         type="email"
-                                        placeholder="Staff Name"
+                                        placeholder="Staff Firstname"
                                         id="email"
                                         required
                                     />
                                 </div>
+
+                                <div className="form-group input-container mt-4">
+                                    <i className="mdi mdi-account icon-fund"></i>
+                                    <input
+                                        className="form-control fund-style"
+                                        type="email"
+                                        placeholder="Staff Lastname"
+                                        id="email"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="form-group input-container mt-4">
+                                    <i className="mdi mdi-phone icon-fund"></i>
+                                    <input
+                                        className="form-control fund-style"
+                                        type="email"
+                                        placeholder="Staff Phonenumber"
+                                        id="email"
+                                        required
+                                    />
+                                </div>
+
 
                                 <div className="form-group input-container mt-4">
                                     <i className="mdi mdi-email icon-fund"></i>

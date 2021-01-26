@@ -10,7 +10,7 @@ import { Payouts, Funding, DashboardCount } from "../../store/actions/dashboardA
 
 const Dashboard = (props) =>{
 
-    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout} = props
+    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, isLoading} = props
 
     const [isActive, setActive] = useState(false);
     
@@ -26,15 +26,6 @@ const Dashboard = (props) =>{
         { id: 3, name: 'tab-3', text: 'Month', value: '3' },
         { id: 4, name: 'tab-4', text: 'Year', value: '4' },
     ])
-
-    // const [dashCard] = useState([
-    //     {id: 1, name: 'Funding', value: 0},
-    //     {id: 2, name: 'In-Flow', value: 0},
-    //     {id: 3, name: 'Out-Flow', value: 0},
-    //     {id: 4, name: 'Active', value: 0},
-    //     {id: 5, name: 'Inactive', value: 0},
-    //     {id: 6, name: 'Suspended', value: 0},
-    // ])
 
 
 
@@ -85,6 +76,27 @@ const Dashboard = (props) =>{
     },[getFunding,getDashboardCount, getPayouts])
 
    
+    if (isLoading) {
+        return (
+            <div
+                style={{
+                    minHeight: '90vh',
+                    minWidth: '100vw',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    boxSizing: 'border-box',
+                    margin: '0',
+                    padding: '20px'
+                }}
+            >
+                <div className="preloader">
+                    <img src="/img/purple_fav.png" alt="PurpleGold Loader" />
+                </div>
+            </div>
+        )
+    }
+
 
     return(
         <div style={{backgroundColor: '#f5f6f8'}}>
@@ -330,7 +342,8 @@ const mapStateToProps = (state) => {
         funding: state.dashboard.funding,
         fundingSum: state.dashboard.fundingSum,
         count: state.dashboard.count,
-        payout: state.dashboard.payouts
+        payout: state.dashboard.payouts,
+        isLoading: state.dashboard.isLoading
     };
   };
   

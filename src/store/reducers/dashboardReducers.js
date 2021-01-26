@@ -3,7 +3,8 @@ const initState = {
     payouts: [],
     funding: [],
     fundingSum: 0,
-    count: []
+    count: [],
+    isLoading: true
  };
  
  const dashboardReducer = (state = initState, action) => {
@@ -23,6 +24,11 @@ const initState = {
             return{
                 ...state,
                 count: action.data
+            }
+        case 'Stop_Loader':
+            return{
+                ...state,
+                isLoading: false
             }
          default:
              return state

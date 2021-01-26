@@ -47,6 +47,7 @@ export const Funding = (values) => {
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "Dashboard_Count", data: res.data.data});
+          dispatch({type: 'Stop_Loader'})
         }
       } catch (err) {
         dispatch({ type: "Count_Error", err: err.response?.data?.message });

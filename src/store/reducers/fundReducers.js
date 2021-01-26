@@ -6,9 +6,6 @@ const initState = {
    loading: false,
    email: '',
    amount: '',
-   funding: [],
-   fundingSum: 0,
-   count: []
 };
 
 const fundReducer = (state = initState, action) => {
@@ -31,17 +28,6 @@ const fundReducer = (state = initState, action) => {
             return{
                 ...state,
                 loading: false
-            }
-        case 'Funding':
-            return{
-                ...state,
-                funding: action.data[0].users,
-                fundingSum: action.data[0].fundingSum
-            }
-        case 'Dashboard_Count':
-            return{
-                ...state,
-                count: action.data
             }
         default:
             return state

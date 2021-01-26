@@ -32,10 +32,10 @@ class App extends Component {
              <Route exact path="/fund" component={Fund} />
              <Route path="/fund/confirm" component={FundConfirm} />
              <Route exact path="/admin" component={Admin} />
-             <Route  path="/admin/all" component={AllAdmin} />
-             <Route  path="/admin/suspended" component={SuspendedAdmin} />
-             <Route  path="/admin/activities" component={AdminActivities} />
-             <Route  path="/admin/profile" component={AdminProfile} />
+             <Route path="/admin/all" component={AllAdmin} />
+             <Route path="/admin/suspended" component={SuspendedAdmin} />
+             <Route path="/admin/activities" component={AdminActivities} />
+             <Route path="/admin/profile" component={AdminProfile} />
              <Route path="/users" component={Users} />
              <Route path="/marketers" component={Marketers} />
            </Switch>

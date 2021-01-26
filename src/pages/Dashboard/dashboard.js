@@ -4,11 +4,13 @@ import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
-import { Funding, DashboardCount } from "../../store/actions/fundActions";
-import { Payouts } from "../../store/actions/dashboardActions";
+// import { Funding, DashboardCount } from "../../store/actions/fundActions";
+import { Payouts, Funding, DashboardCount } from "../../store/actions/dashboardActions";
 
 
-const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, getPayouts}) =>{
+const Dashboard = (props) =>{
+
+    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout} = props
 
     const [isActive, setActive] = useState(false);
     
@@ -263,120 +265,57 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
 
                 </div>
 
-              
 
-                    {/* Users details */}
-                    <div className="row mt-3">
-                        <div className="col-lg-12">
+                  {/* UpcomingPayouts details */}
+                  <div className="row mt-3">
+                         <div className="col-lg-12">
                             <div className="table-style">
                                 <div className="myTable mt-4">
                                         <div className="myHead">
-                                            {/* first row */}
-                                            <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>GTBank -0015738102</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-                                        {/* second row */}
-                                        <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Stanbic Bank -0015738102</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-                                        {/* third row */}
-                                        <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Access Bank -0015738102</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-                                        {/* fourth row */}
-                                        <div className="myRow">
-                                                <div className="myColumn">
-                                                <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="myColumn">
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Fidelity Bank -0015738102</p>
-                                            </div>
-                                            <div className="myColumn">
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                        {payout.length ? payout.map((pay, index)=>{
+                        return(
+                            <div key={index} className="myRow">
+                            <div className="myColumn">
+                            <img className="img-fluid" src="/img/avatar.png" alt="" />
                                 </div>
-
-                                    
-                                            
-
-                                    {/* total count */}
+                                <div className="myColumn">
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{pay.firstname} {pay.lastname}</p>
+                                </div>
+                                <div className="myColumn">
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {pay.totalReturn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                                </div>
+                                <div className="myColumn">
+                                    {pay.email}
+                                </div>
+                                <div className="myColumn">
+                                    <p className="mb-0" style={{color: '#9E079E'}}>{pay.bank} - {pay.accountNumber}</p>
+                                </div>
+                                <div className="myColumn">
+                                <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                </div>
+                            </div>
+                        )
+                    }):
+                   <p className="text-center mt-3" style={{fontStyle: 'italic'}}>No data available for today.</p>
+                }
+                                    </div>
+                         </div>
+                    {/* total count */}
+                    <div>
+                                <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                     <div>
-                                        <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
-                                            <div>
-                                                <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N 2,031,564.00</h6>
-                                            </div>
-                                            <div className="ml-3">
-                                                <button className="btn btn-view">View All</button>
-                                                </div>
-                                        </div>
+                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
                                     </div>
+                                    <div className="ml-3">
+                                        <button className="btn btn-view">View All</button>
+                                        </div>
                                 </div>
-                        </div>
+                            </div>
+                    </div>
+                </div> 
+            </div>
 
-                    </div>                    
+                                
 
                 </div>
             </div>
@@ -388,9 +327,10 @@ const Dashboard = ({getFunding, funding, fundingSum, getDashboardCount, count, g
 
 const mapStateToProps = (state) => {
     return {
-        funding: state.fund.funding,
-        fundingSum: state.fund.fundingSum,
-        count: state.fund.count
+        funding: state.dashboard.funding,
+        fundingSum: state.dashboard.fundingSum,
+        count: state.dashboard.count,
+        payout: state.dashboard.payouts
     };
   };
   

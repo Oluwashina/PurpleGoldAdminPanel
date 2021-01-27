@@ -4,13 +4,12 @@ import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
-// import { Funding, DashboardCount } from "../../store/actions/fundActions";
 import { Payouts, Funding, DashboardCount } from "../../store/actions/dashboardActions";
 
 
 const Dashboard = (props) =>{
 
-    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, isLoading} = props
+    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, payoutSum, isLoading} = props
 
     const [isActive, setActive] = useState(false);
     
@@ -39,10 +38,76 @@ const Dashboard = (props) =>{
 
     const FundToggle = (id) =>{
        setFund(id)
+       var values;
+       switch(id){
+           case 1:
+               values = {
+                time: 'today',
+                user: 'INVESTOR'
+             }
+             getFunding(values)
+               break;
+           case 2:
+              values = {
+                time: 'week',
+                user: 'INVESTOR'
+             }
+            getFunding(values)
+            break;
+            case 3:
+                 values = {
+                    time: 'month',
+                    user: 'INVESTOR'
+                 }
+                getFunding(values)
+                break;
+            case 4:
+                 values = {
+                    time: 'year',
+                    user: 'INVESTOR'
+                 }
+                getFunding(values)
+                break;
+            default:
+                console.log("Today")
+       }
     }
 
     const PayToggle = (id) =>{
         setPayout(id)
+        var values;
+        switch(id){
+            case 1:
+                values = {
+                 time: 'today',
+                 user: 'INVESTOR'
+              }
+              getPayouts(values)
+                break;
+            case 2:
+               values = {
+                 time: 'week',
+                 user: 'INVESTOR'
+              }
+              getPayouts(values)
+             break;
+             case 3:
+                  values = {
+                     time: 'month',
+                     user: 'INVESTOR'
+                  }
+                  getPayouts(values)
+                 break;
+             case 4:
+                  values = {
+                     time: 'year',
+                     user: 'INVESTOR'
+                  }
+                  getPayouts(values)
+                 break;
+             default:
+                 console.log("Today")
+        }
     }
 
     const fundDayToggle = fundData.map((item)=>
@@ -211,31 +276,49 @@ const Dashboard = (props) =>{
                             <div className="table-style">
                                 <div className="myTable mt-4">
                                         <div className="myHead">
-                                        {funding.length ? funding.map((fund, index)=>{
+                                        {funding.length ? funding.map((value, index)=>{
+                                         
+                                            var dayShow
+                                            switch(fund){
+                                                case 1:
+                                                    dayShow = "Today";
+                                                    break;
+                                                case 2:
+                                                    dayShow = "This Week";
+                                                    break;
+                                                case 3:
+                                                    dayShow = "Month";
+                                                    break;
+                                                case 4:
+                                                    dayShow = "Year";
+                                                    break;
+                                                default:
+                                                    dayShow = ""
+                                            }
                         return(
                             <div key={index} className="myRow">
                             <div className="myColumn">
                             <img className="img-fluid" src="/img/avatar.png" alt="" />
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{fund.firstname} {fund.lastname}</p>
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{value.firstname} {value.lastname}</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {fund.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                 </div>
                                 <div className="myColumn">
-                                    {fund.email}
+                                    {value.email}
                                 </div>
                                 <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>{fund.createdAt.slice(11, 19)}</p>
+                                    <p className="mb-0" style={{color: '#9E079E'}}>{value.createdAt.slice(11, 19)}</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                <p className="mb-0" style={{color: '#9E079E'}}>{dayShow}</p>
                                 </div>
                             </div>
                         )
                     }):
-                   <p className="text-center mt-3" style={{fontStyle: 'italic'}}>No data available for today.</p>
+                   <p className="text-center mt-3" style={{fontStyle: 'italic'}}>No data available for display.</p>
                 }
                                     </div>
                          </div>
@@ -279,36 +362,54 @@ const Dashboard = (props) =>{
 
 
                   {/* UpcomingPayouts details */}
-                  <div className="row mt-3">
+                  <div className="row mt-3 mb-5">
                          <div className="col-lg-12">
                             <div className="table-style">
                                 <div className="myTable mt-4">
                                         <div className="myHead">
-                                        {payout.length ? payout.map((pay, index)=>{
+                                        {payout.length ? payout.map((value, index)=>{
+                                            
+                                            var dayShow
+                                            switch(pay){
+                                                case 1:
+                                                    dayShow = "Today";
+                                                    break;
+                                                case 2:
+                                                    dayShow = "This Week";
+                                                    break;
+                                                case 3:
+                                                    dayShow = "Month";
+                                                    break;
+                                                case 4:
+                                                    dayShow = "Year";
+                                                    break;
+                                                default:
+                                                    dayShow = ""
+                                            }
                         return(
                             <div key={index} className="myRow">
                             <div className="myColumn">
                             <img className="img-fluid" src="/img/avatar.png" alt="" />
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{pay.firstname} {pay.lastname}</p>
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{value.firstname} {value.lastname}</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {pay.totalReturn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                                <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N {value.totalReturn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                 </div>
                                 <div className="myColumn">
-                                    {pay.email}
+                                    {value.email}
                                 </div>
                                 <div className="myColumn">
-                                    <p className="mb-0" style={{color: '#9E079E'}}>{pay.bank} - {pay.accountNumber}</p>
+                                    <p className="mb-0" style={{color: '#9E079E'}}>{value.bank} - {value.accountNumber}</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E'}}>Today</p>
+                                <p className="mb-0" style={{color: '#9E079E'}}>{dayShow}</p>
                                 </div>
                             </div>
                         )
                     }):
-                   <p className="text-center mt-3" style={{fontStyle: 'italic'}}>No data available for today.</p>
+                   <p className="text-center mt-3" style={{fontStyle: 'italic'}}>No data available for display.</p>
                 }
                                     </div>
                          </div>
@@ -316,7 +417,7 @@ const Dashboard = (props) =>{
                     <div>
                                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                     <div>
-                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
+                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {payoutSum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
                                     </div>
                                     <div className="ml-3">
                                         <button className="btn btn-view">View All</button>
@@ -343,6 +444,7 @@ const mapStateToProps = (state) => {
         fundingSum: state.dashboard.fundingSum,
         count: state.dashboard.count,
         payout: state.dashboard.payouts,
+        payoutSum: state.dashboard.payoutSum,
         isLoading: state.dashboard.isLoading
     };
   };

@@ -6,10 +6,21 @@ const initState = {
    loading: false,
    email: '',
    amount: '',
+   loader: false
 };
 
 const fundReducer = (state = initState, action) => {
     switch (action.type) {
+        case 'Loader' :
+            return{
+                ...state,
+                loader: true
+            }
+        case 'Stop_Loader':
+            return{
+                ...state,
+                loader: false
+            }
         case 'Email_Valid':
             return {
                 ...state,

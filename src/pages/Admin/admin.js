@@ -1,15 +1,39 @@
 import SideBar from '../../components/SideBar/SideBar'
 import React, {useState} from 'react'
 import './admin.css'
+import { connect } from "react-redux";
+import { AddAdmin } from "../../store/actions/adminActions";
 
 
 const Admin = (props) =>{
 
+    const {CreateAdmin, loader} = props
+
     const [fund] = useState(1);
+
+    const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
+    const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const handleSubmit = (event) =>{
         event.preventDefault()
-        props.history.push("/confirm/fund");
+        const values = {
+            firstname,
+            lastname,
+            phone,
+            email,
+            password
+        }
+        console.log(values)
+        CreateAdmin(values)
+        setFirstname('')
+        setLastname('')
+        setPhone('')
+        setEmail('')
+        setPassword('')
+        
     }
 
     const [fundData] = useState([
@@ -80,10 +104,11 @@ const Admin = (props) =>{
                                     <i className="mdi mdi-account icon-fund"></i>
                                     <input
                                         className="form-control fund-style"
-                                        type="email"
+                                        type="text"
                                         placeholder="Staff Firstname"
-                                        id="email"
                                         required
+                                        value={firstname}
+                                        onChange={(e) => setFirstname(e.target.value)}
                                     />
                                 </div>
 
@@ -91,10 +116,11 @@ const Admin = (props) =>{
                                     <i className="mdi mdi-account icon-fund"></i>
                                     <input
                                         className="form-control fund-style"
-                                        type="email"
+                                        type="text"
                                         placeholder="Staff Lastname"
-                                        id="email"
                                         required
+                                        value={lastname}
+                                        onChange={(e) => setLastname(e.target.value)}
                                     />
                                 </div>
 
@@ -102,10 +128,12 @@ const Admin = (props) =>{
                                     <i className="mdi mdi-phone icon-fund"></i>
                                     <input
                                         className="form-control fund-style"
-                                        type="email"
-                                        placeholder="Staff Phonenumber"
-                                        id="email"
+                                        type="text"
+                                        placeholder="Staff Phonenumber e.g 800-000-0000"
+                                        
                                         required
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
                                     />
                                 </div>
 
@@ -118,6 +146,8 @@ const Admin = (props) =>{
                                         placeholder="Staff Email Address"
                                         id="email"
                                         required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
 
 
@@ -129,14 +159,16 @@ const Admin = (props) =>{
                                         className="form-control fund-style"
                                         type="password"
                                         placeholder="Password"
-                                        id="password"
+                                        
                                         required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                     </div>
 
                                     <button 
                                 type="submit"
-                               
+                                disabled={loader}
                                 className="btn btn-fund mt-2">
                                     Create New Admin
                                     </button>
@@ -159,4 +191,17 @@ const Admin = (props) =>{
     )
 }
 
-export default Admin;
+const mapStateToProps = (state) => {
+    return {
+      loader: state.admin.loading
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      CreateAdmin: (value) => dispatch(AddAdmin(value)),
+    };
+  };
+  
+
+export default connect(mapStateToProps,mapDispatchToProps)(Admin);

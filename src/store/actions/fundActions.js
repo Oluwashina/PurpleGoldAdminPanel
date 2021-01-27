@@ -13,6 +13,8 @@ const getToken = () => {
 // verify email actions functionality
 export const VerifyEmail = (values) => {
     return async (dispatch, getState) => {
+       // loader
+      dispatch({ type: "Loader" });
       try {
           const email = values.email
         const res = await axios.get(apiUrl + "user/"+email, {
@@ -26,10 +28,12 @@ export const VerifyEmail = (values) => {
             console.log(res)
           dispatch({ type: "Email_Valid", data: res.data.data });
           dispatch({ type: "Fund_Details", data: values });
+          dispatch({ type: "Stop_Loader" });
         }
       } catch (err) {
         dispatch({ type: "Email_Error", err: err.response?.data?.message });
         cogoToast.error('Email Address not valid!')
+        dispatch({ type: "Stop_Loader" });
       }
     };
   };
@@ -45,7 +49,9 @@ export const VerifyEmail = (values) => {
 
 //   Confirm funding functionality
 export const ConfirmFund = () => ((dispatch, getState) => {
-    console.log(getState().fund)
+   // loader
+   dispatch({ type: "Loader" });
+
    const data ={
     amount: getState().fund.amount,
     userId: getState().fund.userId
@@ -58,10 +64,12 @@ export const ConfirmFund = () => ((dispatch, getState) => {
         }
     }).then((res) => {
         if (res.status === 201) {
+        dispatch({ type: "Stop_Loader" });
         cogoToast.success('Wallet has been successfully funded!', { position: 'bottom-right', })
         dispatch({ type: "CancelFund" });
         } 
     }).catch((err) => {
+      dispatch({ type: "Stop_Loader" });
         cogoToast.error('Error while funding wallet!')
     })
   });

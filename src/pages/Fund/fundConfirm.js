@@ -4,8 +4,9 @@ import {connect} from 'react-redux'
 import { CancelFund, ConfirmFund } from "../../store/actions/fundActions";
 
 
-const FundConfirm = ({firstname,lastname,amount,email, Cancel, history, Confirm}) =>{
+const FundConfirm = (props) =>{
 
+    const {firstname,lastname,amount,email, Cancel, history, Confirm, loader} = props
 
     const CancelFund = () =>{
         Cancel()
@@ -40,6 +41,7 @@ const FundConfirm = ({firstname,lastname,amount,email, Cancel, history, Confirm}
                                 <div className="mt-4" style={{display: 'flex',}}>
                                     <div style={{flex: 1}}>
                                         <button 
+                                        disabled={loader}
                                         onClick={confirmFund}
                                         className="btn btn-confirm">Confirmed</button>
                                     </div>
@@ -75,7 +77,8 @@ const mapStateToProps = (state) =>{
         firstname: state.fund.firstname,
         lastname: state.fund.lastname,
         amount: state.fund.amount,
-        email: state.fund.email
+        email: state.fund.email,
+        loader: state.fund.loader
     }
 }
 

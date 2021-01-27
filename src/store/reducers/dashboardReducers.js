@@ -3,6 +3,7 @@ const initState = {
     payouts: [],
     funding: [],
     fundingSum: 0,
+    payoutSum: 0,
     count: [],
     isLoading: true
  };
@@ -10,9 +11,14 @@ const initState = {
  const dashboardReducer = (state = initState, action) => {
      switch (action.type) {
          case 'Payout':
+             let payoutSum;
+             payoutSum = action.data.reduce((acc, cur)=>{
+                return acc + parseFloat(cur.totalReturn)
+              },0)
              return {
                  ...state,
-                 payouts: action.data
+                 payouts: action.data,
+                 payoutSum: payoutSum
              }
         case 'Funding':
             return{

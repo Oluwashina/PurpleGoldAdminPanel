@@ -6,7 +6,7 @@ import { VerifyEmail } from "../../store/actions/fundActions";
 
 
 
-const Fund = ({verify, history, loading}) =>{
+const Fund = ({verify, history, loading,loader}) =>{
 
     const [email, setEmail] = useState("")
     const [amount, setAmount] = useState('')
@@ -17,7 +17,6 @@ const Fund = ({verify, history, loading}) =>{
             email,
             amount
         }
-        console.log(values)
         verify(values)
     }
 
@@ -79,7 +78,7 @@ const Fund = ({verify, history, loading}) =>{
 
                                     <button 
                                 type="submit"
-                               
+                                disabled={loader}
                                 className="btn btn-fund mt-2">
                                     Proceed to Fund Users Wallet
                                     </button>
@@ -105,6 +104,7 @@ const Fund = ({verify, history, loading}) =>{
 const mapStateToProps = (state) =>{
     return{
         loading: state.fund.loading,
+        loader: state.fund.loader,
     }
 }
 

@@ -356,8 +356,6 @@ const Dashboard = (props) =>{
                          {payoutDayToggle}
                     </div>
 
-                   
-
                 </div>
 
 

@@ -30,35 +30,29 @@ export const getAllAdmin = () => {
     };
   };
 
-//   create a new admin functionality
-export const AddAdmin = (value) => ((dispatch, getState) => {
-    // loader
-    dispatch({ type: "Loader" });
-    
-   const data ={
-    firstname: value.firstname,
-    lastname: value.lastname,
-    phoneNumber: "+234" + value.phone,
-    email: value.email,
-    password: value.password,
-   } 
 
-    axios.post(apiUrl + "admin/create_admin", data, {
-        headers: {
+//   create a new admin functionality
+export const AddAdmin = (user) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await axios.post(apiUrl + "admin/create_admin", { ...user }, {
+          headers: {
             Accept: 'application/json',
             appID: 'PGADMIN',
             Authorization: getToken()
-        }
-    }).then((res) => {
-        if (res.status === 201) {
+          }
+        });
+      if (res.status === 201) {
+          console.log(res)
         cogoToast.success('Admin created successfully!', { position: 'bottom-right', })
-        dispatch({ type: "Stop_Loader" });
-        } 
-    }).catch((err) => {
-        cogoToast.error('Email or user already exist')
-        dispatch({ type: "Stop_Loader" });
-    })
-  });
+      }
+    } catch (err) {
+      // var message = err.response.data
+      cogoToast.error('User or email already exists')
+    }
+  };
+};
+
 
 
 

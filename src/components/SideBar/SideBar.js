@@ -23,7 +23,7 @@ function SideBar({Logout, firstname,lastname}){
                 {/* logo */}
                 <div>
                     <Link className="navbar-brand" to="/dashboard">
-                        <img alt="logo" src="/img/dash-logo.png" width="106" height="31"  />
+                        <img alt="logo" src="/img/dash-logo.png" width="106" height="31" />
                     </Link>
                 </div>
 

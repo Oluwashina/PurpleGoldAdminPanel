@@ -2,12 +2,12 @@ import SideBar from '../../components/SideBar/SideBar'
 import React, {useState, useEffect} from 'react'
 import './withdrawal.css'
 import { connect } from "react-redux";
-import { ProcessingRequest } from "../../store/actions/withdrawalActions";
+import { ProcessingRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
 
 
 const Processing = (props) =>{
 
-    const {getProcessed, request} = props
+    const {getProcessed, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props
 
     const [isActive, setActive] = useState(false);
     
@@ -47,6 +47,11 @@ const Processing = (props) =>{
               status: "PROCESSING",
             };
             getProcessed(values);
+            getWithdrawCount({
+                time: "today",
+                user: "INVESTOR",
+               }
+              )
             break;
           case 2:
             values = {
@@ -55,6 +60,11 @@ const Processing = (props) =>{
               status: "PROCESSING",
             };
             getProcessed(values);
+            getWithdrawCount({
+                time: "week",
+                user: "INVESTOR",
+               }
+              )
             break;
           case 3:
             values = {
@@ -63,6 +73,11 @@ const Processing = (props) =>{
               status: "PROCESSING",
             };
             getProcessed(values);
+            getWithdrawCount({
+                time: "month",
+                user: "INVESTOR",
+               }
+              )
             break;
           case 4:
             values = {
@@ -71,6 +86,11 @@ const Processing = (props) =>{
               status: "PROCESSING",
             };
             getProcessed(values);
+            getWithdrawCount({
+                time: "year",
+                user: "INVESTOR",
+               }
+              )
             break;
           default:
             console.log("Today");
@@ -94,7 +114,12 @@ const Processing = (props) =>{
         status: "PROCESSING",
         };
         getProcessed(values);
-    }, [getProcessed]);
+        getWithdrawCount({
+            time: "today",
+            user: "INVESTOR",
+           }
+          );
+    }, [getProcessed, getWithdrawCount]);
 
     return(
         <div style={{backgroundColor: '#f5f6f8',}}>
@@ -116,25 +141,25 @@ const Processing = (props) =>{
                     <div className="request-div mx-auto mt-5">
                         <div className="newRequest" style={{position: 'relative'}}  onClick={handleRequest}>
                             <div className="active-count" style={{color: 'white'}}>
-                                6
+                                {pendingCount}
                             </div>
                             <p className="mb-0">New Request</p>
                         </div>
                         <div className="active-processing">
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                                <p className="mb-0" style={{background: '#FF0000',borderRadius: 10, padding: '2px 10px', color: '#fff', fontSize: 12}}>89</p>
+                                <p className="mb-0" style={{background: '#FF0000',borderRadius: 10, padding: '2px 10px', color: '#fff', fontSize: 12}}>{processingCount}</p>
                                  <p className="mb-0 ml-2">Processing</p>
                             </div>
                         </div>  
                         <div className="paid"  onClick={handlePaid}>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <p className="mb-0" style={{background: '#E5E3F3',borderRadius: 10, padding: '2px 10px', color: '#AAAAAA', fontSize: 12}}>265</p>
+                                <p className="mb-0" style={{background: '#E5E3F3',borderRadius: 10, padding: '2px 10px', color: '#AAAAAA', fontSize: 12}}>{paidCount}</p>
                                  <p className="mb-0 ml-2">Paid</p>
                             </div>
                         </div> 
                         <div className="declined" onClick={handleDeclined}>
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <p className="mb-0" style={{background: '#E5E3F3',borderRadius: 10, padding: '2px 10px', color: '#AAAAAA', fontSize: 12}}>37</p>
+                                <p className="mb-0" style={{background: '#E5E3F3',borderRadius: 10, padding: '2px 10px', color: '#AAAAAA', fontSize: 12}}>{declinedCount}</p>
                                  <p className="mb-0 ml-2">Declined</p>
                             </div>
                           
@@ -308,12 +333,17 @@ const Processing = (props) =>{
 const mapStateToProps = (state) => {
     return {
       request: state.withdraw.processingRequest,
+      pendingCount:state.withdraw.pendingCount,
+      processingCount: state.withdraw.processingCount,
+      paidCount: state.withdraw.paidCount,
+      declinedCount: state.withdraw.declinedCount
     };
   };
   
   const mapDispatchToProps = (dispatch) => {
     return {
       getProcessed: (value) => dispatch(ProcessingRequest(value)),
+      getWithdrawCount: (value) => dispatch(WithdrawCount(value)),
     };
   };
   

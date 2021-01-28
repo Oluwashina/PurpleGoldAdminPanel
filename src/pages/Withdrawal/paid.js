@@ -2,10 +2,10 @@ import SideBar from "../../components/SideBar/SideBar";
 import React, { useState, useEffect } from "react";
 import "./withdrawal.css";
 import { connect } from "react-redux";
-import { PaidRequest } from "../../store/actions/withdrawalActions";
+import { PaidRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
 
 const Paid = (props) => {
-  const { getPaid, request } = props;
+  const { getPaid, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props;
 
   const [isActive, setActive] = useState(false);
 
@@ -45,6 +45,11 @@ const Paid = (props) => {
           status: "PAID",
         };
         getPaid(values);
+        getWithdrawCount({
+          time: "today",
+          user: "INVESTOR",
+         }
+        )
         break;
       case 2:
         values = {
@@ -53,6 +58,11 @@ const Paid = (props) => {
           status: "PAID",
         };
         getPaid(values);
+        getWithdrawCount({
+          time: "week",
+          user: "INVESTOR",
+         }
+        )
         break;
       case 3:
         values = {
@@ -61,6 +71,11 @@ const Paid = (props) => {
           status: "PAID",
         };
         getPaid(values);
+        getWithdrawCount({
+          time: "month",
+          user: "INVESTOR",
+         }
+        )
         break;
       case 4:
         values = {
@@ -69,6 +84,11 @@ const Paid = (props) => {
           status: "PAID",
         };
         getPaid(values);
+        getWithdrawCount({
+          time: "year",
+          user: "INVESTOR",
+         }
+        )
         break;
       default:
         console.log("Today");
@@ -93,7 +113,12 @@ const Paid = (props) => {
       status: "PAID",
     };
     getPaid(values);
-  }, [getPaid]);
+    getWithdrawCount({
+      time: "today",
+      user: "INVESTOR",
+     }
+    )
+  }, [getPaid, getWithdrawCount]);
 
   return (
     <div style={{ backgroundColor: "#f5f6f8" }}>
@@ -130,7 +155,7 @@ const Paid = (props) => {
               onClick={handleRequest}
             >
               <div className="active-count" style={{ color: "white" }}>
-                6
+                {pendingCount}
               </div>
               <p className="mb-0">New Request</p>
             </div>
@@ -146,7 +171,7 @@ const Paid = (props) => {
                     fontSize: 12,
                   }}
                 >
-                  89
+                  {processingCount}
                 </p>
                 <p className="mb-0 ml-2">Processing</p>
               </div>
@@ -163,7 +188,7 @@ const Paid = (props) => {
                     fontSize: 12,
                   }}
                 >
-                  265
+                  {paidCount}
                 </p>
                 <p className="mb-0 ml-2">Paid</p>
               </div>
@@ -180,7 +205,7 @@ const Paid = (props) => {
                     fontSize: 12,
                   }}
                 >
-                  37
+                  {declinedCount}
                 </p>
                 <p className="mb-0 ml-2">Declined</p>
               </div>
@@ -338,12 +363,17 @@ const Paid = (props) => {
 const mapStateToProps = (state) => {
   return {
     request: state.withdraw.paidRequest,
+    pendingCount:state.withdraw.pendingCount,
+    processingCount: state.withdraw.processingCount,
+    paidCount: state.withdraw.paidCount,
+    declinedCount: state.withdraw.declinedCount
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getPaid: (value) => dispatch(PaidRequest(value)),
+    getWithdrawCount: (value) => dispatch(WithdrawCount(value)),
   };
 };
 

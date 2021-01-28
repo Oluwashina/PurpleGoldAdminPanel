@@ -78,21 +78,21 @@
     background: rgba(160, 48, 168, 0.31);
   border-radius: 10px;
   padding: 10px 20px;
-  width: 180px;
+  /* width: 180px; */
 }
 
 .withdrawn-div{
     background-color:  #FFEAF9;
     border-radius: 10px;
     padding: 10px 20px;
-    width: 180px;
+    /* width: 180px; */
 }
 
 .balance-div{
  background: #FFDDDD;
     border-radius: 10px;
     padding: 10px 20px;
-    width: 180px;
+    /* width: 180px; */
 }
 .delete-icon{
     background: #FF5959;

@@ -1,9 +1,13 @@
 import SideBar from '../../components/SideBar/SideBar'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './withdrawal.css'
+import { connect } from "react-redux";
+import { ProcessingRequest } from "../../store/actions/withdrawalActions";
 
 
 const Processing = (props) =>{
+
+    const {getProcessed, request} = props
 
     const [isActive, setActive] = useState(false);
     
@@ -34,6 +38,43 @@ const Processing = (props) =>{
 
     const DailyToggle = (id) =>{
         setDay(id)
+        var values;
+        switch (id) {
+          case 1:
+            values = {
+              time: "today",
+              user: "INVESTOR",
+              status: "PROCESSING",
+            };
+            getProcessed(values);
+            break;
+          case 2:
+            values = {
+              time: "week",
+              user: "INVESTOR",
+              status: "PROCESSING",
+            };
+            getProcessed(values);
+            break;
+          case 3:
+            values = {
+              time: "month",
+              user: "INVESTOR",
+              status: "PROCESSING",
+            };
+            getProcessed(values);
+            break;
+          case 4:
+            values = {
+              time: "year",
+              user: "INVESTOR",
+              status: "PROCESSING",
+            };
+            getProcessed(values);
+            break;
+          default:
+            console.log("Today");
+        }
      } 
 
     const dailyDiv = fundData.map((item)=>
@@ -44,6 +85,16 @@ const Processing = (props) =>{
         <p className="mb-0">{item.text}</p>
     </div>
     )
+
+    // Get all withdraw data
+    useEffect(() => {
+        const values = {
+        time: "today",
+        user: "INVESTOR",
+        status: "PROCESSING",
+        };
+        getProcessed(values);
+    }, [getProcessed]);
 
     return(
         <div style={{backgroundColor: '#f5f6f8',}}>
@@ -99,7 +150,7 @@ const Processing = (props) =>{
                     </div>
 
                      {/* Data tables to be populated with the withdrawal request layout */}
-                     <div className="paid-head mt-4">
+                     <div className="paid-head mt-4 mb-5">
                              <div className="myTable" style={{marginBottom: 0}}>
                                 <div className="myHead">
                                         {/* first row */}
@@ -127,85 +178,90 @@ const Processing = (props) =>{
                                             </div>
                                         </div>
 
-                                           {/* actual data row */}
-                                     <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                                </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>processing...</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                                 <button className="btn btn-paid">Paid</button>
-                                                  <button className="btn btn-decline ml-2">Decline</button>
-                                            </div>
-                                            
-                                    </div>
+                                                
+                                                {request.length ? (
+                        request.map((value, index) => {
+                            return (
+                            <div
+                                key={index}
+                                className="myRow"
+                                style={{ background: "#fff" }}
+                            >
+                                <div
+                                className="adminColumn"
+                                style={{ padding: "18px 20px" }}
+                                >
+                                <img
+                                    className="img-fluid"
+                                    src="/img/avatar.png"
+                                    alt=""
+                                />
+                                </div>
+                                <div
+                                className="adminColumn"
+                                style={{ padding: "18px 20px" }}
+                                >
+                                <p
+                                    className="mb-0"
+                                    style={{ fontWeight: 700, color: "#000000" }}
+                                >
+                                    {value.firstname} {value.lastname}
+                                </p>
+                                </div>
+                                <div
+                                className="adminColumn"
+                                style={{ padding: "18px 20px" }}
+                                >
+                                <p
+                                    className="mb-0"
+                                    style={{ fontWeight: 700, color: "#000000" }}
+                                >
+                                    N 255,198.00
+                                </p>
+                                </div>
+                                <div className="adminColumn">{value.email}</div>
+                                <div
+                                className="adminColumn"
+                                style={{ padding: "18px 20px" }}
+                                >
+                                <p className="mb-0" style={{ color: "#9E079E" }}>
+                                    {value.createdAt}
+                                </p>
+                                </div>
+                                <div
+                                className="adminColumn"
+                                style={{ padding: "18px 20px" }}
+                                >
+                                <p
+                                    className="mb-0"
+                                    style={{
+                                    color: "#9E079E",
+                                    fontStyle: "italic",
+                                    textTransform: "lowercase",
+                                    }}
+                                >
+                                    {value.status}
+                                </p>
+                                </div>
+                                <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                    <button className="btn btn-paid">Paid</button>
+                                    <button className="btn btn-decline ml-2">Decline</button>
+                            </div>
+                            </div>
+                            );
+                        })
+                        ) : (
+                        <p
+                            className="text-center mt-3"
+                            style={{ fontStyle: "italic" }}
+                        >
+                            
+                        </p>
+                        )}
 
-                                    {/* second row */}
-                                    <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                                </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>processing...</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                                 <button className="btn btn-paid">Paid</button>
-                                                  <button className="btn btn-decline ml-2">Decline</button>
-                                            </div>
-                                            
-                                    </div>
 
-                                    {/* third row */}
-                                    <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                                </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>processing...</p>
-                                            </div>     
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                                 <button className="btn btn-paid">Paid</button>
-                                                  <button className="btn btn-decline ml-2">Decline</button>
-                                            </div>    
-                                    </div>
+
+                                       
 
                                     {/* fourth row */}
                                     <div className="myRow" style={{background: '#fff'}}>
@@ -249,4 +305,18 @@ const Processing = (props) =>{
     )
 }
 
-export default Processing;
+const mapStateToProps = (state) => {
+    return {
+      request: state.withdraw.processingRequest,
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      getProcessed: (value) => dispatch(ProcessingRequest(value)),
+    };
+  };
+  
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Processing);

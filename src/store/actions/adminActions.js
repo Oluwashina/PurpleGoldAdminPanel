@@ -55,6 +55,68 @@ export const AddAdmin = (user) => {
 
 
 
+//   Change password functionality
+export const ChangePassword = (user) => {
+  return async (dispatch, getState) => {
+    
+    // get image url uploaded to cloudinary first
+
+    const values = {
+      oldPassword: user.password,
+      newPassword: user.newpassword
+    }
+    try {
+      const res = await axios.post(apiUrl + "investor/reset_password", { ...values }, {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+        cogoToast.success('Password updated successfully!', { position: 'bottom-right', })
+      }
+    } catch (err) {
+      // var message = err.response.data
+      cogoToast.error('Check that your old password is correct!')
+    }
+  };
+};
+
+
+// Upload a profile picture functionality
+export const UploadPhoto = () => {
+  return async (dispatch, getState) => {
+
+
+    const values = {
+      firstname: getState().auth.profile.firstname,
+      lastname: getState().auth.profile.lastname,
+      email: getState().auth.profile.email,
+      imageUrl: getState().auth.profile.imageUrl
+    }
+
+    try {
+      const res = await axios.patch(apiUrl + "investor/update_profile", { ...values }, {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+        cogoToast.success('Updated Successfully!,Profile picture will be effected at next login!', { position: 'bottom-right', })
+      }
+    } catch (err) {
+      // var message = err.response.data
+      cogoToast.error('Error while uploading image!')
+    }
+  };
+};
+
+
 
 
 

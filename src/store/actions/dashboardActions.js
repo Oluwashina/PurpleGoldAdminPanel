@@ -15,7 +15,7 @@ export const Funding = (values) => {
       try {
           const time = values.time
           const user = values.user
-        const res = await axios.get(apiUrl + "reports/funding?time="+time+"&user="+user, {
+        const res = await axios.get(apiUrl + "reports/funding?time="+time+"&user="+user+"&limit="+5, {
             headers: {
               Accept: 'application/json',
               appID: 'PGADMIN',
@@ -61,7 +61,7 @@ export const Payouts = (values) => {
     try {
         const time = values.time
         const user = values.user
-      const res = await axios.get(apiUrl + "reports/upcoming_payouts?time="+time+"&user="+user, {
+      const res = await axios.get(apiUrl + "reports/upcoming_payouts?time="+time+"&user="+user+"&limit=5", {
           headers: {
             Accept: 'application/json',
             appID: 'PGADMIN',

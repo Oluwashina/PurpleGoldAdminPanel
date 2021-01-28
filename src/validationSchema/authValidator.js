@@ -23,3 +23,12 @@ export const RegisterAdminValidator = Yup.object({
       .min(3, "Password cannot be less than 3 characters")
       .required("Password is required"),
   });
+
+  
+export const ChangePasswordValidator = Yup.object({
+  password:  Yup.string()
+  .required('Password is required'),
+  newpassword:  Yup.string()
+  .required('Enter a new password'),
+   confirm_password:Yup.string().oneOf([Yup.ref('newpassword'), null], 'Passwords must match')
+});

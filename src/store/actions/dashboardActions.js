@@ -71,6 +71,7 @@ export const Payouts = (values) => {
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "Payout", data: res.data.data});
+        dispatch({type: 'Stop_Loader'})
       }
     } catch (err) {
       dispatch({ type: "Payout_Error", err: err.response?.data?.message });

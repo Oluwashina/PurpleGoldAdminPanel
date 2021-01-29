@@ -83,7 +83,7 @@ function Users(props) {
           </div>
 
           {/* Data tables to be populated with all admin layout */}
-          <div className="admin-head mt-5 mb-5">
+          <div className="admin-head mt-5">
             <div className="myTable" style={{ marginBottom: 0 }}>
               <div className="myHead">
                 {/*heading row */}
@@ -120,7 +120,7 @@ function Users(props) {
                       <p className="mb-0 ml-2">Balance</p>
                     </div>
                   </div>
-                  <div className="withdrawColumn"></div>
+                  {/* <div className="withdrawColumn"></div> */}
                 </div>
 
                 {/* sample test */}
@@ -235,17 +235,7 @@ function Users(props) {
                           </div>
                         </div>
                         {/* suspend button or view more */}
-                        <div className="adminColumn">
-                          <button className="btn btn-suspend">
-                            <img src="/img/suspend.svg"
-                            alt="suspend"
-                            className="img-fluid" />
-                            {/* <i
-                              className="mdi mdi-close"
-                              style={{ fontSize: 20 }}
-                            ></i> */}
-                          </button>
-                        </div>
+                        
                       </div>
                     );
                   })
@@ -254,12 +244,17 @@ function Users(props) {
                     className="text-center mt-3"
                     style={{ fontStyle: "italic" }}
                   >
-                    No user available for display!
+                    
                   </p>
                 )}
               </div>
             </div>
           </div>
+
+          <div className="text-center">
+                  {users.length ? "" :  <p style={{fontStyle: 'italic'}}>You do not have any user available for display</p>} 
+             </div>
+
         </div>
       </div>
     </div>

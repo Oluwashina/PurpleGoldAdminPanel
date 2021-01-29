@@ -28,21 +28,21 @@ const Processing = (props) =>{
     }
 
     // paid functionality
-    const ClickPaid = (amount) =>{
-        alert(amount)
+    const ClickPaid = (requestId) =>{
+        alert(requestId)
         const values = {
           status: "PAID",
-          withdrawalId: amount
+          withdrawalId: requestId
         };
         PaidPayment(values);
     }
 
     // declined functionality
-    const ClickDeclined = (amount) =>{
-        alert(amount)
+    const ClickDeclined = (requestId) =>{
+        alert(requestId)
         const values = {
           status: "DECLINED",
-          withdrawalId: amount
+          withdrawalId: requestId
         };
         DeclinedPayment(values);
     }
@@ -290,11 +290,11 @@ const Processing = (props) =>{
                                 </div>
                                 <div className="adminColumn"  style={{padding: '18px 20px'}}>
                                     <button
-                                    onClick={() => ClickPaid(value.amount)}
+                                    onClick={() => ClickPaid(value.requestId)}
                                     disabled={paidloader}
                                      className="btn btn-paid">Paid</button>
                                     <button
-                                     onClick={() => ClickDeclined(value.amount)}
+                                     onClick={() => ClickDeclined(value.requestId)}
                                      disabled={declinedloader}
                                      className="btn btn-decline ml-2">Decline</button>
                             </div>

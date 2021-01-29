@@ -111,7 +111,7 @@ const AllAdmin = (props) => {
                         <div className="adminColumn">{value.email}</div>
                         <div className="adminColumn">
                           <p className="mb-0" style={{ color: "#9E079E" }}>
-                            Today
+                          {value.lastLogin}
                           </p>
                         </div>
                         <div className="adminColumn">
@@ -131,12 +131,18 @@ const AllAdmin = (props) => {
                     className="text-center mt-3"
                     style={{ fontStyle: "italic" }}
                   >
-                    No admin registered yet!
+                  
                   </p>
                 )}
               </div>
             </div>
           </div>
+
+          <div className="text-center">
+                  {admin.length ? "" :  <p style={{fontStyle: 'italic'}}> No admin registered yet!</p>} 
+                  </div>
+                  
+
         </div>
       </div>
     </div>

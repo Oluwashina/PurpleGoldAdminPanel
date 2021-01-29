@@ -9,7 +9,7 @@ const getToken = () => {
 }
 
 
-// Get funding data for month,year, and week functionality
+// Getall admins
 export const getAllAdmin = () => {
     return async (dispatch, getState) => {
       try {
@@ -29,6 +29,27 @@ export const getAllAdmin = () => {
       }
     };
   };
+
+  // Get all suspended admins
+export const getSuspendedAdmin = () => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await axios.get(apiUrl + "admin/admins?status=suspended", {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+        dispatch({ type: "SuspendedAdmins", data: res.data.data});
+      }
+    } catch (err) {
+      dispatch({ type: "SuspendAdmin_Error", err: err.response?.data?.message });
+    }
+  };
+}
 
 
 //   create a new admin functionality
@@ -53,6 +74,31 @@ export const AddAdmin = (user) => {
   };
 };
 
+
+//   Activate an admin functionality
+export const ActivateAdmin = (user) => {
+  return async (dispatch, getState) => {
+    dispatch({ type: "Restore_Loader" });
+    try {
+      const res = await axios.patch(apiUrl + "admin/activate_admin", { ...user }, {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+          dispatch({ type: "StopRestoreLoader" });
+        cogoToast.success('Admin successfully restored!', { position: 'bottom-right', })
+      }
+    } catch (err) {
+      // var message = err.response.data
+      dispatch({ type: "StopRestoreLoader" });
+      cogoToast.error('Error while restoring admin')
+    }
+  };
+};
 
 
 //   Change password functionality

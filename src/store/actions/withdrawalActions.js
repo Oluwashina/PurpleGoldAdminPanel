@@ -185,7 +185,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
      }).then((res) => {
          if (res.status === 200) {
          dispatch({ type: "StopDeclinedLoader" });
-         cogoToast.success('Your request is been decclined successfully', { position: 'bottom-right', })
+         cogoToast.success('Your request has been declined successfully', { position: 'bottom-right', })
          } 
      }).catch((err) => {
        dispatch({ type: "StopDeclinedLoader" });

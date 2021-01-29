@@ -106,11 +106,11 @@ const Withdrawal = (props) => {
   ));
 
   // process payment functionlity
-  const ProcessPay = (amount) =>{
-    alert(amount)
+  const ProcessPay = (requestId) =>{
+    alert(requestId)
     const values = {
       status: "PROCESSING",
-      withdrawalId: amount
+      withdrawalId: requestId
     };
     ProcessPayment(values);
   }
@@ -311,7 +311,7 @@ const Withdrawal = (props) => {
                           style={{ alignItems: "center" }}
                         >
                           <button className="btn btn-view"
-                            onClick={() => ProcessPay(value.amount)}
+                            onClick={() => ProcessPay(value.requestId)}
                             disabled={processloader}
                           >Process</button>
                         </div>

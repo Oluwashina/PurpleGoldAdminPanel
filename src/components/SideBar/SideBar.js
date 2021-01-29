@@ -67,7 +67,7 @@ function SideBar({Logout, firstname,lastname}){
                 <div className={isActive.includes("/withdrawal")   ? "text-center activeNav" : "text-center Nav"}>
                     <Link to="/withdrawal" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/withdrawal.svg" className="img-fluid" />
-                    <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Withdrawal</p>
+                    <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Withdraw</p>
                     </Link>
                 </div>
 

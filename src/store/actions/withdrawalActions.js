@@ -1,6 +1,6 @@
 import {apiUrl} from '../config'
 import axios from 'axios'
-// import cogoToast from 'cogo-toast';
+import cogoToast from 'cogo-toast';
 
 
 const getToken = () => {
@@ -130,7 +130,67 @@ return async (dispatch, getState) => {
 };
 };
 
+// process withdrawal request with status processing
+export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
+   // loader
+   dispatch({ type: "Process_Loader" });
+    axios.put(apiUrl + "withdrawal_request_status", {...values}, {
+        headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+        }
+    }).then((res) => {
+        if (res.status === 200) {
+        dispatch({ type: "StopProcessLoader" });
+        cogoToast.success('Sucessful! Your request is been processed', { position: 'bottom-right', })
+        } 
+    }).catch((err) => {
+      dispatch({ type: "StopProcessLoader" });
+        cogoToast.error('Error while processing request!')
+    })
+  });
 
+  // process withdrawal request with the status paid
+  export const ProcessPaid = (values) => ((dispatch, getState) => {
+    // loader
+    dispatch({ type: "Paid_Loader" });
+     axios.put(apiUrl + "withdrawal_request_status", {...values}, {
+         headers: {
+             Accept: 'application/json',
+             appID: 'PGADMIN',
+             Authorization: getToken()
+         }
+     }).then((res) => {
+         if (res.status === 200) {
+         dispatch({ type: "StopPaidLoader" });
+         cogoToast.success('Sucessful! Request confirmed as paid.', { position: 'bottom-right', })
+         } 
+     }).catch((err) => {
+       dispatch({ type: "StopPaidLoader" });
+         cogoToast.error('Error while processing request!')
+     })
+   });
 
-
+  //  process withdrawal request with status declined
+  export const ProcessDeclined = (values) => ((dispatch, getState) => {
+    // loader
+    dispatch({ type: "Declined_Loader" });
+     axios.put(apiUrl + "withdrawal_request_status", {...values}, {
+         headers: {
+             Accept: 'application/json',
+             appID: 'PGADMIN',
+             Authorization: getToken()
+         }
+     }).then((res) => {
+         if (res.status === 200) {
+         dispatch({ type: "StopDeclinedLoader" });
+         cogoToast.success('Your request is been decclined successfully', { position: 'bottom-right', })
+         } 
+     }).catch((err) => {
+       dispatch({ type: "StopDeclinedLoader" });
+         cogoToast.error('Error while processing request!')
+     })
+   });
+ 
 

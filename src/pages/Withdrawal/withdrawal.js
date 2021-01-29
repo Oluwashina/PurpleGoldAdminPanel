@@ -2,10 +2,10 @@ import SideBar from "../../components/SideBar/SideBar";
 import React, { useState, useEffect } from "react";
 import "./withdrawal.css";
 import { connect } from "react-redux";
-import { NewRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
+import { NewRequest, WithdrawCount, ProcessWithdrawal } from "../../store/actions/withdrawalActions";
 
 const Withdrawal = (props) => {
-  const { getWithdraw, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props;
+  const { getWithdraw, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount, ProcessPayment, processloader } = props;
 
   const [isActive, setActive] = useState(false);
 
@@ -104,6 +104,16 @@ const Withdrawal = (props) => {
       <p className="mb-0">{item.text}</p>
     </div>
   ));
+
+  // process payment functionlity
+  const ProcessPay = (amount) =>{
+    alert(amount)
+    const values = {
+      status: "PROCESSING",
+      withdrawalId: amount
+    };
+    ProcessPayment(values);
+  }
 
   // Get all withdraw data
   useEffect(() => {
@@ -215,7 +225,7 @@ const Withdrawal = (props) => {
           </div>
 
           {/* Data tables to be populated with the withdrawal request layout */}
-          <div className="paid-head mt-4 mb-4">
+          <div className="paid-head mt-4">
             <div className="myTable" style={{ marginBottom: 0 }}>
               <div className="myHead">
                 {/* first row */}
@@ -269,7 +279,7 @@ const Withdrawal = (props) => {
                             className="mb-0"
                             style={{ fontWeight: 700, color: "#000000" }}
                           >
-                            N 255,198.00
+                            N {value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           </p>
                         </div>
                         <div className="adminColumn">{value.email}</div>
@@ -293,29 +303,34 @@ const Withdrawal = (props) => {
                               textTransform: "lowercase",
                             }}
                           >
-                            {value.status}
+                            {value.status}...
                           </p>
                         </div>
                         <div
                           className="myColumn"
                           style={{ alignItems: "center" }}
                         >
-                          <button className="btn btn-view">Process</button>
+                          <button className="btn btn-view"
+                            onClick={() => ProcessPay(value.amount)}
+                            disabled={processloader}
+                          >Process</button>
                         </div>
                       </div>
                     );
                   })
                 ) : (
-                  <p
-                    className="text-center mt-3"
-                    style={{ fontStyle: "italic" }}
-                  >
-                    No withdrawal request available for display!
+                  <p>
+                  
                   </p>
                 )}
               </div>
             </div>
           </div>
+                  
+                  <div className="text-center">
+                  {request.length ? "" :  <p style={{fontStyle: 'italic'}}>No new request available for display</p>} 
+                  </div>
+
         </div>
       </div>
     </div>
@@ -329,7 +344,8 @@ const mapStateToProps = (state) => {
     pendingCount:state.withdraw.pendingCount,
     processingCount: state.withdraw.processingCount,
     paidCount: state.withdraw.paidCount,
-    declinedCount: state.withdraw.declinedCount
+    declinedCount: state.withdraw.declinedCount,
+    processloader: state.withdraw.processloader
   };
 };
 
@@ -337,6 +353,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getWithdraw: (value) => dispatch(NewRequest(value)),
     getWithdrawCount: (value) => dispatch(WithdrawCount(value)),
+    ProcessPayment: (value) => dispatch(ProcessWithdrawal(value)),
   };
 };
 

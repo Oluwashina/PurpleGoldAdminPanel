@@ -2,12 +2,12 @@ import SideBar from '../../components/SideBar/SideBar'
 import React, {useState, useEffect} from 'react'
 import './withdrawal.css'
 import { connect } from "react-redux";
-import { ProcessingRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
+import { ProcessingRequest, WithdrawCount, ProcessPaid, ProcessDeclined} from "../../store/actions/withdrawalActions";
 
 
 const Processing = (props) =>{
 
-    const {getProcessed, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props
+    const {getProcessed, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount, PaidPayment, DeclinedPayment, paidloader, declinedloader } = props
 
     const [isActive, setActive] = useState(false);
     
@@ -25,6 +25,26 @@ const Processing = (props) =>{
 
     const handleDeclined = () =>{
         props.history.push('/withdrawal/declined')  
+    }
+
+    // paid functionality
+    const ClickPaid = (amount) =>{
+        alert(amount)
+        const values = {
+          status: "PAID",
+          withdrawalId: amount
+        };
+        PaidPayment(values);
+    }
+
+    // declined functionality
+    const ClickDeclined = (amount) =>{
+        alert(amount)
+        const values = {
+          status: "DECLINED",
+          withdrawalId: amount
+        };
+        DeclinedPayment(values);
     }
 
     const [fundData] = useState([
@@ -175,7 +195,7 @@ const Processing = (props) =>{
                     </div>
 
                      {/* Data tables to be populated with the withdrawal request layout */}
-                     <div className="paid-head mt-4 mb-5">
+                     <div className="paid-head mt-4">
                              <div className="myTable" style={{marginBottom: 0}}>
                                 <div className="myHead">
                                         {/* first row */}
@@ -241,7 +261,7 @@ const Processing = (props) =>{
                                     className="mb-0"
                                     style={{ fontWeight: 700, color: "#000000" }}
                                 >
-                                    N 255,198.00
+                                    N {value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 </p>
                                 </div>
                                 <div className="adminColumn">{value.email}</div>
@@ -265,12 +285,18 @@ const Processing = (props) =>{
                                     textTransform: "lowercase",
                                     }}
                                 >
-                                    {value.status}
+                                    {value.status}...
                                 </p>
                                 </div>
                                 <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                    <button className="btn btn-paid">Paid</button>
-                                    <button className="btn btn-decline ml-2">Decline</button>
+                                    <button
+                                    onClick={() => ClickPaid(value.amount)}
+                                    disabled={paidloader}
+                                     className="btn btn-paid">Paid</button>
+                                    <button
+                                     onClick={() => ClickDeclined(value.amount)}
+                                     disabled={declinedloader}
+                                     className="btn btn-decline ml-2">Decline</button>
                             </div>
                             </div>
                             );
@@ -286,38 +312,14 @@ const Processing = (props) =>{
 
 
 
-                                       
-
-                                    {/* fourth row */}
-                                    <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                                </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>N 255,198.00</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                femiemmanuel@gmail.com
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>25/01/2020</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E', fontStyle: 'italic' }}>processing...</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                                 <button className="btn btn-paid">Paid</button>
-                                                  <button className="btn btn-decline ml-2">Decline</button>
-                                            </div>
-                                            
-                                    </div>
 
                                      </div>
                              </div>
                     </div>
+
+                    <div className="text-center">
+                  {request.length ? "" :  <p style={{fontStyle: 'italic'}}>No processing request available for display</p>} 
+                  </div>
 
                 
                    
@@ -336,7 +338,9 @@ const mapStateToProps = (state) => {
       pendingCount:state.withdraw.pendingCount,
       processingCount: state.withdraw.processingCount,
       paidCount: state.withdraw.paidCount,
-      declinedCount: state.withdraw.declinedCount
+      declinedCount: state.withdraw.declinedCount,
+      paidloader: state.withdraw.paidloader,
+      declinedloader: state.withdraw.declinedloader,
     };
   };
   
@@ -344,6 +348,8 @@ const mapStateToProps = (state) => {
     return {
       getProcessed: (value) => dispatch(ProcessingRequest(value)),
       getWithdrawCount: (value) => dispatch(WithdrawCount(value)),
+      PaidPayment: (value) => dispatch(ProcessPaid(value)),
+      DeclinedPayment: (value) => dispatch(ProcessDeclined(value)),
     };
   };
   

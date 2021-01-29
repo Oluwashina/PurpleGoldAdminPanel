@@ -66,7 +66,7 @@ export const ChangePassword = (user) => {
       newPassword: user.newpassword
     }
     try {
-      const res = await axios.post(apiUrl + "investor/reset_password", { ...values }, {
+      const res = await axios.post(apiUrl + "reset_password", { ...values }, {
           headers: {
             Accept: 'application/json',
             appID: 'PGADMIN',
@@ -75,7 +75,8 @@ export const ChangePassword = (user) => {
         });
       if (res.status === 200) {
           console.log(res)
-        cogoToast.success('Password updated successfully!', { position: 'bottom-right', })
+          dispatch({ type: "PasswordChanged"})
+        cogoToast.success('Password updated successfully! Kindly Login again.', { position: 'bottom-right', })
       }
     } catch (err) {
       // var message = err.response.data

@@ -93,7 +93,7 @@ function Users(props) {
                     <div style={{ display: "flex" }}>
                       <img
                         alt=""
-                        src="/img/investments.png"
+                        src="/img/Total_Investment.svg"
                         className="img-fluid"
                       />
                       <p className="mb-0 ml-2">Total Active Investments</p>
@@ -104,7 +104,7 @@ function Users(props) {
                     <div style={{ display: "flex" }}>
                       <img
                         alt=""
-                        src="/img/withdrawn.png"
+                        src="/img/Total_Withdrawal.svg"
                         className="img-fluid"
                       />
                       <p className="mb-0 ml-2">Total Withdrawn</p>
@@ -114,7 +114,7 @@ function Users(props) {
                     <div style={{ display: "flex" }}>
                       <img
                         alt=""
-                        src="/img/balance.png"
+                        src="/img/Total_Balance.svg"
                         className="img-fluid"
                       />
                       <p className="mb-0 ml-2">Balance</p>
@@ -174,7 +174,7 @@ function Users(props) {
                           >
                             <img
                               alt=""
-                              src="/img/investments.png"
+                              src="/img/Total_Investment.svg"
                               className="img-fluid"
                             />
                             <p
@@ -196,7 +196,7 @@ function Users(props) {
                           >
                             <img
                               alt=""
-                              src="/img/withdrawn.png"
+                              src="/img/Total_Withdrawal.svg"
                               className="img-fluid"
                             />
                             <p
@@ -219,7 +219,7 @@ function Users(props) {
                           >
                             <img
                               alt=""
-                              src="/img/balance.png"
+                              src="/img/Total_Balance.svg"
                               className="img-fluid"
                             />
                             <p
@@ -237,10 +237,13 @@ function Users(props) {
                         {/* suspend button or view more */}
                         <div className="adminColumn">
                           <button className="btn btn-suspend">
-                            <i
+                            <img src="/img/suspend.svg"
+                            alt="suspend"
+                            className="img-fluid" />
+                            {/* <i
                               className="mdi mdi-close"
                               style={{ fontSize: 20 }}
-                            ></i>
+                            ></i> */}
                           </button>
                         </div>
                       </div>

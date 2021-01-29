@@ -108,7 +108,7 @@
     background: #FF5959;
     border-radius: 15px;
     color: white;
-    padding: 8px 15px;
+    padding: 10px 15px;
     transition: all ease-in 0.5s;
 }
 .btn-suspend:hover{

@@ -221,7 +221,7 @@ const Declined = (props) => {
           </div>
 
           {/* Data tables to be populated with the withdrawal request layout */}
-          <div className="declined-head mt-4 mb-5">
+          <div className="declined-head mt-4">
             <div className="myTable" style={{ marginBottom: 0 }}>
               <div className="myHead">
                 {/* first row */}
@@ -274,7 +274,7 @@ const Declined = (props) => {
                             className="mb-0"
                             style={{ fontWeight: 700, color: "#000000" }}
                           >
-                            N 255,198.00
+                            N {value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           </p>
                         </div>
                         <div className="adminColumn">{value.email}</div>
@@ -309,51 +309,18 @@ const Declined = (props) => {
                     className="text-center mt-3"
                     style={{ fontStyle: "italic" }}
                   >
-                    No withdrawal request available for display!
+                   
                   </p>
                 )}
 
-                {/* fourth row */}
-                <div className="myRow" style={{ background: "#fff" }}>
-                  <div className="adminColumn" style={{ padding: "18px 20px" }}>
-                    <img className="img-fluid" src="/img/avatar.png" alt="" />
-                  </div>
-                  <div className="adminColumn" style={{ padding: "18px 20px" }}>
-                    <p
-                      className="mb-0"
-                      style={{ fontWeight: 700, color: "#000000" }}
-                    >
-                      Femi Emmanuel
-                    </p>
-                  </div>
-                  <div className="adminColumn" style={{ padding: "18px 20px" }}>
-                    <p
-                      className="mb-0"
-                      style={{ fontWeight: 700, color: "#000000" }}
-                    >
-                      N 255,198.00
-                    </p>
-                  </div>
-                  <div className="adminColumn" style={{ padding: "18px 20px" }}>
-                    femiemmanuel@gmail.com
-                  </div>
-                  <div className="adminColumn" style={{ padding: "18px 20px" }}>
-                    <p className="mb-0" style={{ color: "#9E079E" }}>
-                      25/01/2020
-                    </p>
-                  </div>
-                  <div className="adminColumn" style={{ padding: "18px 20px" }}>
-                    <p
-                      className="mb-0"
-                      style={{ color: "#9E079E", fontStyle: "italic" }}
-                    >
-                      Declined
-                    </p>
-                  </div>
-                </div>
+              
               </div>
             </div>
           </div>
+
+          <div className="text-center">
+                  {request.length ? "" :  <p style={{fontStyle: 'italic'}}>No declined request available for display</p>} 
+                  </div>
         </div>
       </div>
     </div>

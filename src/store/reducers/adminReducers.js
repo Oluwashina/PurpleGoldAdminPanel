@@ -1,7 +1,7 @@
 
 const initState = {
     admins: [],
-    loading: false
+    loading: false,
  };
  
  const adminReducer = (state = initState, action) => {
@@ -11,15 +11,10 @@ const initState = {
                  ...state,
                  admins: action.data
              } 
-        case 'Loader':
+        case 'PasswordChanged':
             return{
                 ...state,
                 loading: true
-            } 
-        case 'Stop_Loader':
-            return{
-                ...state,
-                loading: false
             }
          default:
              return state

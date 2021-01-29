@@ -1,12 +1,16 @@
 import SideBar from "../../components/SideBar/SideBar";
 import React, { useState } from "react";
 import { Form, Formik } from "formik";
+// import {Redirect} from 'react-router-dom';
 import "./admin.css";
 import { connect } from "react-redux";
 import { ChangePassword } from "../../store/actions/adminActions";
 import { ChangePasswordValidator } from "../../validationSchema/authValidator";
 
-const AdminProfile = ({ profile, history, saveProfile }) => {
+const AdminProfile = (props) => {
+
+  const { profile, history, saveProfile,} = props
+
   const [fund] = useState(5);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordNew, setPasswordNew] = useState(false);
@@ -36,7 +40,17 @@ const AdminProfile = ({ profile, history, saveProfile }) => {
   const handleSubmit = async (values, setSubmitting) => {
     console.log(values);
     await saveProfile(values);
+    // history.push("/");
   };
+
+  // if(loading){  
+  //   return (
+  //     <Redirect to={{
+  //         pathname:"/"
+  //     }} />
+  //   )
+  // }
+
 
   const FundToggle = (id) => {
     // route t all admin
@@ -287,6 +301,7 @@ const AdminProfile = ({ profile, history, saveProfile }) => {
 const mapStateToProps = (state) => {
   return {
     profile: state.auth.profile,
+    loading: state.admin.loading
   };
 };
 

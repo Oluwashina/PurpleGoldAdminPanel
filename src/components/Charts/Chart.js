@@ -1,18 +1,43 @@
 import {Line} from 'react-chartjs-2'
 import './Chart.css'
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import {ChartRequest} from "../../store/actions/dashboardActions";
+
+const Chart = (props) =>{
+
+  const {graphData, getChartData, chartDayData, chartDate, ToggleDay} = props
 
 
-const Chart = () =>{
+  //  Get all funding data
+   useEffect(() =>{
+    const values = {
+        time: 'today',
+        user: 'INVESTOR',
+        type: 'funding'
+    }
+    getChartData(values)
+  },[getChartData,])
 
-  const [fund, setFund] = useState(1);
+    // const data = {
+    //     labels: ['1', '2', '3', '4', '5', '6'],
+    //     datasets: [
+    //       {
+    //         label: 'Amount',
+    //         data: [12, 19, 3, 5, 2, 3],
+    //         fill: false,
+    //         backgroundColor: '#E79A26',
+    //         borderColor: '#E79A26',
+    //       },
+    //     ],
+    //   }
 
-    const data = {
-        labels: ['1', '2', '3', '4', '5', '6'],
+      const data = {
+        labels: graphData.map(({createdAt})=> createdAt),
         datasets: [
           {
             label: 'Amount',
-            data: [12, 19, 3, 5, 2, 3],
+            data: graphData.map(({amount})=> amount),
             fill: false,
             backgroundColor: '#E79A26',
             borderColor: '#E79A26',
@@ -32,22 +57,54 @@ const Chart = () =>{
         },
       }
 
-      const FundToggle = (id) =>{
-        setFund(id)
+      const FundToggle = (value) =>{
+        ToggleDay(value)
+        var values;
+        switch(value){
+          case "today":
+              values = {
+                  time: value,
+                  user: 'INVESTOR',
+                  type: 'funding'     //this is what changes or been manipulated
+            }
+            getChartData(values)
+            break;
+          case "week":
+              // time,user and type is subject to change
+             values = {
+              time:  value,
+              user: 'INVESTOR',
+              type: 'in_flow'
+            }
+            getChartData(values)
+           break;
+           case "month":
+              values = {
+                  time:  value,
+                  user: 'INVESTOR',
+                  type: 'out_flow'
+                }
+                getChartData(values)
+               break;
+           case "year":
+              values = {
+                  time:  value,
+                  user: 'INVESTOR',
+                  type: 'active_users'
+                }
+                getChartData(values)
+               break;
+           default:
+               console.log("Today")
+      }
      }
  
 
-    const [fundData] = useState([
-        { id: 1, name: 'tab-1', text: 'Today', value: '1' },
-        { id: 2, name: 'tab-2', text: 'This Week', value: '2' },
-        { id: 3, name: 'tab-3', text: 'Month', value: '3' },
-        { id: 4, name: 'tab-4', text: 'Year', value: '4' },
-    ])
 
-    const funding = fundData.map((item)=>
+    const funding = chartDayData.map((item)=>
     <div key={item.id}
-        className={fund === item.id ? 'filter-tab active-filter' : 'filter-tab'}
-        onClick={() => FundToggle(item.id)}
+        className={chartDate === item.value ? 'filter-tab active-filter' : 'filter-tab'}
+        onClick={() => FundToggle(item.value)}
         >   
         <p className="mb-0">{item.text}</p>
     </div>
@@ -73,4 +130,24 @@ const Chart = () =>{
     )
 }
 
-export default Chart
+
+
+
+const mapStateToProps = (state) => {
+  return {
+      graphData: state.dashboard.chartData,
+      chartDayData: state.dashboard.chartDayData,
+      chartDate: state.dashboard.chartDate
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+return {
+  getChartData: (value) => dispatch(ChartRequest(value)),
+  ToggleDay:  (value) => dispatch({ type: "ToggleChartDay", data: value })
+ };
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chart)

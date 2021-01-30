@@ -4,12 +4,12 @@ import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
-import { Payouts, Funding, DashboardCount } from "../../store/actions/dashboardActions";
+import { Payouts, Funding, DashboardCount, ChartRequest } from "../../store/actions/dashboardActions";
 
 
 const Dashboard = (props) =>{
 
-    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, payoutSum, isLoading} = props
+    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, payoutSum, isLoading,  getChartData, chartDate} = props
 
     const [isActive, setActive] = useState(false);
     
@@ -34,6 +34,61 @@ const Dashboard = (props) =>{
 
     const handleCardToggle = (index) =>{
         setCards(index)
+        alert(index)
+        var values;
+        switch(index){
+            case 0:
+                values = {
+                    time: chartDate,
+                    user: 'INVESTOR',
+                    type: 'funding'
+              }
+              getChartData(values)
+              break;
+            case 1:
+                // time,user and type is subject to change
+               values = {
+                time:  chartDate,
+                user: 'INVESTOR',
+                type: 'in_flow'
+              }
+              getChartData(values)
+             break;
+             case 2:
+                values = {
+                    time:  chartDate,
+                    user: 'INVESTOR',
+                    type: 'out_flow'
+                  }
+                  getChartData(values)
+                 break;
+             case 3:
+                values = {
+                    time:  chartDate,
+                    user: 'INVESTOR',
+                    type: 'active_users'
+                  }
+                  getChartData(values)
+                 break;
+            case 4:
+                values = {
+                    time: chartDate,
+                    user: 'INVESTOR',
+                    type: 'inactive_users'
+                  }
+                  getChartData(values)
+            break;
+            case 5:
+                values = {
+                    time: chartDate,
+                    user: 'INVESTOR',
+                    type: 'suspended_users'
+                  }
+                getChartData(values)
+                break;
+             default:
+                 console.log("Today")
+        }
     }
 
     const FundToggle = (id) =>{
@@ -443,7 +498,8 @@ const mapStateToProps = (state) => {
         count: state.dashboard.count,
         payout: state.dashboard.payouts,
         payoutSum: state.dashboard.payoutSum,
-        isLoading: state.dashboard.isLoading
+        isLoading: state.dashboard.isLoading,
+        chartDate: state.dashboard.chartDate
     };
   };
   
@@ -452,6 +508,7 @@ return {
     getFunding: (value) => dispatch(Funding(value)),
     getDashboardCount: (value) => dispatch(DashboardCount(value)),
     getPayouts: (value) =>dispatch(Payouts(value)),
+    getChartData: (value) => dispatch(ChartRequest(value)),
  };
 };
 

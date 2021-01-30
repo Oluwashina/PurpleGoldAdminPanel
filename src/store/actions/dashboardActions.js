@@ -31,6 +31,30 @@ export const Funding = (values) => {
       }
     };
   };
+
+  // Get chart  data for month,year, and week functionality
+export const ChartRequest = (values) => {
+  return async (dispatch, getState) => {
+    try {
+        const time = values.time
+        const user = values.user
+        const type = values.type
+      const res = await axios.get(apiUrl + "reports/"+type+"?time="+time+"&user="+user, {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+        dispatch({ type: "ChartData", data: res.data.data});
+      }
+    } catch (err) {
+      dispatch({ type: "Chart_Error", err: err.response?.data?.message });
+    }
+  };
+};
   
   // dashboard count
   export const DashboardCount = (values) => {

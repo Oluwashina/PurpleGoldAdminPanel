@@ -7,10 +7,35 @@ import {Provider} from 'react-redux'
 import {createStore, compose, applyMiddleware} from 'redux'
 import rootReducer from './store/reducers/rootReducer';
 import thunk from 'redux-thunk'
+// import throttle from 'lodash/throttle'
 
 // import fonts for use
 import './fonts/bw/BwModelicaCyrillicDEMO-Regular.ttf'
-import './fonts/bw/BwModelicaCyrillicDEMO-Medium.ttf' 
+import './fonts/bw/BwModelicaCyrillicDEMO-Medium.ttf'
+
+
+// save redux store to local storage
+// function saveToLocalStorage(state) {
+//   try{
+//     const serializedState = JSON.stringify(state)
+//     localStorage.setItem('state', serializedState)
+//   } catch(e){
+//     console.log(e)
+//   }
+// }
+
+// function to load storage to redux state
+// function loadFromLocalStorage() {
+//   try {
+//     const serializedState = localStorage.getItem('state')
+//     if(serializedState === null) return undefined
+//     return JSON.parse(serializedState)
+//   }catch(e){
+//     console.log(e)
+//     return undefined
+//   }
+// }
+
 
 
 const composeEnhancers =
@@ -25,13 +50,18 @@ const composeEnhancers =
     // other store enhancers if any
   );
 
+  // const persistedState = loadFromLocalStorage()
+
   
 
 const store = createStore(
   rootReducer,
+   // persistedState,
   enhancer
 )
 
+
+// store.subscribe(throttle(() => saveToLocalStorage(store.getState()),1000))
 
 
 ReactDOM.render(

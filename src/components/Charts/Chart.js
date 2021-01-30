@@ -6,7 +6,7 @@ import {ChartRequest} from "../../store/actions/dashboardActions";
 
 const Chart = (props) =>{
 
-  const {graphData, getChartData, chartDayData, chartDate, ToggleDay} = props
+  const {graphData, getChartData, chartDayData, chartDate, ToggleDay, cardActive} = props
 
 
   //  Get all funding data
@@ -65,7 +65,7 @@ const Chart = (props) =>{
               values = {
                   time: value,
                   user: 'INVESTOR',
-                  type: 'funding'     //this is what changes or been manipulated
+                  type: cardActive     //this is what changes or been manipulated
             }
             getChartData(values)
             break;
@@ -74,7 +74,7 @@ const Chart = (props) =>{
              values = {
               time:  value,
               user: 'INVESTOR',
-              type: 'in_flow'
+              type: cardActive
             }
             getChartData(values)
            break;
@@ -82,7 +82,7 @@ const Chart = (props) =>{
               values = {
                   time:  value,
                   user: 'INVESTOR',
-                  type: 'out_flow'
+                  type: cardActive
                 }
                 getChartData(values)
                break;
@@ -90,7 +90,7 @@ const Chart = (props) =>{
               values = {
                   time:  value,
                   user: 'INVESTOR',
-                  type: 'active_users'
+                  type: cardActive
                 }
                 getChartData(values)
                break;
@@ -137,7 +137,8 @@ const mapStateToProps = (state) => {
   return {
       graphData: state.dashboard.chartData,
       chartDayData: state.dashboard.chartDayData,
-      chartDate: state.dashboard.chartDate
+      chartDate: state.dashboard.chartDate,
+      cardActive: state.dashboard.cardActive
   };
 };
 

@@ -95,13 +95,20 @@ export const Payouts = (values) => {
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "Payout", data: res.data.data});
-        dispatch({type: 'Stop_Loader'})
       }
     } catch (err) {
       dispatch({ type: "Payout_Error", err: err.response?.data?.message });
     }
   };
 };
+
+// Get funding data for month,year, and week functionality
+export const CardToggle = (value) => {
+  return (dispatch, getState) => {
+    dispatch({ type: "ToggleCard", data: value });
+  };
+};
+
 
 
 

@@ -4,18 +4,16 @@ import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
-import { Payouts, Funding, DashboardCount, ChartRequest } from "../../store/actions/dashboardActions";
+import { Payouts, Funding, DashboardCount, ChartRequest, CardToggle } from "../../store/actions/dashboardActions";
 
 
 const Dashboard = (props) =>{
 
-    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, payoutSum, isLoading,  getChartData, chartDate} = props
+    const {getFunding, funding, fundingSum, getDashboardCount, count, getPayouts, payout, payoutSum, isLoading,  getChartData, chartDate, cardIndex, ToggleCards} = props
 
     const [isActive, setActive] = useState(false);
     
     const [fund, setFund] = useState(1);
-
-    const [cards, setCards] = useState(0);
 
     const [pay, setPayout] = useState(1);
 
@@ -33,7 +31,7 @@ const Dashboard = (props) =>{
     }
 
     const handleCardToggle = (index) =>{
-        setCards(index)
+        ToggleCards(index)
         alert(index)
         var values;
         switch(index){
@@ -265,7 +263,7 @@ const Dashboard = (props) =>{
                             <div key={index} className="col-lg-2">
                             <div 
                                 onClick={() => handleCardToggle(index)}
-                               className={cards === index ? 'card-div-active' : 'card-div'}
+                               className={cardIndex === index ? 'card-div-active' : 'card-div'}
                             >
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <p className="mb-0" style={{color: '#A030A8', fontSize: 14, fontWeight: 'bold'}}>{name}</p>
@@ -381,7 +379,7 @@ const Dashboard = (props) =>{
                     <div>
                                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                     <div>
-                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
+                                        <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
                                     </div>
                                     <div className="ml-3">
                                         <button className="btn btn-view">View All</button>
@@ -499,7 +497,8 @@ const mapStateToProps = (state) => {
         payout: state.dashboard.payouts,
         payoutSum: state.dashboard.payoutSum,
         isLoading: state.dashboard.isLoading,
-        chartDate: state.dashboard.chartDate
+        chartDate: state.dashboard.chartDate,
+        cardIndex: state.dashboard.cardIndex
     };
   };
   
@@ -509,6 +508,7 @@ return {
     getDashboardCount: (value) => dispatch(DashboardCount(value)),
     getPayouts: (value) =>dispatch(Payouts(value)),
     getChartData: (value) => dispatch(ChartRequest(value)),
+    ToggleCards: (value) => dispatch(CardToggle(value)),
  };
 };
 

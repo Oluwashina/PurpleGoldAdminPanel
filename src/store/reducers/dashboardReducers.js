@@ -13,7 +13,9 @@ const initState = {
         { id: 3, name: 'tab-3', text: 'Month', value: 'month' },
         { id: 4, name: 'tab-4', text: 'Year', value: 'year' },
     ],
-    chartDate: "today"
+    chartDate: "today",
+    cardActive: "funding",
+    cardIndex: 0
  };
  
  const dashboardReducer = (state = initState, action) => {
@@ -44,6 +46,38 @@ const initState = {
                 ...state,
                 chartDate: action.data
             }
+        case 'ToggleCard':
+            var index = action.data
+            var active;
+            switch(index){
+                case 0:
+                    active = "funding"
+                    break;
+                case 1:
+                    active= "in_flow"
+                    break;
+                case 2:
+                    active= "out_flow"
+                    break;
+                case 3:
+                    active= "active_users"
+                    break;
+                case 4:
+                    active= "inactive_users"
+                    break;
+                case 5:
+                    active= "suspended_users"
+                    break;    
+                default:
+                console.log("Today")
+                    
+            }
+            return{
+                ...state,
+                cardIndex: action.data,
+                cardActive: active
+
+            } 
         case 'Dashboard_Count':
             return{
                 ...state,

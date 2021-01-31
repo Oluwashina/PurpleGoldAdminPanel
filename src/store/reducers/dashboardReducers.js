@@ -31,10 +31,15 @@ const initState = {
                  payoutSum: payoutSum
              }
         case 'Funding':
+            let fundingSum;
+            let data = action.data[0].users
+            fundingSum = data.reduce((acc, cur)=>{
+               return acc + parseFloat(cur.amount)
+             },0)
             return{
                 ...state,
                 funding: action.data[0].users,
-                fundingSum: action.data[0].fundingSum
+                fundingSum: fundingSum
             }
         case 'ChartData':
             return{

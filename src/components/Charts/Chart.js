@@ -2,6 +2,7 @@ import {Line} from 'react-chartjs-2'
 import './Chart.css'
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import Moment from 'moment';
 import {ChartRequest} from "../../store/actions/dashboardActions";
 
 const Chart = (props) =>{
@@ -32,8 +33,37 @@ const Chart = (props) =>{
     //     ],
     //   }
 
+  const dateFormat = (date) =>{
+    var dayShow;
+    switch(chartDate){
+        // today
+        case "today":
+            dayShow = 
+              Moment(date).format('YYYY/MM/DD')
+            break;
+        case "week":
+            // week
+            dayShow = 
+            Moment(date).format('dddd')
+            break;
+        case "month":
+            // month
+            dayShow = 
+            Moment(date).format('MMMM')
+            break;
+        case "year":
+            // year
+            dayShow = 
+            Moment(date).format('YYYY')
+            break;
+        default:
+            dayShow = ""
+    }
+     return dayShow;
+  }
+
       const data = {
-        labels: graphData.map(({createdAt})=> createdAt),
+        labels: graphData.map(({createdAt})=> dateFormat(createdAt)),
         datasets: [
           {
             label: 'Amount',

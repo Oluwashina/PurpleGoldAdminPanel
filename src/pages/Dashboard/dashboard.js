@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react'
 import CountUp from 'react-countup'
 import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
+import Moment from 'react-moment';
 import { Payouts, Funding, DashboardCount, ChartRequest, CardToggle } from "../../store/actions/dashboardActions";
 
 
@@ -32,7 +33,6 @@ const Dashboard = (props) =>{
 
     const handleCardToggle = (index) =>{
         ToggleCards(index)
-        alert(index)
         var values;
         switch(index){
             case 0:
@@ -333,17 +333,33 @@ const Dashboard = (props) =>{
                                          
                                             var dayShow
                                             switch(fund){
+                                                // today
                                                 case 1:
-                                                    dayShow = "Today";
+                                                    dayShow = 
+                                                    <Moment format="YYYY/MM/DD">
+                                                        {value.createdAt}
+                                                         </Moment>
                                                     break;
                                                 case 2:
-                                                    dayShow = "This Week";
+                                                    // week
+                                                    dayShow = 
+                                                    <Moment format="dddd">
+                                                        {value.createdAt}
+                                                         </Moment>
                                                     break;
                                                 case 3:
-                                                    dayShow = "Month";
+                                                    // month
+                                                    dayShow = 
+                                                         <Moment format="MMMM">
+                                                        {value.createdAt}
+                                                            </Moment>
                                                     break;
                                                 case 4:
-                                                    dayShow = "Year";
+                                                    // year
+                                                    dayShow = 
+                                                    <Moment format="YYYY">
+                                                        {value.createdAt}
+                                                         </Moment>
                                                     break;
                                                 default:
                                                     dayShow = ""
@@ -366,7 +382,9 @@ const Dashboard = (props) =>{
                                     <p className="mb-0" style={{color: '#9E079E'}}>{value.createdAt.slice(11, 19)}</p>
                                 </div>
                                 <div className="myColumn">
-                                <p className="mb-0" style={{color: '#9E079E'}}>{dayShow}</p>
+                                <p className="mb-0" style={{color: '#9E079E'}}>
+                                    {dayShow}
+                                </p>
                                 </div>
                             </div>
                         )
@@ -422,21 +440,38 @@ const Dashboard = (props) =>{
                                             
                                             var dayShow
                                             switch(pay){
+                                                // today
                                                 case 1:
-                                                    dayShow = "Today";
+                                                    dayShow = 
+                                                    <Moment format="YYYY/MM/DD">
+                                                        {value.createdAt}
+                                                         </Moment>
                                                     break;
                                                 case 2:
-                                                    dayShow = "This Week";
+                                                    // week
+                                                    dayShow = 
+                                                    <Moment format="dddd">
+                                                        {value.createdAt}
+                                                         </Moment>
                                                     break;
                                                 case 3:
-                                                    dayShow = "Month";
+                                                    // month
+                                                    dayShow = 
+                                                         <Moment format="MMMM">
+                                                        {value.createdAt}
+                                                            </Moment>
                                                     break;
                                                 case 4:
-                                                    dayShow = "Year";
+                                                    // year
+                                                    dayShow = 
+                                                    <Moment format="YYYY">
+                                                        {value.createdAt}
+                                                         </Moment>
                                                     break;
                                                 default:
                                                     dayShow = ""
                                             }
+                                            
                         return(
                             <div key={index} className="myRow">
                             <div className="myColumn">

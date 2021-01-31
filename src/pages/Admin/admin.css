@@ -71,3 +71,19 @@
   .btn-save:hover{
     color: white;
   }
+
+  /* input tye file styles */
+  .file{
+    display: table;
+    width: 40%;
+    margin: auto;
+    background: #7031D8;
+    border-radius: 10px;
+    color: white;
+    padding: 12px 30px;
+    font-weight: bold;
+    transition: all ease-in 0.5s;
+  }
+  input[type="file"] {
+    display: none;
+}

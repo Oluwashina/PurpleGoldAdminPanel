@@ -116,11 +116,18 @@ const AdminProfile = (props) => {
                 />
               </div>
 
-              <div className="text-center mt-3">
+              {/* <div className="text-center mt-3">
                 <button className="btn btn-paid" style={{ fontWeight: "bold" }}>
                   <i className="mdi mdi-camera-outline mr-2"></i>Upload Photo
                 </button>
+              </div> */}
+
+              <div className="text-center mt-3">
+                <label className="file"><i className="mdi mdi-camera-outline mr-1"></i> Upload Photo
+                <input type="file" size="60" />
+                </label> 
               </div>
+              
 
               <div className="text-center mt-3">
                 <div

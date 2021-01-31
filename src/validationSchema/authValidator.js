@@ -32,3 +32,10 @@ export const ChangePasswordValidator = Yup.object({
   .required('Enter a new password'),
    confirm_password:Yup.string().oneOf([Yup.ref('newpassword'), null], 'Passwords must match')
 });
+
+export const FundWalletValidator = Yup.object({
+  email: Yup.string().email("Enter a valid email")
+      .required("Email is required"),
+  amount: Yup.string().required("Amount is required").matches(/^[0-9]*$/,
+    "Enter a valid amount")
+});

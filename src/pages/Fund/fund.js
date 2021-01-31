@@ -1,24 +1,21 @@
 import SideBar from '../../components/SideBar/SideBar'
-import React,{useState, useEffect} from 'react'
+import React,{ useEffect} from 'react'
 import {connect} from 'react-redux'
 import './fund.css'
+import { Form, Formik } from "formik";
 import { VerifyEmail } from "../../store/actions/fundActions";
+import { FundWalletValidator } from "../../validationSchema/authValidator";
 
 
 
 const Fund = ({verify, history, loading,loader}) =>{
 
-    const [email, setEmail] = useState("")
-    const [amount, setAmount] = useState('')
-
-    const handleSubmit = (event) =>{
-        event.preventDefault()
-        const values = {
-            email,
-            amount
-        }
-        verify(values)
-    }
+    
+  const handleSubmit = async (values, setSubmitting) => {
+    console.log(values);
+    await verify(values)
+    // history.push("/");
+  };
 
     useEffect(() =>{
         if(loading){
@@ -46,44 +43,72 @@ const Fund = ({verify, history, loading,loader}) =>{
                                 <h5 className="text-center" style={{color: '#7031BD', fontWeight: 'bold'}}>Fund User</h5>
                             </div>
 
-                            <form onSubmit={handleSubmit}>
-
-                                <div className="form-group input-container mt-4">
-                                    <i className="mdi mdi-email icon-fund"></i>
-                                    <input
-                                        className="form-control fund-style"
-                                        type="email"
-                                        placeholder="Please Enter Users Email Address"
-                                        id="email"
-                                        required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-
-
-                                    </div>
-
-                                    <div className="form-group input-container mt-4">
-                                    <i className="mdi mdi-wallet icon-fund"></i>
-                                    <input
-                                        className="form-control fund-style"
-                                        type="text"
-                                        placeholder="Please Enter Amount you want to Fund into Users PurpleVest Wallet"
-                                        id="wallet"
-                                        required
-                                        value={amount}
-                                        onChange={(e) => setAmount(e.target.value)}
-                                    />
-                                    </div>
-
-                                    <button 
-                                type="submit"
-                                disabled={loader}
-                                className="btn btn-fund mt-2">
-                                    Proceed to Fund Users Wallet
-                                    </button>
+                            <Formik
+                            onSubmit={(values, {setSubmitting}) =>
+                                handleSubmit(values, setSubmitting)
+                                }
+                            validationSchema={FundWalletValidator}
+                            initialValues={{email: "", amount: ""}}
+                        >
+                            {({
+                                handleChange,
+                                isSubmitting,
+                                handleSubmit,
+                                handleBlur,
+                                values,
+                                touched,
+                                errors
+                            })=>(
+                                <Form onSubmit={handleSubmit}>
+                                    {/* email */}
+                                        <div className="form-group input-container mt-4">
+                                            <i className="mdi mdi-email icon-fund"></i>
+                                            <input
+                                                className="form-control fund-style"
+                                                type="text"
+                                                placeholder="Please Enter Users Email Address"
+                                                onBlur={handleBlur}
+                                                onChange={handleChange}
+                                                id="email"
+                                                value={values.email}
+                                            />
+                                            <small style={{ color: "#dc3545" }}>
+                                                    {touched.email && errors.email}
+                                                </small>
+                                        </div>
                                 
-                            </form>
+                                    
+                        
+                                        {/* amount */}
+                                        <div className="form-group input-container mt-4">
+                                            <i className="mdi mdi-wallet icon-fund"></i>
+                                            <input
+                                                className="form-control fund-style"
+                                                type="text"
+                                                placeholder="Please Enter Amount you want to Fund into Users PurpleVest Wallet"
+                                                id="amount"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.amount}
+                                               
+                                            />
+                                              <small style={{ color: "#dc3545" }}>
+                                                {touched.amount && errors.amount}
+                                           </small>
+                                    </div>
+                                    
+                                       
+
+                                        <button 
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="btn btn-fund mt-2">
+                                             Proceed to Fund Users Wallet
+                                        </button>
+                                </Form>
+                            )}
+
+                        </Formik>
                        
 
                      </div>
@@ -104,7 +129,6 @@ const Fund = ({verify, history, loading,loader}) =>{
 const mapStateToProps = (state) =>{
     return{
         loading: state.fund.loading,
-        loader: state.fund.loader,
     }
 }
 

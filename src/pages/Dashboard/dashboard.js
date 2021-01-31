@@ -350,14 +350,14 @@ const Dashboard = (props) =>{
                                                 case 3:
                                                     // month
                                                     dayShow = 
-                                                         <Moment format="MMMM">
+                                                         <Moment format="dddd, MMMM Do">
                                                         {value.createdAt}
                                                             </Moment>
                                                     break;
                                                 case 4:
                                                     // year
                                                     dayShow = 
-                                                    <Moment format="YYYY">
+                                                    <Moment format="MMMM Do, YYYY">
                                                         {value.createdAt}
                                                          </Moment>
                                                     break;
@@ -457,14 +457,14 @@ const Dashboard = (props) =>{
                                                 case 3:
                                                     // month
                                                     dayShow = 
-                                                         <Moment format="MMMM">
+                                                         <Moment format="dddd, MMMM Do">
                                                         {value.createdAt}
                                                             </Moment>
                                                     break;
                                                 case 4:
                                                     // year
                                                     dayShow = 
-                                                    <Moment format="YYYY">
+                                                    <Moment format="MMMM Do, YYYY">
                                                         {value.createdAt}
                                                          </Moment>
                                                     break;

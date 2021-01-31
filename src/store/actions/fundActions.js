@@ -13,8 +13,6 @@ const getToken = () => {
 // verify email actions functionality
 export const VerifyEmail = (values) => {
     return async (dispatch, getState) => {
-       // loader
-      dispatch({ type: "Loader" });
       try {
           const email = values.email
         const res = await axios.get(apiUrl + "user/"+email, {
@@ -28,12 +26,10 @@ export const VerifyEmail = (values) => {
             console.log(res)
           dispatch({ type: "Email_Valid", data: res.data.data });
           dispatch({ type: "Fund_Details", data: values });
-          dispatch({ type: "Stop_Loader" });
         }
       } catch (err) {
         dispatch({ type: "Email_Error", err: err.response?.data?.message });
         cogoToast.error('Email Address not valid!')
-        dispatch({ type: "Stop_Loader" });
       }
     };
   };
@@ -51,12 +47,11 @@ export const VerifyEmail = (values) => {
 export const ConfirmFund = () => ((dispatch, getState) => {
    // loader
    dispatch({ type: "Loader" });
-
    const data ={
     amount: getState().fund.amount,
     userId: getState().fund.userId
    } 
-    axios.post(apiUrl + "transactions/fund_wallet", data, {
+    axios.post(apiUrl + "transactions/fund_walletin", data, {
         headers: {
             Accept: 'application/json',
             appID: 'PGADMIN',

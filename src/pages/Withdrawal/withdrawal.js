@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import { NewRequest, WithdrawCount, ProcessWithdrawal } from "../../store/actions/withdrawalActions";
 
 const Withdrawal = (props) => {
-  const { getWithdraw, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount, ProcessPayment, processloader } = props;
+  const { getWithdraw, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount, ProcessPayment, processloader, success } = props;
 
   const [isActive, setActive] = useState(false);
 
@@ -130,6 +130,25 @@ const Withdrawal = (props) => {
        }
       )
   }, [getWithdraw, getWithdrawCount]);
+
+  // make the call again after the process button is done
+  useEffect(() => {
+    const values = {
+      time: "today",
+      user: "INVESTOR",
+      status: "PENDING",
+    };
+    if(success){
+      getWithdraw(values);
+      getWithdrawCount({
+          time: "today",
+          user: "INVESTOR",
+         }
+        )
+    }
+  }, [getWithdraw, getWithdrawCount, success]);
+
+
 
   return (
     <div style={{ backgroundColor: "#f5f6f8" }}>
@@ -315,7 +334,7 @@ const Withdrawal = (props) => {
                         >
                           <button className="btn btn-view"
                             onClick={() => ProcessPay(value.requestId)}
-                            disabled={processloader}
+                            disabled={processloader.indexOf(value.requestId)!==-1}
                           >Process</button>
                         </div>
                       </div>
@@ -348,7 +367,8 @@ const mapStateToProps = (state) => {
     processingCount: state.withdraw.processingCount,
     paidCount: state.withdraw.paidCount,
     declinedCount: state.withdraw.declinedCount,
-    processloader: state.withdraw.processloader
+    processloader: state.withdraw.processloader,
+    success: state.withdraw.success
   };
 };
 

@@ -8,7 +8,7 @@ import { ProcessingRequest, WithdrawCount, ProcessPaid, ProcessDeclined} from ".
 
 const Processing = (props) =>{
 
-    const {getProcessed, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount, PaidPayment, DeclinedPayment, paidloader, declinedloader } = props
+    const {getProcessed, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount, PaidPayment, DeclinedPayment, paidloader, declinedloader, success } = props
 
     const [isActive, setActive] = useState(false);
     
@@ -141,6 +141,23 @@ const Processing = (props) =>{
            }
           );
     }, [getProcessed, getWithdrawCount]);
+
+     // make the call again after the paid button is done
+  useEffect(() => {
+    const values = {
+        time: "today",
+        user: "INVESTOR",
+        status: "PROCESSING",
+        };
+    if(success){
+     getProcessed(values);
+     getWithdrawCount({
+        time: "today",
+        user: "INVESTOR",
+       }
+      );
+    }
+  }, [getProcessed, getWithdrawCount, success]);
 
     return(
         <div style={{backgroundColor: '#f5f6f8',}}>
@@ -294,11 +311,11 @@ const Processing = (props) =>{
                                 <div className="adminColumn"  style={{padding: '18px 20px'}}>
                                     <button
                                     onClick={() => ClickPaid(value.requestId)}
-                                    disabled={paidloader}
+                                    disabled={paidloader.indexOf(value.requestId)!==-1}
                                      className="btn btn-paid">Paid</button>
                                     <button
                                      onClick={() => ClickDeclined(value.requestId)}
-                                     disabled={declinedloader}
+                                     disabled={declinedloader.indexOf(value.requestId)!==-1}
                                      className="btn btn-decline ml-2">Decline</button>
                             </div>
                             </div>
@@ -344,6 +361,7 @@ const mapStateToProps = (state) => {
       declinedCount: state.withdraw.declinedCount,
       paidloader: state.withdraw.paidloader,
       declinedloader: state.withdraw.declinedloader,
+      success: state.withdraw.success
     };
   };
   

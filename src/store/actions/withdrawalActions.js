@@ -133,7 +133,7 @@ return async (dispatch, getState) => {
 // process withdrawal request with status processing
 export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
    // loader
-   dispatch({ type: "Process_Loader" });
+   dispatch({ type: "Process_Loader", data: values.withdrawalId });
     axios.put(apiUrl + "withdrawal_request_status", {...values}, {
         headers: {
             Accept: 'application/json',
@@ -143,6 +143,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
     }).then((res) => {
         if (res.status === 200) {
         dispatch({ type: "StopProcessLoader" });
+        dispatch({type: 'Process_Success'})
         cogoToast.success('Sucessful! Your request has been processed', { position: 'top-center', heading: 'PurpleGold' })
         } 
     }).catch((err) => {
@@ -154,7 +155,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
   // process withdrawal request with the status paid
   export const ProcessPaid = (values) => ((dispatch, getState) => {
     // loader
-    dispatch({ type: "Paid_Loader" });
+    dispatch({ type: "Paid_Loader", data: values.withdrawalId });
      axios.put(apiUrl + "withdrawal_request_status", {...values}, {
          headers: {
              Accept: 'application/json',
@@ -164,6 +165,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
      }).then((res) => {
          if (res.status === 200) {
          dispatch({ type: "StopPaidLoader" });
+         dispatch({type: 'Process_Success'})
          cogoToast.success('Sucessful! Request confirmed as paid.', { position: 'top-center', heading: 'PurpleGold'  })
          } 
      }).catch((err) => {
@@ -175,7 +177,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
   //  process withdrawal request with status declined
   export const ProcessDeclined = (values) => ((dispatch, getState) => {
     // loader
-    dispatch({ type: "Declined_Loader" });
+    dispatch({ type: "Declined_Loader",  data: values.withdrawalId  });
      axios.put(apiUrl + "withdrawal_request_status", {...values}, {
          headers: {
              Accept: 'application/json',
@@ -185,6 +187,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
      }).then((res) => {
          if (res.status === 200) {
          dispatch({ type: "StopDeclinedLoader" });
+         dispatch({type: 'Process_Success'})
          cogoToast.success('Your request has been declined successfully', { position: 'top-center', heading: 'PurpleGold' })
          } 
      }).catch((err) => {

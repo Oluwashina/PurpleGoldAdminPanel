@@ -1,10 +1,14 @@
 import SideBar from "../../components/SideBar/SideBar";
-import React, {useState} from 'react'
-
+import React, {useState, useEffect} from 'react'
+import {connect} from 'react-redux'
+import { GetUserById, SuspendUser, ActivateUser } from "../../store/actions/userActions";
+import Moment from 'react-moment';
 
 const UsersDetails = (props) => {
 
-    const {history} = props
+    const {history,getDetails, match, firstname, lastname, createdAt, 
+        walletBalance, totalAmountInvested, totalWithdrawn, susloader, HandleSuspend,
+         HandleActivate, isActive, success, walletActions, withdrawals, investments} = props
 
     const [day, setDay] = useState(1);
 
@@ -32,6 +36,41 @@ const UsersDetails = (props) => {
       const GoBack = () =>{
           history.push("/users")
       }
+
+      const Suspend = (id) =>{
+        alert(id)
+        const values = {
+            id
+        }
+        if(isActive){
+            HandleSuspend(values)
+        }
+        else{
+           HandleActivate(values)
+        }
+        
+      }
+
+         // Get all funding data
+    useEffect(() =>{
+        const values = {
+            time: 'today',
+            id: match.params.id
+        }
+        getDetails(values)
+    },[getDetails, match])
+
+    // call the api again after a user is suspended or activated
+    useEffect(() =>{
+        const values = {
+            time: 'today',
+            id: match.params.id
+        }
+        if(success){
+            getDetails(values)
+        }
+        
+    },[getDetails, match, success])
 
 
     return (  
@@ -64,8 +103,16 @@ const UsersDetails = (props) => {
 
                         {/* suspend action */}
                         <div className="col-lg-2">
-                        <button className="btn btn-suspend"
-                            >Suspend</button>
+                        <button 
+                         className={ isActive ? 'btn btn-suspend' : 'btn btn-active'}
+                        disabled={susloader}
+                         onClick={() => Suspend(match.params.id)}
+                            >
+                                {isActive ? (
+                                        "Suspend"
+                                    ) : (
+                                            "Activate"
+                                 )}</button>
                         </div>
 
                         {/* when user joined and avatar */}
@@ -88,7 +135,7 @@ const UsersDetails = (props) => {
                                   fontSize: 15,
                                 }}
                               >
-                               Akinyemi Ogungbaro
+                               {firstname} {lastname}
                               </p>
                               <p
                                 className="mb-0"
@@ -98,7 +145,9 @@ const UsersDetails = (props) => {
                                   fontSize: 14,
                                 }}
                               >
-                                Joined: Jan 05 2021
+                                Joined:  <Moment format="MMMM Do YYYY">
+                                       {createdAt}
+                                        </Moment>
                               </p>
                             </div>
                           </div>
@@ -123,7 +172,7 @@ const UsersDetails = (props) => {
                                 
                                 </div>
                                 <div>
-                                    <p className="mb-0"  style={{color: '#333334', fontWeight: 600}}>Total: N1,234,987.00</p>
+                                    <p className="mb-0"  style={{color: '#333334', fontWeight: 600}}>Total: N {parseFloat(totalAmountInvested).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                 </div>
                             </div>
 
@@ -148,97 +197,61 @@ const UsersDetails = (props) => {
                                        
                                     </div>
 
+
+                                    {investments.length ? (
+                                    investments.map((value, index) => {
+                                        return (
+                                        <div
+                                            key={index}
+                                            className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}
+                                        >
+                                          
+                                          <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
+                                                 N {parseFloat(value.amount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                            </div>
+
+                                            <div className="investColumn">
+                                                {value.planName} ({value.duration} {value.duration > 1 ? "months" : "month"})
+                                                </div>
+
+                                            <div className="investColumn" style={{textAlign: 'right'}}>
+                                               <Moment format="Do MMM, YYYY">
+                                                {value.createdAt}
+                                                </Moment>
+                                            </div>
+
+                                            <div className="investColumn" style={{color: '#00B227'}}>
+                                                {value.status}
+                                            </div>
+
+                                         
+                                        </div>
+                                        );
+                                    })
+                                    ) : (
+                                    <p
+                                        className="text-center mt-3"
+                                        style={{ fontStyle: "italic" }}
+                                    >
+                                    
+                                    </p>
+                                    )}
+
                                     {/* actual data */}
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
-                                        N 1,250,768.00
-                                            </div>
-                                    <div className="investColumn">
-                                    Gelato (1 month)
-                                    </div>
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#00B227'}}>
-                                        Active
-                                    </div>
-                                       
-                                    </div>
 
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                    <div className="investColumn">
-                                    Honourable (3 month)
-                                    </div>
                                     
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#FF0000'}}>
-                                        Completed
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                    <div className="investColumn">
-                                    Honourable (3 month)
-                                    </div>
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#FF0000'}}>
-                                        Completed
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                    <div className="investColumn">
-                                    Honourable (3 month)
-                                    </div>
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#FF0000'}}>
-                                        Completed
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
-                                        N 50,768.00
-                                            </div>
-                                    <div className="investColumn">
-                                    Gelato (1 month)
-                                    </div>
-                                    
-                                    <div className="investColumn">
-                                    7 Jan, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#FF0000'}}>
-                                        Completed
-                                    </div>
-                                       
-                                    </div>
 
                                 </div>
 
                             </div>
 
+                            {/* what to display when there is no data */}
+                            <div className="text-center mt-1">
+                                {investments.length ? "" :  <p style={{fontStyle: 'italic', fontSize: 15}}>No Investments history</p>} 
+                                </div>
+
                         </div>
+
                             {/* withdrawal */}
                             <div className="col-lg-4">
                                 <div className="investment">
@@ -254,11 +267,11 @@ const UsersDetails = (props) => {
                                 
                                 </div>
                                 <div>
-                                    <p className="mb-0"  style={{color: '#333334', fontWeight: 600}}>Total: N1,234,987.00</p>
+                                    <p className="mb-0"  style={{color: '#333334', fontWeight: 600}}>Total: N {parseFloat(totalWithdrawn).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                 </div>
                             </div>
 
-                             {/*investment head  */}
+                             {/*Withdrawal head  */}
                              <div className="myTable" style={{marginBottom: 10}}>
                                 <div className="myHead" >
                                     {/*heading row */}
@@ -276,85 +289,54 @@ const UsersDetails = (props) => {
                                        
                                     </div>
 
+                                    {withdrawals.length ? (
+                                    withdrawals.map((value, index) => {
+                                        return (
+                                        <div
+                                            key={index}
+                                            className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}
+                                        >
+                                          
+                                          <div className="investColumn" style={{color: '#FE20BE', fontWeight: 600}}>
+                                                 N {parseFloat(value.amount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                            </div>
+
+                                            <div className="investColumn">
+                                             
+                                               <Moment format="Do MMM, YYYY">
+                                                {value.createdAt}
+                                                </Moment>
+                                            </div>
+
+                                            <div className="investColumn" >
+                                                    <p className="mb-0"
+                                                    style={{color: '#00B227',}}
+                                                    >{value.status}</p>
+                                             </div>
+
+                                         
+                                        </div>
+                                        );
+                                    })
+                                    ) : (
+                                    <p
+                                        className="text-center mt-3"
+                                        style={{ fontStyle: "italic" }}
+                                    >
+                                    
+                                    </p>
+                                    )}
+
                                     {/* actual data */}
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#FE20BE', fontWeight: 600}}>
-                                        N 1,250,768.00
-                                            </div>
-                                    
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#00B227'}}>
-                                        Paid
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#FE20BE', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                   
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#FF0000'}}>
-                                        Declined
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#FE20BE', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                   
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#00B227'}}>
-                                        Paid
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#FE20BE', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                    
-                                    
-                                    <div className="investColumn">
-                                    12 Feb, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#00B227'}}>
-                                        Paid
-                                    </div>
-                                       
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#FE20BE', fontWeight: 600}}>
-                                        N 50,768.00
-                                            </div>
-                                   
-                                    
-                                    <div className="investColumn">
-                                    7 Jan, 2021
-                                    </div>
-                                    <div className="investColumn" style={{color: '#00B227'}}>
-                                        Paid
-                                    </div>
-                                       
-                                    </div>
+                        
 
                                 </div>
-
                             </div>
+
+                             {/* what to display when there is no data */}
+                             <div className="text-center mt-1">
+                                {withdrawals.length ? "" :  <p style={{fontStyle: 'italic', fontSize: 15}}>No Withdrawal history</p>} 
+                                </div>
 
                         </div>
 
@@ -373,7 +355,7 @@ const UsersDetails = (props) => {
                                 
                                 </div>
                                 <div>
-                                    <p className="mb-0"  style={{color: '#333334', fontWeight: 600}}>Total: N1,234,987.00</p>
+                                    <p className="mb-0"  style={{color: '#333334', fontWeight: 600}}>Total: N { parseFloat(walletBalance).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                                 </div>
                             </div>
 
@@ -391,73 +373,49 @@ const UsersDetails = (props) => {
                                        
                                     </div>
 
-                                    {/* actual data */}
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn" style={{color: '#FF3535', fontWeight: 600}}>
-                                        N 1,250,768.00
-                                            </div>
-                                    
-                                    
-                                    <div className="investColumn" style={{textAlign: 'right'}}>
-                                    12 Feb, 2021
-                                    </div>
-                                   
-                                       
-                                    </div>
 
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn"  style={{color: '#FF3535', fontWeight: 600}}>
-                                        N 250,768.00
+                                    {walletActions.length ? (
+                                    walletActions.map((value, index) => {
+                                        return (
+                                        <div
+                                            key={index}
+                                            className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}
+                                        >
+                                          
+                                          <div className="investColumn" style={{color: '#FF3535', fontWeight: 600}}>
+                                                 N {parseFloat(value.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </div>
-                                   
-                                    
-                                    <div className="investColumn" style={{textAlign: 'right'}}>
-                                    12 Feb, 2021
-                                    </div>
-                                    
-                                       
-                                    </div>
 
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn"  style={{color: '#FF3535', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
-                                   
-                                    
-                                    <div className="investColumn" style={{textAlign: 'right'}}>
-                                    12 Feb, 2021
-                                    </div>
-                                  
-                                       
-                                    </div>
+                                            <div className="investColumn" style={{textAlign: 'right'}}>
+                                             
+                                               <Moment format="Do MMM, YYYY">
+                                                {value.createdAt}
+                                                </Moment>
+                                                </div>
 
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn"  style={{color: '#FF3535', fontWeight: 600}}>
-                                        N 250,768.00
-                                            </div>
+                                         
+                                        </div>
+                                        );
+                                    })
+                                    ) : (
+                                    <p
+                                        className="text-center mt-3"
+                                        style={{ fontStyle: "italic" }}
+                                    >
                                     
-                                    
-                                    <div className="investColumn" style={{textAlign: 'right'}}>
-                                    12 Feb, 2021
-                                    </div>
-                                   
-                                    </div>
-
-                                    <div className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}>
-                                        <div className="investColumn"  style={{color: '#FF3535', fontWeight: 600}}>
-                                        N 50,768.00
-                                            </div>
-                                   
-                                    
-                                    <div className="investColumn" style={{textAlign: 'right'}}>
-                                    7 Jan, 2021
-                                    </div>
-                                  
-                                    </div>
+                                    </p>
+                                    )}
+                                        {/* actual data */}
 
                                 </div>
 
                             </div>
+
+                            {/* what to display when there is no data */}
+                            <div className="text-center mt-1">
+                                {walletActions.length ? "" :  <p style={{fontStyle: 'italic'}}>No balance history</p>} 
+                                </div>
+
 
                         </div>
                         
@@ -479,5 +437,34 @@ const UsersDetails = (props) => {
         </div>
     );
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.userDetails,
+        susloader: state.user.susloader,
+        firstname: state.user.firstname,
+        lastname: state.user.lastname,
+        createdAt: state.user.createdAt,
+        totalAmountInvested: state.user.totalAmountInvested,
+        totalWithdrawn: state.user.totalWithdrawn,
+        walletBalance: state.user.walletBalance,
+        isActive: state.user.isActive,
+        success: state.user.success,
+        walletActions: state.user.walletActions,
+        withdrawals: state.user.withdrawals,
+        investments: state.user.investments
+    };
+  };
+  
+const mapDispatchToProps = (dispatch) => {
+return {
+    getDetails: (value) => dispatch(GetUserById(value)),
+    HandleSuspend: (value) => dispatch(SuspendUser(value)),
+    HandleActivate: (value) => dispatch(ActivateUser(value)),
+ };
+};
+
+
  
-export default UsersDetails;
+export default connect(mapStateToProps, mapDispatchToProps)(UsersDetails);

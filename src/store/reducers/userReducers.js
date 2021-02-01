@@ -2,7 +2,21 @@
 const initState = {
     users: [],
     loading: false,
-    usersCount: []
+    susloader: false,
+    usersCount: [],
+    userDetails: [],
+    lastname: "",
+    firstname: "",
+    createdAt: "",
+    totalAmountInvested: 0,
+    totalWithdrawn: 0,
+    walletBalance: "",
+    investments: [],
+    walletActions: [],
+    withdrawals: [],
+    isActive: 1,
+    success: false
+    
  };
  
  const userReducer = (state = initState, action) => {
@@ -17,6 +31,37 @@ const initState = {
                 ...state,
                 usersCount : action.data
             }
+        case 'UserDetails':
+            return{
+                ...state,
+                userDetails: action.data,
+                firstname: action.data[0].firstname,
+                lastname: action.data[0].lastname,
+                createdAt: action.data[0].createdAt,
+                totalAmountInvested: action.data[0].totalAmountInvested,
+                walletBalance: action.data[0].walletBalance,
+                totalWithdrawn: action.data[0].totalWithdrawn,
+                investments: action.data[0].investments,
+                walletActions: action.data[0].walletActions,
+                withdrawals: action.data[0].withdrawals,
+                isActive: action.data[0].isActive,
+                success: false
+            }
+        case 'Suspend_Loader':
+            return{
+                ...state,
+                susloader: true
+            }
+        case 'StopSuspendLoader':
+            return{
+                ...state,
+                susloader: false
+            }
+        case 'SuccessLoad':
+            return{
+                ...state,
+                success: true
+            } 
          default:
              return state
      }

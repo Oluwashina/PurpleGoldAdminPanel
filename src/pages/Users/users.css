@@ -114,6 +114,16 @@
 .btn-suspend:hover{
     color: white;
 }
+.btn-active{
+    background:#00B327;
+    border-radius: 15px;
+    color: white;
+    padding: 10px 40px;
+    transition: all ease-in 0.5s;
+}
+.btn-active:hover{
+    color: white
+}
 
 /* user by id styles */
 .btn-back{

@@ -190,7 +190,7 @@ function Users(props) {
                               style={{ color: "#A030A8", fontWeight: "bold" }}
                             >
                               N{" "}
-                              {user.totalAmountInvested
+                              {parseFloat(user.totalAmountInvested).toFixed(2)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </p>
@@ -212,7 +212,7 @@ function Users(props) {
                               style={{ color: "#FE20BE", fontWeight: "bold" }}
                             >
                               N{" "}
-                              {user.totalWithdrawn
+                              {parseFloat(user.totalWithdrawn).toFixed(2)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </p>
@@ -235,7 +235,7 @@ function Users(props) {
                               style={{ color: "#FF3535", fontWeight: "bold" }}
                             >
                               N{" "}
-                              {user.walletBalance.replace(
+                              {parseFloat(user.walletBalance).toFixed(2).replace(
                                 /\B(?=(\d{3})+(?!\d))/g,
                                 ","
                               )}

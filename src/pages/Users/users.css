@@ -105,12 +105,58 @@
 
 /* buttons */
 .btn-suspend{
-    background: #FF5959;
+    background:#FF3535;
     border-radius: 15px;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 40px;
     transition: all ease-in 0.5s;
 }
 .btn-suspend:hover{
     color: white;
 }
+
+/* user by id styles */
+.btn-back{
+    background: #6D31DB;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    transition: all ease-in 0.5s;
+}
+.btn-back:hover{
+    color: white;     
+} 
+
+.investment{
+    background: #FBFBFB;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.balance{
+    background: #FBFBFB;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.view-more{
+    background: #E5E3F3;
+    box-shadow: 0px 10px 10px 10px #F4F4F5;
+    border-radius: 10px;
+    padding: 15px;
+    color: #333334;
+    font-weight: bold;
+}
+
+.myTable .myHead .investColumn{
+    vertical-align: middle;
+    /* border-bottom: 0.4px solid rgba(0,0,0,.1); */
+  }
+  .investColumn{
+    display: table-cell;
+  }
+  .myTable .investColumn{
+    padding: 15px 18px 15px 18px;
+    vertical-align: top;
+    font-size: 14px;
+  }

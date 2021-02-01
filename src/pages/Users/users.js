@@ -3,11 +3,16 @@ import React, { useState, useEffect } from "react";
 import "./users.css";
 import { getAllUsers, UsersCount } from "../../store/actions/userActions";
 import { connect } from "react-redux";
+import Moment from 'react-moment';
 
 function Users(props) {
-  const { getUsers,getCount, users, count } = props;
+  const { getUsers,getCount, users, count, history } = props;
 
   const [fund, setFund] = useState(0);
+
+  const viewUser = (id) =>{
+    history.push("/users/"+id)
+  }
 
 
   const FundToggle = (id) => {
@@ -140,6 +145,7 @@ function Users(props) {
                                 src="/img/user.png"
                                 className="img-fluid"
                                 alt=""
+                                onClick={() => viewUser(user.id)}
                               />
                             </div>
                             <div className="ml-2">
@@ -161,7 +167,9 @@ function Users(props) {
                                   fontSize: 14,
                                 }}
                               >
-                                Joined: {user.createdAt}
+                                Joined: <Moment format="MMMM Do YYYY">
+                                       {user.createdAt}
+                                        </Moment>
                               </p>
                             </div>
                           </div>

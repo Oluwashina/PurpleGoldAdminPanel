@@ -6,7 +6,8 @@ const initState = {
    loading: false,
    email: '',
    amount: '',
-   loader: false
+   loader: false,
+   confirmed: false
 };
 
 const fundReducer = (state = initState, action) => {
@@ -14,12 +15,17 @@ const fundReducer = (state = initState, action) => {
         case 'Loader' :
             return{
                 ...state,
-                loader: true
+                loader: true,
             }
         case 'Stop_Loader':
             return{
                 ...state,
-                loader: false
+                loader: false,
+            }
+        case 'Fund_Successful':
+            return{
+                ...state,
+                confirmed: true
             }
         case 'Email_Valid':
             return {
@@ -27,7 +33,8 @@ const fundReducer = (state = initState, action) => {
                 firstname: action.data.firstname,
                 lastname: action.data.lastname,
                 userId: action.data.id,
-                loading: true
+                loading: true,
+                confirmed: false
             }
         case 'Fund_Details':
             return{

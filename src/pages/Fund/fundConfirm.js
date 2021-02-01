@@ -1,12 +1,13 @@
 import SideBar from '../../components/SideBar/SideBar'
 import './fund.css'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import { CancelFund, ConfirmFund } from "../../store/actions/fundActions";
 
 
 const FundConfirm = (props) =>{
 
-    const {firstname,lastname,amount,email, Cancel, history, Confirm, loader} = props
+    const {firstname,lastname,amount,email, Cancel, history, Confirm, loader, confirmed} = props
 
     const CancelFund = () =>{
         Cancel()
@@ -16,6 +17,12 @@ const FundConfirm = (props) =>{
     const confirmFund = () =>{
         Confirm()
     }
+
+    useEffect(() =>{
+        if(confirmed){
+          history.push('/dashboard');
+        }
+    },[confirmed, history])
 
     return(
         <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
@@ -78,7 +85,8 @@ const mapStateToProps = (state) =>{
         lastname: state.fund.lastname,
         amount: state.fund.amount,
         email: state.fund.email,
-        loader: state.fund.loader
+        loader: state.fund.loader,
+        confirmed: state.fund.confirmed
     }
 }
 

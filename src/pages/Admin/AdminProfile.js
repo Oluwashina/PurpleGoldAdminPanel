@@ -291,7 +291,7 @@ const AdminProfile = (props) => {
                       <button 
                        type="submit"
                       disabled={isSubmitting} className="btn btn-save">
-                        Save Profile
+                        Save Password
                       </button>
                     </div>
                   </Form>

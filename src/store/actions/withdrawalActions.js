@@ -143,7 +143,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
     }).then((res) => {
         if (res.status === 200) {
         dispatch({ type: "StopProcessLoader" });
-        cogoToast.success('Sucessful! Your request is been processed', { position: 'bottom-right', })
+        cogoToast.success('Sucessful! Your request has been processed', { position: 'top-center', heading: 'PurpleGold' })
         } 
     }).catch((err) => {
       dispatch({ type: "StopProcessLoader" });
@@ -164,7 +164,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
      }).then((res) => {
          if (res.status === 200) {
          dispatch({ type: "StopPaidLoader" });
-         cogoToast.success('Sucessful! Request confirmed as paid.', { position: 'bottom-right', })
+         cogoToast.success('Sucessful! Request confirmed as paid.', { position: 'top-center', heading: 'PurpleGold'  })
          } 
      }).catch((err) => {
        dispatch({ type: "StopPaidLoader" });
@@ -185,7 +185,7 @@ export const ProcessWithdrawal = (values) => ((dispatch, getState) => {
      }).then((res) => {
          if (res.status === 200) {
          dispatch({ type: "StopDeclinedLoader" });
-         cogoToast.success('Your request has been declined successfully', { position: 'bottom-right', })
+         cogoToast.success('Your request has been declined successfully', { position: 'top-center', heading: 'PurpleGold' })
          } 
      }).catch((err) => {
        dispatch({ type: "StopDeclinedLoader" });

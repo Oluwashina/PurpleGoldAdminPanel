@@ -191,7 +191,8 @@ const Dashboard = (props) =>{
         getFunding(values)
         getPayouts(values)
         getDashboardCount(values.user)
-    },[getFunding,getDashboardCount, getPayouts])
+        ToggleCards(0)
+    },[getFunding,getDashboardCount, getPayouts, ToggleCards])
 
    
     if (isLoading) {
@@ -336,7 +337,7 @@ const Dashboard = (props) =>{
                                                 // today
                                                 case 1:
                                                     dayShow = 
-                                                    <Moment format="YYYY/MM/DD">
+                                                    <Moment format="DD/MM/YYYY">
                                                         {value.createdAt}
                                                          </Moment>
                                                     break;
@@ -443,7 +444,7 @@ const Dashboard = (props) =>{
                                                 // today
                                                 case 1:
                                                     dayShow = 
-                                                    <Moment format="YYYY/MM/DD">
+                                                    <Moment format="DD/MM/YYYY">
                                                         {value.createdAt}
                                                          </Moment>
                                                     break;

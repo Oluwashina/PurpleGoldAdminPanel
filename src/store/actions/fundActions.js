@@ -51,7 +51,7 @@ export const ConfirmFund = () => ((dispatch, getState) => {
     amount: getState().fund.amount,
     userId: getState().fund.userId
    } 
-    axios.post(apiUrl + "transactions/fund_walletin", data, {
+    axios.post(apiUrl + "transactions/fund_wallet", data, {
         headers: {
             Accept: 'application/json',
             appID: 'PGADMIN',
@@ -60,12 +60,13 @@ export const ConfirmFund = () => ((dispatch, getState) => {
     }).then((res) => {
         if (res.status === 201) {
         dispatch({ type: "Stop_Loader" });
-        cogoToast.success('Wallet has been successfully funded!', { position: 'bottom-right', })
+        dispatch({ type: "Fund_Successful" });
+        cogoToast.success('Wallet has been successfully funded!', { position: 'top-center',heading: 'PurpleGold' } )
         dispatch({ type: "CancelFund" });
         } 
     }).catch((err) => {
       dispatch({ type: "Stop_Loader" });
-        cogoToast.error('Error while funding wallet!')
+        cogoToast.error('Error while funding wallet!',{ position: 'top-center',heading: 'PurpleGold' })
     })
   });
   

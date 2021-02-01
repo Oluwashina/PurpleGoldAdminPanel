@@ -18,7 +18,8 @@ const Chart = (props) =>{
         type: 'funding'
     }
     getChartData(values)
-  },[getChartData,])
+    ToggleDay(values.time)
+  },[getChartData,ToggleDay])
 
     // const data = {
     //     labels: ['1', '2', '3', '4', '5', '6'],

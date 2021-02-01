@@ -2,6 +2,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import React, { useState, useEffect } from "react";
 import "./withdrawal.css";
 import { connect } from "react-redux";
+import Moment from 'react-moment';
 import { PaidRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
 
 const Paid = (props) => {
@@ -283,7 +284,9 @@ const Paid = (props) => {
                           style={{ padding: "18px 20px" }}
                         >
                           <p className="mb-0" style={{ color: "#9E079E" }}>
-                            {value.createdAt}
+                          <Moment format="DD/MM/YYYY">
+                                {value.createdAt}
+                                </Moment>
                           </p>
                         </div>
                         <div

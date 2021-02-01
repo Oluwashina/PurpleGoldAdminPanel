@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { getSuspendedAdmin, ActivateAdmin } from "../../store/actions/adminActions";
 
 const SuspendedAdmin = (props) => {
-  const { getAdmin, admin, handleRestore, restoreloader } = props;
+  const { getAdmin, admin, handleRestore, restoreloader, success } = props;
 
   const [fund] = useState(3);
 
@@ -57,6 +57,14 @@ const SuspendedAdmin = (props) => {
   useEffect(() => {
     getAdmin();
   }, [getAdmin]);
+
+  // get all admins after the restore button has been clicked
+  useEffect(() => {
+    if(success){
+      getAdmin();
+    }
+  }, [getAdmin, success]);
+  
 
   return (
     <div style={{ backgroundColor: "#f5f6f8", height: "100vh" }}>
@@ -123,7 +131,7 @@ const SuspendedAdmin = (props) => {
                         <div className="adminColumn">
                           <button
                            onClick={() => RestoreAdmin(value.id)}
-                           disabled={restoreloader}
+                           disabled={restoreloader.indexOf(value.id)!==-1}
                            className="btn btn-paid">Restore</button>
                         </div>
                       </div>
@@ -152,7 +160,8 @@ const SuspendedAdmin = (props) => {
 const mapStateToProps = (state) => {
   return {
     admin: state.admin.suspendedAdmins,
-    restoreloader: state.admin.restoreloader
+    restoreloader: state.admin.restoreloader,
+    success: state.admin.success
   };
 };
 

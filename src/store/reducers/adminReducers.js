@@ -3,7 +3,8 @@ const initState = {
     admins: [],
     suspendedAdmins: [],
     loading: false,
-    restoreloader: false
+    restoreloader: [],
+    success: false
  };
  
  const adminReducer = (state = initState, action) => {
@@ -16,7 +17,8 @@ const initState = {
         case 'SuspendedAdmins':
             return{
                 ...state,
-                suspendedAdmins: action.data
+                suspendedAdmins: action,
+                success: false
             }
         case 'PasswordChanged':
             return{
@@ -26,12 +28,17 @@ const initState = {
         case "Restore_Loader":
             return{
                 ...state,
-                restoreloader: true
+                restoreloader: [...state.restoreloader, action.data]
             }
         case "StopRestoreLoader":
             return{
                 ...state,
-                restoreloader: false
+                restoreloader: state.restoreloader.splice(1)
+            }
+        case 'Process_Success':
+            return{
+                ...state,
+                success: true
             }
          default:
              return state

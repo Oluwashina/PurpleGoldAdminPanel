@@ -50,12 +50,12 @@ const Chart = (props) =>{
         case "month":
             // month
             dayShow = 
-            Moment(date).format('MMMM')
+            Moment(date).format('MMMM Do')
             break;
         case "year":
             // year
             dayShow = 
-            Moment(date).format('YYYY')
+            Moment(date).format('MMMM Do, YYYY')
             break;
         default:
             dayShow = ""

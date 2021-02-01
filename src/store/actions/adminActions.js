@@ -78,7 +78,7 @@ export const AddAdmin = (user) => {
 //   Activate an admin functionality
 export const ActivateAdmin = (user) => {
   return async (dispatch, getState) => {
-    dispatch({ type: "Restore_Loader" });
+    dispatch({ type: "Restore_Loader", data: user.id });
     try {
       const res = await axios.patch(apiUrl + "admin/activate_admin", { ...user }, {
           headers: {
@@ -90,6 +90,7 @@ export const ActivateAdmin = (user) => {
       if (res.status === 200) {
           console.log(res)
           dispatch({ type: "StopRestoreLoader" });
+          dispatch({type: 'Process_Success'})
         cogoToast.success('Admin successfully restored!', { position: 'bottom-right', })
       }
     } catch (err) {

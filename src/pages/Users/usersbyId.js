@@ -2,7 +2,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import { GetUserById, SuspendUser, ActivateUser } from "../../store/actions/userActions";
-import Moment from 'react-moment';
+import Moment from 'moment';
 
 const UsersDetails = (props) => {
 
@@ -31,6 +31,39 @@ const UsersDetails = (props) => {
 
       const DailyToggle = (id) => {
         setDay(id);
+        var values;
+        switch(id){
+            case 1:
+              values = {
+                    time: 'today',
+                    id: match.params.id
+                }
+             getDetails(values)
+                break;
+            case 2:
+                values = {
+                    time: 'week',
+                    id: match.params.id
+                }
+             getDetails(values)
+             break;
+             case 3:
+                values = {
+                    time: 'month',
+                    id: match.params.id
+                }
+             getDetails(values)
+                 break;
+             case 4:
+                values = {
+                    time: 'year',
+                    id: match.params.id
+                }
+             getDetails(values)
+                 break;
+             default:
+                 console.log("Today")
+        }
       }
 
       const GoBack = () =>{
@@ -38,7 +71,6 @@ const UsersDetails = (props) => {
       }
 
       const Suspend = (id) =>{
-        alert(id)
         const values = {
             id
         }
@@ -111,7 +143,7 @@ const UsersDetails = (props) => {
                                 {isActive ? (
                                         "Suspend"
                                     ) : (
-                                            "Activate"
+                                            "Restore"
                                  )}</button>
                         </div>
 
@@ -145,9 +177,8 @@ const UsersDetails = (props) => {
                                   fontSize: 14,
                                 }}
                               >
-                                Joined:  <Moment format="MMMM Do YYYY">
-                                       {createdAt}
-                                        </Moment>
+                                Joined:  
+                                       {Moment(createdAt).format('MMMM Do, YYYY')}        
                               </p>
                             </div>
                           </div>
@@ -214,10 +245,10 @@ const UsersDetails = (props) => {
                                                 {value.planName} ({value.duration} {value.duration > 1 ? "months" : "month"})
                                                 </div>
 
-                                            <div className="investColumn" style={{textAlign: 'right'}}>
-                                               <Moment format="Do MMM, YYYY">
+                                            <div className="investColumn" >
+                                            
                                                 {value.createdAt}
-                                                </Moment>
+                                                
                                             </div>
 
                                             <div className="investColumn" style={{color: '#00B227'}}>
@@ -303,9 +334,9 @@ const UsersDetails = (props) => {
 
                                             <div className="investColumn">
                                              
-                                               <Moment format="Do MMM, YYYY">
+                                               
                                                 {value.createdAt}
-                                                </Moment>
+                                                
                                             </div>
 
                                             <div className="investColumn" >
@@ -375,22 +406,21 @@ const UsersDetails = (props) => {
 
 
                                     {walletActions.length ? (
-                                    walletActions.map((value, index) => {
+                                    walletActions.map((data) => {
                                         return (
                                         <div
-                                            key={index}
+                                            key={data.id}
                                             className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}
                                         >
                                           
                                           <div className="investColumn" style={{color: '#FF3535', fontWeight: 600}}>
-                                                 N {parseFloat(value.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                 N {parseFloat(data.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </div>
 
                                             <div className="investColumn" style={{textAlign: 'right'}}>
-                                             
-                                               <Moment format="Do MMM, YYYY">
-                                                {value.createdAt}
-                                                </Moment>
+                                                                                           
+                                                {data.createdAt}  
+                                                
                                                 </div>
 
                                          

@@ -30,7 +30,6 @@ const Processing = (props) =>{
 
     // paid functionality
     const ClickPaid = (requestId) =>{
-        alert(requestId)
         const values = {
           status: "PAID",
           withdrawalId: requestId
@@ -40,7 +39,6 @@ const Processing = (props) =>{
 
     // declined functionality
     const ClickDeclined = (requestId) =>{
-        alert(requestId)
         const values = {
           status: "DECLINED",
           withdrawalId: requestId

@@ -108,7 +108,6 @@ const Withdrawal = (props) => {
 
   // process payment functionlity
   const ProcessPay = (requestId) =>{
-    alert(requestId)
     const values = {
       status: "PROCESSING",
       withdrawalId: requestId

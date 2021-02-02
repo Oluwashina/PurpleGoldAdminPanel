@@ -331,7 +331,21 @@ const Dashboard = (props) =>{
                                 <div className="myTable mt-4">
                                         <div className="myHead">
                                         {funding.length ? funding.map((value, index)=>{
-                                         
+                                            
+                                            // picture
+                                            var imageUrl;
+                                            if(value.imageUrl === "" || null){
+                                                imageUrl = "../img/profile.svg"
+                                            }
+                                            else if(value.imageUrl === "/profile_pics.jpg"){
+                                                imageUrl = "../img/profile.svg"
+                                            }
+                                            else{
+                                                imageUrl = value.imageUrl
+                                            }
+
+
+                                            // date format
                                             var dayShow
                                             switch(fund){
                                                 // today
@@ -368,8 +382,11 @@ const Dashboard = (props) =>{
                         return(
                             <div key={index} className="myRow">
                             <div className="myColumn">
-                            <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                </div>
+                                
+                                    <img className="img-fluid imageStyle" src={imageUrl} alt="" />
+                                
+                            	
+                            </div>
                                 <div className="myColumn">
                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{value.firstname} {value.lastname}</p>
                                 </div>
@@ -439,6 +456,22 @@ const Dashboard = (props) =>{
                                         <div className="myHead">
                                         {payout.length ? payout.map((value, index)=>{
                                             
+                                            
+                                            // picture
+                                            var imageUrl;
+                                            switch(value.imageUrl){
+                                                case "":
+                                                imageUrl = "../img/profile.svg"  
+                                                break;
+                                                case null:
+                                                    imageUrl = "../img/profile.svg" 
+                                                break;
+                                                case "/profile_pics.jpg":
+                                                    imageUrl = "../img/profile.svg" 
+                                                break;
+                                                default:
+                                                imageUrl = value.imageUrl 
+                                            }
                                             var dayShow
                                             switch(pay){
                                                 // today
@@ -476,7 +509,7 @@ const Dashboard = (props) =>{
                         return(
                             <div key={index} className="myRow">
                             <div className="myColumn">
-                            <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                    <img className="img-fluid imageStyle" src={imageUrl} alt="" />
                                 </div>
                                 <div className="myColumn">
                                 <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{value.firstname} {value.lastname}</p>

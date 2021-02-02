@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logOut } from "../../store/actions/authActions";
 
 
-function SideBar({Logout, firstname,lastname}){
+function SideBar({Logout, firstname,lastname, image}){
 
 
         // check for which path you are on
@@ -40,7 +40,10 @@ function SideBar({Logout, firstname,lastname}){
                         <img src="/img/bell.png" alt="notifications" />
                         </div>
                         <div className="ml-4">
-                        <img src="/img/avatar.png" alt="user" />
+                            <img 
+                            className="imageStyle"
+                              src={ image ? image : `../img/profile.svg`}
+                             alt="user" />
                         </div>
                         <div>
                             <p className="ml-4 mb-0 text-white" style={{fontWeight: 400}}>{firstname} {lastname}</p>
@@ -137,7 +140,8 @@ function SideBar({Logout, firstname,lastname}){
 const mapStateToProps = (state) => {
     return {
         firstname: state.auth.profile.firstname,
-        lastname: state.auth.profile.lastname
+        lastname: state.auth.profile.lastname,
+        image: state.auth.profile.imageUrl,
     };
   };
 

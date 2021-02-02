@@ -15,7 +15,8 @@ const initState = {
     walletActions: [],
     withdrawals: [],
     isActive: 1,
-    success: false
+    success: false,
+    imageUrl: ""
     
  };
  
@@ -45,6 +46,7 @@ const initState = {
                 walletActions: action.data[0].walletActions,
                 withdrawals: action.data[0].withdrawals,
                 isActive: action.data[0].isActive,
+                imageUrl: action.data[0].imageUrl,
                 success: false
             }
         case 'Suspend_Loader':

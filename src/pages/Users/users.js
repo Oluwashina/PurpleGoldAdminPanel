@@ -132,6 +132,23 @@ function Users(props) {
 
                 {users.length ? (
                   users.map((user, index) => {
+
+                     // picture
+                     var imageUrl;
+                     switch(user.imageUrl){
+                         case "":
+                         imageUrl = "../img/profile.svg"  
+                         break;
+                         case null:
+                          imageUrl = "../img/profile.svg" 
+                          break;
+                         case "/profile_pics.jpg":
+                             imageUrl = "../img/profile.svg" 
+                         break;
+                         default:
+                         imageUrl = user.imageUrl 
+                     }
+
                     return (
                       <div
                         key={index}
@@ -142,8 +159,8 @@ function Users(props) {
                           <div style={{ display: "flex" }}>
                             <div>
                               <img
-                                src="/img/user.png"
-                                className="img-fluid"
+                                src={imageUrl}
+                                className="img-fluid userProfile"
                                 alt=""
                                 onClick={() => viewUser(user.id)}
                               />

@@ -8,7 +8,7 @@ const UsersDetails = (props) => {
 
     const {history,getDetails, match, firstname, lastname, createdAt, 
         walletBalance, totalAmountInvested, totalWithdrawn, susloader, HandleSuspend,
-         HandleActivate, isActive, success, walletActions, withdrawals, investments} = props
+         HandleActivate, isActive, success, walletActions, withdrawals, investments, imageUrl} = props
 
     const [day, setDay] = useState(1);
 
@@ -104,6 +104,21 @@ const UsersDetails = (props) => {
         
     },[getDetails, match, success])
 
+    let image;
+    switch(imageUrl){
+        case "":
+        image = "../img/profile.svg"  
+        break;
+        case null:
+            image = "../img/profile.svg" 
+        break;
+        case "/profile_pics.jpg":
+            image = "../img/profile.svg" 
+        break;
+        default:
+        image = imageUrl 
+    }
+
 
     return (  
         <div style={{ backgroundColor: "#f5f6f8", }}>
@@ -152,8 +167,8 @@ const UsersDetails = (props) => {
                         <div style={{ display: "flex" }}>
                             <div>
                               <img
-                                src="/img/user.png"
-                                className="img-fluid"
+                                src={ image}
+                                className="img-fluid userProfile"
                                 alt=""
                                 
                               />
@@ -483,7 +498,8 @@ const mapStateToProps = (state) => {
         success: state.user.success,
         walletActions: state.user.walletActions,
         withdrawals: state.user.withdrawals,
-        investments: state.user.investments
+        investments: state.user.investments,
+        imageUrl: state.user.imageUrl,
     };
   };
   

@@ -71,6 +71,11 @@
   .btn-save:hover{
     color: white;
   }
+  .profileImage{
+    border-radius: 41px;
+    width: 120px;
+    height: 120px;
+  }
 
   /* input tye file styles */
   .file{

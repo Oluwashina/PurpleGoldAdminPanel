@@ -9,7 +9,7 @@ import { ChangePasswordValidator } from "../../validationSchema/authValidator";
 
 const AdminProfile = (props) => {
 
-  const { profile, history, saveProfile,} = props
+  const { profile, history, saveProfile, image} = props
 
   const [fund] = useState(5);
   const [passwordShown, setPasswordShown] = useState(false);
@@ -108,10 +108,11 @@ const AdminProfile = (props) => {
             ></div>
 
             <div style={{ padding: "30px 60px", background: "white" }}>
-              <div className="text-center">
+              <div className="text-center ">
                 <img
-                  src="/img/profile.png"
-                  className="img-fluid"
+                  // src="/img/profile.png"
+                  src={ image ? image : `../img/profile.svg`}
+                  className="profileImage"
                   alt="profile-pix"
                 />
               </div>
@@ -308,6 +309,7 @@ const AdminProfile = (props) => {
 const mapStateToProps = (state) => {
   return {
     profile: state.auth.profile,
+    image: state.auth.profile.imageUrl,
     loading: state.admin.loading
   };
 };

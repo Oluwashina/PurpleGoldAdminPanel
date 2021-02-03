@@ -18,6 +18,7 @@ import Users from  './pages/Users/users'
 import UsersDetails from './pages/Users/usersbyId'
 import Marketers from './pages/Marketers/marketers'
 import FundingAll from './pages/Dashboard/FundingAll'
+import Payouts from './pages/Dashboard/AllPayouts'
 
 
 class App extends Component {
@@ -44,6 +45,7 @@ class App extends Component {
              <Route exact path="/users" component={Users} />
              <Route path="/users/:id" component={UsersDetails} />
              <Route path="/marketers" component={Marketers} />
+             <Route path="/payouts/all" component={Payouts} />
            </Switch>
        </BrowserRouter>
      );

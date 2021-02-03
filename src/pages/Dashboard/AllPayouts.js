@@ -2,11 +2,11 @@ import SideBar from "../../components/SideBar/SideBar";
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 import { connect } from "react-redux";
-import { AllFunding } from "../../store/actions/dashboardActions";
+import { AllPayouts } from "../../store/actions/dashboardActions";
 import Moment from 'react-moment';
 
-const FundingAll = (props) => {
-  const { getFunding,  funding } = props;
+const Payouts = (props) => {
+  const { getPayouts,  payout } = props;
 
   const [fund, setFund] = useState(1);
 
@@ -26,28 +26,28 @@ const FundingAll = (props) => {
                 time: 'today',
                 user: 'INVESTOR'
              }
-             getFunding(values)
+             getPayouts(values)
                break;
            case 2:
               values = {
                 time: 'week',
                 user: 'INVESTOR'
              }
-            getFunding(values)
+             getPayouts(values)
             break;
             case 3:
                  values = {
                     time: 'month',
                     user: 'INVESTOR'
                  }
-                getFunding(values)
+                 getPayouts(values)
                 break;
             case 4:
                  values = {
                     time: 'year',
                     user: 'INVESTOR'
                  }
-                getFunding(values)
+                 getPayouts(values)
                 break;
             default:
                 console.log("Today")
@@ -72,8 +72,8 @@ const FundingAll = (props) => {
         time: 'today',
         user: 'INVESTOR'
     }
-    getFunding(values);
-  }, [getFunding]);
+    getPayouts(values);
+  }, [getPayouts]);
 
   return (
     <div style={{ backgroundColor: "#f5f6f8" }}>
@@ -105,13 +105,13 @@ const FundingAll = (props) => {
                   <div className="withdrawColumn">Name</div>
                   <div className="withdrawColumn">Amount</div>
                   <div className="withdrawColumn">Email</div>
-                  <div className="withdrawColumn">Time</div>
+                  <div className="withdrawColumn">Account Details</div>
                   <div className="withdrawColumn">Date</div>
                 </div>
                 {/* actual data row */}
 
-                {funding.length ? (
-                  funding.map((value, index) => {
+                {payout.length ? (
+                  payout.map((value, index) => {
                     
                     // picture
                     var imageUrl;
@@ -181,11 +181,11 @@ const FundingAll = (props) => {
                             {value.firstname} {value.lastname}
                           </p>
                         </div>
-                        <div className="myColumn">{value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                        <div className="myColumn">{value.totalReturn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                         <div className="myColumn">{value.email}</div>
                         <div className="myColumn">
                           <p className="mb-0" style={{ color: "#9E079E" }}>
-                          {value.createdAt.slice(11, 19)}
+                          {value.bank} - {value.accountNumber}
                           </p>
                         </div>
                         <div className="myColumn">
@@ -211,7 +211,7 @@ const FundingAll = (props) => {
           </div>
 
           <div className="text-center">
-                  {funding.length ? "" :  <p style={{fontStyle: 'italic'}}>No data available for display</p>} 
+                  {payout.length ? "" :  <p style={{fontStyle: 'italic'}}>No data available for display</p>} 
                   </div>
                   
 
@@ -223,14 +223,14 @@ const FundingAll = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    funding: state.dashboard.funding,
+    payout: state.dashboard.payouts,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getFunding: (value) => dispatch(AllFunding(value)),
+    getPayouts: (value) => dispatch(AllPayouts(value)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FundingAll);
+export default connect(mapStateToProps, mapDispatchToProps)(Payouts);

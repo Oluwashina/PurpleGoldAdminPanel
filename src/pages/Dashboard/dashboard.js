@@ -413,7 +413,7 @@ const Dashboard = (props) =>{
                                     </div>
                          </div>
                     {/* total count */}
-                    <div>
+                         <div>
                                 <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                                     <div>
                                         <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
@@ -544,7 +544,10 @@ const Dashboard = (props) =>{
                                         <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {payoutSum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
                                     </div>
                                     <div className="ml-3">
-                                        <button className="btn btn-view">View All</button>
+                                      <Link to="/payouts/all">
+                                            <button className="btn btn-view">View All</button>
+                                        </Link>
+                                       
                                         </div>
                                 </div>
                             </div>

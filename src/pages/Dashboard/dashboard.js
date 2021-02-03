@@ -6,6 +6,7 @@ import Chart from '../../components/Charts/Chart'
 import {connect} from 'react-redux'
 import Moment from 'react-moment';
 import { Payouts, Funding, DashboardCount, ChartRequest, CardToggle } from "../../store/actions/dashboardActions";
+import { Link } from 'react-router-dom'
 
 
 const Dashboard = (props) =>{
@@ -418,8 +419,11 @@ const Dashboard = (props) =>{
                                         <h6 style={{fontWeight: 'bold', color: '#000000',}}>Total: N {fundingSum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h6>
                                     </div>
                                     <div className="ml-3">
-                                        <button className="btn btn-view">View All</button>
-                                        </div>
+                                        <Link to="/fund/all">
+                                            <button className="btn btn-view">View All</button>
+                                        </Link>
+                                        
+                                    </div>
                                 </div>
                             </div>
                     </div>

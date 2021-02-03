@@ -17,6 +17,7 @@ import AdminProfile from './pages/Admin/AdminProfile'
 import Users from  './pages/Users/users'
 import UsersDetails from './pages/Users/usersbyId'
 import Marketers from './pages/Marketers/marketers'
+import FundingAll from './pages/Dashboard/FundingAll'
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
              <Route path="/withdrawal/declined" component={Declined} />
              <Route exact path="/fund" component={Fund} />
              <Route path="/fund/confirm" component={FundConfirm} />
+             <Route path="/fund/all" component={FundingAll} />
              <Route exact path="/admin" component={Admin} />
              <Route path="/admin/all" component={AllAdmin} />
              <Route path="/admin/suspended" component={SuspendedAdmin} />

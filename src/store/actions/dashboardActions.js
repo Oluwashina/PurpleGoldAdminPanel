@@ -9,7 +9,7 @@ const getToken = () => {
 }
 
 
-// Get funding data for month,year, and week functionality
+// Get funding data for month,year, and week with limit functionality
 export const Funding = (values) => {
     return async (dispatch, getState) => {
       try {
@@ -31,6 +31,30 @@ export const Funding = (values) => {
       }
     };
   };
+
+  // get all fundigg without limit functionlaity
+  export const AllFunding = (values) => {
+    return async (dispatch, getState) => {
+      try {
+          const time = values.time
+          const user = values.user
+        const res = await axios.get(apiUrl + "reports/funding?time="+time+"&user="+user, {
+            headers: {
+              Accept: 'application/json',
+              appID: 'PGADMIN',
+              Authorization: getToken()
+            }
+          });
+        if (res.status === 200) {
+            console.log(res)
+          dispatch({ type: "Funding", data: res.data.data});
+        }
+      } catch (err) {
+        dispatch({ type: "Funding_Error", err: err.response?.data?.message });
+      }
+    };
+  };
+
 
   // Get chart  data for month,year, and week functionality
 export const ChartRequest = (values) => {

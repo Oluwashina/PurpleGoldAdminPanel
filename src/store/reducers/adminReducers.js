@@ -2,7 +2,6 @@
 const initState = {
     admins: [],
     suspendedAdmins: [],
-    loading: false,
     restoreloader: [],
     success: false,
     activities: []
@@ -25,11 +24,6 @@ const initState = {
             return{
                 ...state,
                 activities: action.data
-            }
-        case 'PasswordChanged':
-            return{
-                ...state,
-                loading: true
             }
         case "Restore_Loader":
             return{

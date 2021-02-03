@@ -139,9 +139,9 @@ function SideBar({Logout, firstname,lastname, image}){
 
 const mapStateToProps = (state) => {
     return {
-        firstname: state.auth.profile.firstname,
-        lastname: state.auth.profile.lastname,
-        image: state.auth.profile.imageUrl,
+        firstname: state.auth.firstname,
+        lastname: state.auth.lastname,
+        image: state.auth.imageUrl,
     };
   };
 

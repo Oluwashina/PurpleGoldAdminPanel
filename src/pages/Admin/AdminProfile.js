@@ -1,22 +1,21 @@
 import SideBar from "../../components/SideBar/SideBar";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Form, Formik } from "formik";
 // import {Redirect} from 'react-router-dom';
 import "./admin.css";
 import { connect } from "react-redux";
-import { ChangePassword } from "../../store/actions/adminActions";
-import { UploadPhoto } from "../../store/actions/authActions";
+import { UploadPhoto, ChangePassword } from "../../store/actions/authActions";
 import { ChangePasswordValidator } from "../../validationSchema/authValidator";
 
 const AdminProfile = (props) => {
 
-  const { profile, history, saveProfile, image, handlePicture, photoloader} = props
+  const { firstname, lastname, loading, email, history, saveProfile, image, handlePicture, photoloader} = props
 
   const [fund] = useState(5);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordNew, setPasswordNew] = useState(false);
   const [passwordConfirm, setPasswordConfirm] = useState(false);
-  const [fileName, setfileName] = useState("");
+  // const [fileName, setfileName] = useState("");
 
   const fileRef = useRef(null)
 
@@ -43,7 +42,7 @@ const AdminProfile = (props) => {
   const handleFile = () =>{
     console.log(fileRef.current.files[0])
     var file = fileRef.current.files[0]
-    setfileName(fileRef.current.files[0].name)
+    // setfileName(fileRef.current.files[0].name)
     handlePicture(file)
 
   }
@@ -57,7 +56,7 @@ const AdminProfile = (props) => {
 
 
   const FundToggle = (id) => {
-    // route t all admin
+    // route to admin
     if (id === 1) {
       history.push("/admin");
     }
@@ -84,6 +83,14 @@ const AdminProfile = (props) => {
       <p className="mb-0">{item.text}</p>
     </div>
   ));
+
+
+  // route to login after successful changed password
+  useEffect(() =>{
+    if(loading){
+      history.push("/")
+    }
+},[loading, history])
 
   return (
     <div style={{ backgroundColor: "#f5f6f8" }}>
@@ -135,7 +142,6 @@ const AdminProfile = (props) => {
                    onChange={() => handleFile()}
                  />
                 </label> 
-                <p>{fileName}</p>
               </div>
               
 
@@ -153,7 +159,7 @@ const AdminProfile = (props) => {
                     className="mb-0"
                     style={{ color: "rgba(158, 7, 158, 0.51)" }}
                   >
-                    {profile.firstname} {profile.lastname}
+                    {firstname} {lastname}
                   </p>
                 </div>
               </div>
@@ -172,7 +178,7 @@ const AdminProfile = (props) => {
                     className="mb-0"
                     style={{ color: "rgba(158, 7, 158, 0.51)" }}
                   >
-                    {profile.email}
+                    {email}
                   </p>
                 </div>
               </div>
@@ -317,9 +323,11 @@ const AdminProfile = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.auth.profile,
-    image: state.auth.profile.imageUrl,
-    loading: state.admin.loading,
+    firstname: state.auth.firstname,
+    lastname: state.auth.lastname,
+    email: state.auth.email,
+    image: state.auth.imageUrl,
+    loading: state.auth.loading,
     photoloader: state.auth.photoloader
   };
 };

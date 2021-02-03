@@ -2,8 +2,14 @@
 const initState = {
     isAuthenticated: false,
     token: '',
-    profile: {},
-    photoloader: false
+    firstname: "",
+    lastname: "",
+    email: "",
+    imageUrl: "",
+    id: "",
+    phoneNumber: "",
+    photoloader: false,
+    loading: false
 };
 
 const authReducer = (state = initState, action) => {
@@ -14,14 +20,14 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 isAuthenticated: true,
                 token: action.data.token,
-                profile: {
-                    firstname: action.data.firstname,
-                    lastname: action.data.lastname,
-                    email: action.data.email,
-                    imageUrl: action.data.imageUrl,
-                    id: action.data.id,
-                    phoneNumber: action.data.phoneNumber
-                }
+                firstname: action.data.firstname,
+                lastname: action.data.lastname,
+                email: action.data.email,
+                imageUrl: action.data.imageUrl,
+                id: action.data.id,
+                phoneNumber: action.data.phoneNumber,
+                loading: false
+                
             }
         case 'User_Error':
             return {
@@ -33,7 +39,13 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 isAuthenticated: false,
                 token: '',
-                profile: {}
+                firstname: "",
+                lastname: "",
+                email: "",
+                imageUrl: "",
+                id: "",
+                phoneNumber: ""
+                
             }
         case 'PhotoLoader':
             return{
@@ -48,9 +60,21 @@ const authReducer = (state = initState, action) => {
         case 'profilePicture':
             return{
                 ...state,
-                profile: {
-                    imageUrl: action.data
-                }
+                imageUrl: action.image
+                
+            }
+        case 'PasswordChanged':
+            return{
+                ...state,
+                loading: true,
+                isAuthenticated: false,
+                token: '',
+                firstname: "",
+                lastname: "",
+                email: "",
+                imageUrl: "",
+                id: "",
+                phoneNumber: ""
             }
         default:
             return state

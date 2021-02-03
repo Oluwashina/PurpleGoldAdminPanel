@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Login from './pages/Login/login';
+import ForgotPassword from './pages/Login/ForgotPassword';
 import Dashboard from './pages/Dashboard/dashboard'
 import Withdrawal from './pages/Withdrawal/withdrawal'
 import Processing from './pages/Withdrawal/processing'
@@ -25,6 +26,7 @@ class App extends Component {
       <BrowserRouter>
          <Switch>
              <Route exact path="/" component={Login} />
+             <Route  path="/forgotpassword" component={ForgotPassword} />
              <Route path="/dashboard" component={Dashboard} />
              <Route exact path="/withdrawal" component={Withdrawal} />
              <Route path="/withdrawal/processing" component={Processing} />

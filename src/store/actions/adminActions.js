@@ -56,7 +56,7 @@ export const getSuspendedAdmin = () => {
 export const getAdminActivities = () => {
   return async (dispatch, getState) => {
     try {
-      var userId = getState().auth.profile.id
+      var userId = getState().auth.id
       const res = await axios.get(apiUrl + "user_activities/"+userId, {
           headers: {
             Accept: 'application/json',
@@ -127,33 +127,7 @@ export const ActivateAdmin = (user) => {
 };
 
 
-//   Change password functionality
-export const ChangePassword = (user) => {
-  return async (dispatch, getState) => {
-    
-    const values = {
-      oldPassword: user.password,
-      newPassword: user.newpassword
-    }
-    try {
-      const res = await axios.post(apiUrl + "reset_password", { ...values }, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
-      if (res.status === 200) {
-          console.log(res)
-          dispatch({ type: "PasswordChanged"})
-        cogoToast.success('Password updated successfully! Kindly Login again.', { position: 'bottom-right', })
-      }
-    } catch (err) {
-      // var message = err.response.data
-      cogoToast.error('Check that your old password is correct!')
-    }
-  };
-};
+
 
 
 

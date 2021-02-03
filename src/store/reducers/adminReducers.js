@@ -4,7 +4,8 @@ const initState = {
     suspendedAdmins: [],
     loading: false,
     restoreloader: [],
-    success: false
+    success: false,
+    activities: []
  };
  
  const adminReducer = (state = initState, action) => {
@@ -19,6 +20,11 @@ const initState = {
                 ...state,
                 suspendedAdmins: action,
                 success: false
+            }
+        case 'AdminActivities':
+            return{
+                ...state,
+                activities: action.data
             }
         case 'PasswordChanged':
             return{

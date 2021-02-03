@@ -3,6 +3,7 @@ import axios from 'axios'
 import cogoToast from 'cogo-toast';
 
 
+
 const getToken = () => {
 	const token = localStorage.getItem("token");
 	return token
@@ -50,6 +51,30 @@ export const getSuspendedAdmin = () => {
     }
   };
 }
+
+// get admin functionalities
+export const getAdminActivities = () => {
+  return async (dispatch, getState) => {
+    try {
+      var userId = getState().auth.profile.id
+      const res = await axios.get(apiUrl + "user_activities/"+userId, {
+          headers: {
+            Accept: 'application/json',
+            appID: 'PGADMIN',
+            Authorization: getToken()
+          }
+        });
+      if (res.status === 200) {
+          console.log(res)
+        dispatch({ type: "AdminActivities", data: res.data.data});
+      }
+    } catch (err) {
+      dispatch({ type: "Activities_Error", err: err.response?.data?.message });
+    }
+  };
+}
+
+
 
 
 //   create a new admin functionality
@@ -106,8 +131,6 @@ export const ActivateAdmin = (user) => {
 export const ChangePassword = (user) => {
   return async (dispatch, getState) => {
     
-    // get image url uploaded to cloudinary first
-
     const values = {
       oldPassword: user.password,
       newPassword: user.newpassword
@@ -128,38 +151,6 @@ export const ChangePassword = (user) => {
     } catch (err) {
       // var message = err.response.data
       cogoToast.error('Check that your old password is correct!')
-    }
-  };
-};
-
-
-// Upload a profile picture functionality
-export const UploadPhoto = () => {
-  return async (dispatch, getState) => {
-
-
-    const values = {
-      firstname: getState().auth.profile.firstname,
-      lastname: getState().auth.profile.lastname,
-      email: getState().auth.profile.email,
-      imageUrl: getState().auth.profile.imageUrl
-    }
-
-    try {
-      const res = await axios.patch(apiUrl + "investor/update_profile", { ...values }, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
-      if (res.status === 200) {
-          console.log(res)
-        cogoToast.success('Updated Successfully!,Profile picture will be effected at next login!', { position: 'bottom-right', })
-      }
-    } catch (err) {
-      // var message = err.response.data
-      cogoToast.error('Error while uploading image!')
     }
   };
 };

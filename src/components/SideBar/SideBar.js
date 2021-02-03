@@ -46,7 +46,7 @@ function SideBar({Logout, firstname,lastname, image}){
                              alt="user" />
                         </div>
                         <div>
-                            <p className="ml-4 mb-0 text-white" style={{fontWeight: 400}}>{firstname} {lastname}</p>
+                            <p className="ml-3 mb-0 text-white" style={{fontWeight: 400}}>{firstname} {lastname}</p>
                         </div>
                     </div>
                     

@@ -1,10 +1,15 @@
 import SideBar from '../../components/SideBar/SideBar'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './admin.css'
+import {connect} from 'react-redux'
+import { getAdminActivities } from "../../store/actions/adminActions";
+import Moment from 'moment';
 
 
 const AdminActivities = (props) =>{
 
+    const {getActivities, activities} = props
+    
     const [fund] = useState(4);
 
     const [fundData] = useState([
@@ -43,6 +48,12 @@ const AdminActivities = (props) =>{
     </div>
     )
 
+     // Get all admins
+    useEffect(() => {
+        getActivities();
+    }, [getActivities]);
+
+
 
     return(
         <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
@@ -78,63 +89,64 @@ const AdminActivities = (props) =>{
                                     </div>
                                        
                                     </div>
-                                     {/* actual data row */}
-                                     <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                                 <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                                </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Femi Emmanuel</p>
-                                            </div>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            Paid user “akinyemiogungbaro@gmail.com”  N250,000
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Yesterday</p>
-                                            </div>
-                                            
-                                    </div>
-                                    {/* another row */}
-                                    <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <img className="img-fluid" src="/img/avatar.png" alt="" />
-                                                </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Akinyemi Ogungbaro</p>
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            Paid user “akinyemiogungbaro@gmail.com”  N250,000
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Last Month</p>
-                                            </div>
-                                            
-                                    </div>
 
-                                    {/* another row */}
-                                    <div className="myRow" style={{background: '#fff'}}>
-                                            <div className="adminColumn" style={{padding: '18px 20px'}}>
-                                            <img className="img-fluid" src="/img/avatar.png" alt="" />
+                                    {activities.length ? (
+                                        activities.map((value, index) => {
+                                             // picture
+                                             var imageUrl;
+                                             switch(value.imageUrl){
+                                                 case "":
+                                                 imageUrl = "../img/profile.svg"  
+                                                 break;
+                                                 case null:
+                                                     imageUrl = "../img/profile.svg" 
+                                                 break;
+                                                 case "/profile_pics.jpg":
+                                                     imageUrl = "../img/profile.svg" 
+                                                 break;
+                                                 default:
+                                                 imageUrl = value.imageUrl 
+                                             }
+
+                                            return (
+                                            <div
+                                                key={index}
+                                                className="myRow"
+                                                style={{ background: "#fff" }}
+                                            >
+                                               <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                               <img className="img-fluid imageStyle" src={imageUrl} alt="" />
                                                 </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>Olosunde Oluwatobi</p>
+                                                <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                    <p className="mb-0" style={{fontWeight: 700, color: '#000000'}}>{value.firstname} {value.lastname}</p>
+                                                </div>
+                                                <div className="adminColumn" style={{padding: '18px 20px'}}>
+                                                     {value.activity}
+                                                </div>
+                                                <div className="adminColumn"  style={{padding: '18px 20px'}}>
+                                                     <p className="mb-0" style={{color: '#9E079E'}}>
+                                                         {Moment(value.createdAt).fromNow()}
+                                                     </p>
+                                                </div>
                                             </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            Paid user “akinyemiogungbaro@gmail.com”  N250,000
-                                            </div>
-                                            <div className="adminColumn"  style={{padding: '18px 20px'}}>
-                                            <p className="mb-0" style={{color: '#9E079E'}}>Yesterday</p>
-                                            </div>
-                                           
-                                    </div>
-                            
+                                            );
+                                        })
+                                        ) : (
+                                        <p
+                                            className="text-center mt-3"
+                                            style={{ fontStyle: "italic" }}
+                                        >
+                                        
+                                        </p>
+                                        )}
+                                                      
                                  </div>
-                                   
-                                    
-
                              </div>
                     </div>
-
+                                
+                    <div className="text-center">
+                        {activities.length ? "" :  <p style={{fontStyle: 'italic'}}> No activities available for display!</p>} 
+                  </div>
                 
                 
                 </div>
@@ -143,4 +155,18 @@ const AdminActivities = (props) =>{
     )
 }
 
-export default AdminActivities;
+
+const mapStateToProps = (state) => {
+    return {
+      activities: state.admin.activities,
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      getActivities: () => dispatch(getAdminActivities()),
+    };
+  };
+  
+
+export default connect(mapStateToProps,mapDispatchToProps)(AdminActivities);

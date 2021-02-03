@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./admin.css";
 import { connect } from "react-redux";
 import { getSuspendedAdmin, ActivateAdmin } from "../../store/actions/adminActions";
+import Moment from 'moment';
 
 const SuspendedAdmin = (props) => {
   const { getAdmin, admin, handleRestore, restoreloader, success } = props;
@@ -101,6 +102,21 @@ const SuspendedAdmin = (props) => {
 
                 {admin.length ? (
                   admin.map((value, index) => {
+                    // picture
+                    var imageUrl;
+                    switch(value.imageUrl){
+                        case "":
+                        imageUrl = "../img/profile.svg"  
+                        break;
+                        case null:
+                            imageUrl = "../img/profile.svg" 
+                        break;
+                        case "/profile_pics.jpg":
+                            imageUrl = "../img/profile.svg" 
+                        break;
+                        default:
+                        imageUrl = value.imageUrl 
+                    }
                     return (
                       <div
                         key={index}
@@ -108,11 +124,7 @@ const SuspendedAdmin = (props) => {
                         style={{ background: "#fff" }}
                       >
                         <div className="adminColumn">
-                          <img
-                            className="img-fluid"
-                            src="/img/avatar.png"
-                            alt=""
-                          />
+                        <img className="img-fluid imageStyle" src={imageUrl} alt="" />
                         </div>
                         <div className="adminColumn">
                           <p
@@ -125,7 +137,7 @@ const SuspendedAdmin = (props) => {
                         <div className="adminColumn">{value.email}</div>
                         <div className="adminColumn">
                           <p className="mb-0" style={{ color: "#9E079E" }}>
-                            {value.lastLogin}
+                            {Moment(value.lastLogin).fromNow()}
                           </p>
                         </div>
                         <div className="adminColumn">

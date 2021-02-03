@@ -89,6 +89,10 @@
     font-weight: bold;
     transition: all ease-in 0.5s;
   }
+  .file.disabled, .file:disabled {
+    opacity: .65;
+    pointer-events: none;
+}
   input[type="file"] {
     display: none;
 }

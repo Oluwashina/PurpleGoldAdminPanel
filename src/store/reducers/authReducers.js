@@ -2,7 +2,8 @@
 const initState = {
     isAuthenticated: false,
     token: '',
-    profile: {}
+    profile: {},
+    photoloader: false
 };
 
 const authReducer = (state = initState, action) => {
@@ -17,7 +18,9 @@ const authReducer = (state = initState, action) => {
                     firstname: action.data.firstname,
                     lastname: action.data.lastname,
                     email: action.data.email,
-                    imageUrl: action.data.imageUrl
+                    imageUrl: action.data.imageUrl,
+                    id: action.data.id,
+                    phoneNumber: action.data.phoneNumber
                 }
             }
         case 'User_Error':
@@ -31,6 +34,23 @@ const authReducer = (state = initState, action) => {
                 isAuthenticated: false,
                 token: '',
                 profile: {}
+            }
+        case 'PhotoLoader':
+            return{
+                ...state,
+                photoloader: true
+            }
+        case 'StopPhotoLoader':
+            return{
+                ...state,
+                photoloader: false
+            }
+        case 'profilePicture':
+            return{
+                ...state,
+                profile: {
+                    imageUrl: action.data
+                }
             }
         default:
             return state

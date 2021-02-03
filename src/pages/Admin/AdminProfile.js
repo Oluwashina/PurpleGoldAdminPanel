@@ -1,20 +1,24 @@
 import SideBar from "../../components/SideBar/SideBar";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Formik } from "formik";
 // import {Redirect} from 'react-router-dom';
 import "./admin.css";
 import { connect } from "react-redux";
 import { ChangePassword } from "../../store/actions/adminActions";
+import { UploadPhoto } from "../../store/actions/authActions";
 import { ChangePasswordValidator } from "../../validationSchema/authValidator";
 
 const AdminProfile = (props) => {
 
-  const { profile, history, saveProfile, image} = props
+  const { profile, history, saveProfile, image, handlePicture, photoloader} = props
 
   const [fund] = useState(5);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordNew, setPasswordNew] = useState(false);
   const [passwordConfirm, setPasswordConfirm] = useState(false);
+  const [fileName, setfileName] = useState("");
+
+  const fileRef = useRef(null)
 
   const [fundData] = useState([
     { id: 1, name: "tab-1", text: "New", value: "1" },
@@ -36,6 +40,13 @@ const AdminProfile = (props) => {
     setPasswordConfirm(passwordConfirm ? false : true);
   };
 
+  const handleFile = () =>{
+    console.log(fileRef.current.files[0])
+    var file = fileRef.current.files[0]
+    setfileName(fileRef.current.files[0].name)
+    handlePicture(file)
+
+  }
  
   const handleSubmit = async (values, setSubmitting) => {
     console.log(values);
@@ -43,13 +54,6 @@ const AdminProfile = (props) => {
     // history.push("/");
   };
 
-  // if(loading){  
-  //   return (
-  //     <Redirect to={{
-  //         pathname:"/"
-  //     }} />
-  //   )
-  // }
 
 
   const FundToggle = (id) => {
@@ -124,9 +128,14 @@ const AdminProfile = (props) => {
               </div> */}
 
               <div className="text-center mt-3">
-                <label className="file"><i className="mdi mdi-camera-outline mr-1"></i> Upload Photo
-                <input type="file" size="60" />
+                <label className={photoloader ? "file disabled" : "file"}
+                ><i className="mdi mdi-camera-outline mr-1"></i> Upload Photo
+                <input type="file" size="60"
+                    ref={fileRef}
+                   onChange={() => handleFile()}
+                 />
                 </label> 
+                <p>{fileName}</p>
               </div>
               
 
@@ -310,13 +319,15 @@ const mapStateToProps = (state) => {
   return {
     profile: state.auth.profile,
     image: state.auth.profile.imageUrl,
-    loading: state.admin.loading
+    loading: state.admin.loading,
+    photoloader: state.auth.photoloader
   };
 };
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        saveProfile: (values) => dispatch(ChangePassword(values))
+        saveProfile: (values) => dispatch(ChangePassword(values)),
+        handlePicture: (values) => dispatch(UploadPhoto(values))
     }
 }
 

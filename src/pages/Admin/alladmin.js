@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./admin.css";
 import { connect } from "react-redux";
 import { getAllAdmin } from "../../store/actions/adminActions";
+import Moment from 'moment';
 
 const AllAdmin = (props) => {
   const { getAdmin, admin } = props;
@@ -87,6 +88,23 @@ const AllAdmin = (props) => {
 
                 {admin.length ? (
                   admin.map((value, index) => {
+                    
+                    // picture
+                    var imageUrl;
+                    switch(value.imageUrl){
+                        case "":
+                        imageUrl = "../img/profile.svg"  
+                        break;
+                        case null:
+                            imageUrl = "../img/profile.svg" 
+                        break;
+                        case "/profile_pics.jpg":
+                            imageUrl = "../img/profile.svg" 
+                        break;
+                        default:
+                        imageUrl = value.imageUrl 
+                    }
+
                     return (
                       <div
                         key={index}
@@ -94,11 +112,7 @@ const AllAdmin = (props) => {
                         style={{ background: "#fff" }}
                       >
                         <div className="adminColumn">
-                          <img
-                            className="img-fluid"
-                            src="/img/avatar.png"
-                            alt=""
-                          />
+                        <img className="img-fluid imageStyle" src={imageUrl} alt="" />
                         </div>
                         <div className="adminColumn">
                           <p
@@ -111,7 +125,7 @@ const AllAdmin = (props) => {
                         <div className="adminColumn">{value.email}</div>
                         <div className="adminColumn">
                           <p className="mb-0" style={{ color: "#9E079E" }}>
-                          {value.lastLogin}
+                            {Moment(value.lastLogin).fromNow()}
                           </p>
                         </div>
                         <div className="adminColumn">

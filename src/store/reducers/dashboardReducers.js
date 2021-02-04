@@ -6,7 +6,7 @@ const initState = {
     fundingSum: 0,
     payoutSum: 0,
     count: [],
-    isLoading: true,
+    isLoading: false,
     chartDayData: [
         { id: 1, name: 'tab-1', text: 'Today', value: 'today' },
         { id: 2, name: 'tab-2', text: 'This Week', value: 'week' },
@@ -87,6 +87,11 @@ const initState = {
             return{
                 ...state,
                 count: action.data
+            }
+        case 'Start_Loader':
+            return{
+                ...state,
+                isLoading: true
             }
         case 'Stop_Loader':
             return{

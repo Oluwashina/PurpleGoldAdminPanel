@@ -83,6 +83,7 @@ export const ChartRequest = (values) => {
   // dashboard count
   export const DashboardCount = (values) => {
     return async (dispatch, getState) => {
+      dispatch({type: 'Start_Loader'})
       try {
           const user = values
         const res = await axios.get(apiUrl + "dahboard_count?time=year&user="+user, {

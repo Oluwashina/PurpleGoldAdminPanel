@@ -19,6 +19,7 @@ import UsersDetails from './pages/Users/usersbyId'
 import Marketers from './pages/Marketers/marketers'
 import FundingAll from './pages/Dashboard/FundingAll'
 import Payouts from './pages/Dashboard/AllPayouts'
+import NotFoundPage from './pages/404/NotFound';
 import {isMobile} from 'react-device-detect'
 
 
@@ -50,6 +51,7 @@ class App extends Component {
              <Route path="/users/:id" component={UsersDetails} />
              <Route path="/marketers" component={Marketers} />
              <Route path="/payouts/all" component={Payouts} />
+             <Route path="*" component={NotFoundPage} />
            </Switch>
        </BrowserRouter>
      );

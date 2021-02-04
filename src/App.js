@@ -26,7 +26,7 @@ class App extends Component {
   state = {  }
   render() { 
     if (isMobile) {
-      return <div className="middleDiv">Mobile view not supported for this platform!</div>
+      return <div className="middleDiv">Mobile view not supported!</div>
      }
     return ( 
       <BrowserRouter>

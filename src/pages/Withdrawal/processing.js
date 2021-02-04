@@ -242,6 +242,23 @@ const Processing = (props) =>{
                                                 
                                                 {request.length ? (
                         request.map((value, index) => {
+
+                              // picture
+                            var imageUrl;
+                            switch(value.imageUrl){
+                                case "":
+                                imageUrl = "../img/profile.svg"  
+                                break;
+                                case null:
+                                    imageUrl = "../img/profile.svg" 
+                                break;
+                                case "/profile_pics.jpg":
+                                    imageUrl = "../img/profile.svg" 
+                                break;
+                                default:
+                                imageUrl = value.imageUrl 
+                            }
+
                             return (
                             <div
                                 key={index}
@@ -252,11 +269,7 @@ const Processing = (props) =>{
                                 className="adminColumn"
                                 style={{ padding: "18px 20px" }}
                                 >
-                                <img
-                                    className="img-fluid"
-                                    src="/img/avatar.png"
-                                    alt=""
-                                />
+                                 <img className="img-fluid imageStyle" src={imageUrl} alt="" />
                                 </div>
                                 <div
                                 className="adminColumn"

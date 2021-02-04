@@ -192,8 +192,7 @@ const UsersDetails = (props) => {
                                   fontSize: 14,
                                 }}
                               >
-                                Joined:  
-                                       {Moment(createdAt).format('MMMM Do, YYYY')}        
+                                Joined: {Moment(createdAt).format('MMMM Do, YYYY')}        
                               </p>
                             </div>
                           </div>

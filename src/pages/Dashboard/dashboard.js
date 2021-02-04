@@ -335,16 +335,19 @@ const Dashboard = (props) =>{
                                             
                                             // picture
                                             var imageUrl;
-                                            if(value.imageUrl === "" || null){
-                                                imageUrl = "../img/profile.svg"
+                                            switch(value.imageUrl){
+                                                case "":
+                                                imageUrl = "../img/profile.svg"  
+                                                break;
+                                                case null:
+                                                    imageUrl = "../img/profile.svg" 
+                                                break;
+                                                case "/profile_pics.jpg":
+                                                    imageUrl = "../img/profile.svg" 
+                                                break;
+                                                default:
+                                                imageUrl = value.imageUrl 
                                             }
-                                            else if(value.imageUrl === "/profile_pics.jpg"){
-                                                imageUrl = "../img/profile.svg"
-                                            }
-                                            else{
-                                                imageUrl = value.imageUrl
-                                            }
-
 
                                             // date format
                                             var dayShow

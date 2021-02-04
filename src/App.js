@@ -19,11 +19,15 @@ import UsersDetails from './pages/Users/usersbyId'
 import Marketers from './pages/Marketers/marketers'
 import FundingAll from './pages/Dashboard/FundingAll'
 import Payouts from './pages/Dashboard/AllPayouts'
+import {isMobile} from 'react-device-detect'
 
 
 class App extends Component {
   state = {  }
   render() { 
+    if (isMobile) {
+      return <div className="middleDiv">Mobile view not supported for this platform!</div>
+     }
     return ( 
       <BrowserRouter>
          <Switch>

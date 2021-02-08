@@ -1,6 +1,7 @@
 import {apiUrl} from '../config'
 import axios from 'axios'
 import cogoToast from 'cogo-toast';
+import {PostApi} from '../helpers'
 
 
 
@@ -11,25 +12,46 @@ const getToken = () => {
 
 // login user actions functionality
 export const loginUser = (user) => {
-    return async (dispatch, getState) => {
-      try {
-        const res = await axios.post(apiUrl + "auth", { ...user }, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN'
-            }
-          });
-        if (res.status === 200) {
-            console.log(res)
-          dispatch({ type: "User_LoggedIn", data: res.data.data });
-          cogoToast.success('Login Successful!', { position: 'bottom-right', })
-        }
-      } catch (err) {
-        dispatch({ type: "User_Error", err: err.response?.data?.message });
+  return async (dispatch, getState) => {
+    try {
+      const res = await PostApi("auth", {...user}, "")
+      console.log(res)
+      if (res.status === 200) {
+        console.log(res)
+        dispatch({ type: "User_LoggedIn", data: res.data.data });
+        cogoToast.success('Login Successful!', { position: 'bottom-right', })
+      }
+      if(res.status === 400){
+        dispatch({ type: "User_Error", err: res.data});
         cogoToast.error('Invalid Credentials!')
       }
-    };
+    } catch (err) {
+      console.log(err)
+    }
   };
+};
+
+
+// export const loginUser = (user) => {
+//     return async (dispatch, getState) => {
+//       try {
+//         const res = await axios.post(apiUrl + "auth", { ...user }, {
+//             headers: {
+//               Accept: 'application/json',
+//               appID: 'PGADMIN'
+//             }
+//           });
+//         if (res.status === 200) {
+//             console.log(res)
+//           dispatch({ type: "User_LoggedIn", data: res.data.data });
+//           cogoToast.success('Login Successful!', { position: 'bottom-right', })
+//         }
+//       } catch (err) {
+//         dispatch({ type: "User_Error", err: err.response?.data?.message });
+//         cogoToast.error('Invalid Credentials!')
+//       }
+//     };
+//   };
 
   // forgot password functionality
   export const forgotPassword = (user) => {

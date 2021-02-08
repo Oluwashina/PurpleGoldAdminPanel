@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import React from 'react';
+import {BrowserRouter, Switch, Route,} from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoutes/protectedRoute'
+
 import Login from './pages/Login/login';
 import ForgotPassword from './pages/Login/ForgotPassword';
 import Dashboard from './pages/Dashboard/dashboard'
@@ -23,39 +25,44 @@ import NotFoundPage from './pages/404/NotFound';
 import {isMobile} from 'react-device-detect'
 
 
-class App extends Component {
-  state = {  }
-  render() { 
-    if (isMobile) {
-      return <div className="middleDiv">Mobile view not supported!</div>
-     }
-    return ( 
-      <BrowserRouter>
-         <Switch>
-             <Route exact path="/" component={Login} />
-             <Route  path="/forgotpassword" component={ForgotPassword} />
-             <Route path="/dashboard" component={Dashboard} />
-             <Route exact path="/withdrawal" component={Withdrawal} />
-             <Route path="/withdrawal/processing" component={Processing} />
-             <Route path="/withdrawal/paid" component={Paid} />
-             <Route path="/withdrawal/declined" component={Declined} />
-             <Route exact path="/fund" component={Fund} />
-             <Route path="/fund/confirm" component={FundConfirm} />
-             <Route path="/fund/all" component={FundingAll} />
-             <Route exact path="/admin" component={Admin} />
-             <Route path="/admin/all" component={AllAdmin} />
-             <Route path="/admin/suspended" component={SuspendedAdmin} />
-             <Route path="/admin/activities" component={AdminActivities} />
-             <Route path="/admin/profile" component={AdminProfile} />
-             <Route exact path="/users" component={Users} />
-             <Route path="/users/:id" component={UsersDetails} />
-             <Route path="/marketers" component={Marketers} />
-             <Route path="/payouts/all" component={Payouts} />
-             <Route path="*" component={NotFoundPage} />
-           </Switch>
-       </BrowserRouter>
-     );
-  }
+
+const App = (props) => {
+
+  
+  if(isMobile){
+    return <div className="middleDiv">Mobile view not supported!</div>
+   }
+
+  return ( 
+    <BrowserRouter>
+    <Switch>
+        <Route exact path="/" component={Login} />
+        <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <Route  path="/forgotpassword" component={ForgotPassword} />
+        <ProtectedRoute exact path="/withdrawal" component={Withdrawal} />
+        <ProtectedRoute path="/withdrawal/processing" component={Processing} />
+        <ProtectedRoute path="/withdrawal/paid" component={Paid} />
+        <ProtectedRoute path="/withdrawal/declined" component={Declined} />
+        <ProtectedRoute exact path="/fund" component={Fund} />
+        <ProtectedRoute path="/fund/confirm" component={FundConfirm} />
+        <ProtectedRoute path="/fund/all" component={FundingAll} />
+        <ProtectedRoute exact path="/admin" component={Admin} />
+        <ProtectedRoute path="/admin/all" component={AllAdmin} />
+        <ProtectedRoute path="/admin/suspended" component={SuspendedAdmin} />
+        <ProtectedRoute path="/admin/activities" component={AdminActivities} />
+        <ProtectedRoute path="/admin/profile" component={AdminProfile} />
+        <ProtectedRoute exact path="/users" component={Users} />
+        <ProtectedRoute path="/users/:id" component={UsersDetails} />
+        <ProtectedRoute path="/marketers" component={Marketers} />
+        <ProtectedRoute path="/payouts/all" component={Payouts} />
+        <Route path="*" component={NotFoundPage} />
+      </Switch>
+  </BrowserRouter>
+   );
 }
+
+
  
 export default App;
+
+

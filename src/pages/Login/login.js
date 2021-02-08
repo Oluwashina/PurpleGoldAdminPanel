@@ -1,6 +1,6 @@
 import "./login.css";
 import {Form, Formik} from 'formik'
-import React, {useEffect} from 'react'
+import React,{useEffect} from 'react'
 import {connect } from 'react-redux'
 import { loginValidator } from "../../validationSchema/authValidator";
 import { loginUser } from "../../store/actions/authActions";

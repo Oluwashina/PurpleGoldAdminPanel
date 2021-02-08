@@ -162,6 +162,7 @@ function Users(props) {
                                 src={imageUrl}
                                 className="img-fluid userProfile"
                                 alt=""
+                                style={{cursor: 'pointer'}}
                                 onClick={() => viewUser(user.id)}
                               />
                             </div>

@@ -112,6 +112,13 @@ export const UsersCount = () => {
   };
 
 
+  
+  export const SearchUser = (value) => {
+    return (dispatch, getState) => {
+      dispatch({ type: "SearchUser", data: value });
+    };
+  };
+
 
 
 

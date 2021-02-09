@@ -2,9 +2,10 @@ import './SideBar.css'
 import {Link, useLocation} from 'react-router-dom'
 import { connect } from 'react-redux';
 import { logOut } from "../../store/actions/authActions";
+import { SearchUser } from '../../store/actions/userActions';
 
 
-function SideBar({Logout, firstname,lastname, image}){
+function SideBar({Logout, firstname,lastname, image, Search}){
 
 
         // check for which path you are on
@@ -12,6 +13,11 @@ function SideBar({Logout, firstname,lastname, image}){
 
     const ToggleLogout = () =>{
         Logout()
+    }
+
+    const handleChange = (e) =>{
+        let keyword = e.target.value
+        Search(keyword)
     }
 
 
@@ -30,10 +36,14 @@ function SideBar({Logout, firstname,lastname, image}){
                 <div>
                     {/* other layout side */}
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <div>
+                        <div
+                        style={ { display: isActive.includes("/users") ? 'block' : 'none' } } 
+                        >
                               <div className="form-group input-container mb-0">
                               <i className="mdi mdi-magnify iconn"></i>
-                                <input type="text" placeholder="Search" className="form-control search-style"  />
+                                <input type="text" placeholder="Search by email"
+                                 onChange={handleChange}  
+                                className="form-control search-style"  />
                             </div>
                         </div>
                         <div className="ml-4">
@@ -148,6 +158,7 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = (dispatch) => {
     return {
         Logout: () => dispatch(logOut()),
+        Search: (value) => dispatch(SearchUser(value))
     };
   };
 

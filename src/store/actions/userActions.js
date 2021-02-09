@@ -1,6 +1,5 @@
-import {apiUrl} from '../config'
-import axios from 'axios'
 import cogoToast from 'cogo-toast';
+import {GetApi, PatchApi} from '../helpers'
 
 
 const getToken = () => {
@@ -14,19 +13,16 @@ export const getAllUsers = (values) => {
     return async (dispatch, getState) => {
       try {
         const value = values.filter
-        const res = await axios.get(apiUrl + "admin/investors?status="+value, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("admin/investors?status="+value, getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "AllUsers", data: res.data.data});
         }
+        if(res.status === 400){
+          dispatch({ type: "Users_Error", err: res.data });
+        }
       } catch (err) {
-        dispatch({ type: "Users_Error", err: err.response?.data?.message });
+       console.log(err)
       }
     };
   };
@@ -37,19 +33,16 @@ export const getAllUsers = (values) => {
       try {
         const time = value.time
         const id = value.id
-        const res = await axios.get(apiUrl + "admin/investors/"+id+"?time="+time, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("admin/investors/"+id+"?time="+time, getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "UserDetails", data: res.data.data});
         }
+        if(res.status === 400){
+          dispatch({ type: "Error_User", err: res.data });
+        }
       } catch (err) {
-        dispatch({ type: "Error_User", err: err.response?.data?.message });
+        console.log(err)
       }
     };
   }
@@ -59,23 +52,20 @@ export const getAllUsers = (values) => {
     return async (dispatch, getState) => {
       dispatch({ type: "Suspend_Loader", });
       try {
-        const res = await axios.patch(apiUrl + "admin/deactivate_user", { ...user }, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await PatchApi("admin/deactivate_user", { ...user }, getToken());
         if (res.status === 200) {
             console.log(res)
             dispatch({ type: "StopSuspendLoader" });
             dispatch({type: "SuccessLoad"})
           cogoToast.success('User successfully suspended!', { position: 'top-center', })
         }
+        if(res.status === 400){
+          dispatch({ type: "StopSuspendLoader" });
+          cogoToast.error('Error while suspending user')
+        }
       } catch (err) {
         // var message = err.response.data
-        dispatch({ type: "StopSuspendLoader" });
-        cogoToast.error('Error while suspending user')
+        console.log(err)
       }
     };
   }
@@ -85,23 +75,19 @@ export const getAllUsers = (values) => {
     return async (dispatch, getState) => {
       dispatch({ type: "Suspend_Loader", });
       try {
-        const res = await axios.patch(apiUrl + "admin/activate_user", { ...user }, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await PatchApi("admin/activate_user", { ...user }, getToken());
         if (res.status === 200) {
             console.log(res)
             dispatch({ type: "StopSuspendLoader" });
             dispatch({type: "SuccessLoad"})
           cogoToast.success('User successfully activated!', { position: 'top-center', })
         }
+        if(res.status === 400){
+          dispatch({ type: "StopSuspendLoader" });
+          cogoToast.error('Error while activating user')
+        }
       } catch (err) {
-        // var message = err.response.data
-        dispatch({ type: "StopSuspendLoader" });
-        cogoToast.error('Error while activating user')
+       console.log(err)
       }
     }
   }
@@ -111,19 +97,16 @@ export const getAllUsers = (values) => {
 export const UsersCount = () => {
     return async (dispatch, getState) => {
       try {
-        const res = await axios.get(apiUrl + "user_count?user=INVESTOR", {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("user_count?user=INVESTOR", getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "Users_Count", data: res.data.data});
         }
+        if(res.status === 400){
+          dispatch({ type: "Count_Error", err: res.data });
+        }
       } catch (err) {
-        dispatch({ type: "Count_Error", err: err.response?.data?.message });
+        console.log(err)
       }
     };
   };

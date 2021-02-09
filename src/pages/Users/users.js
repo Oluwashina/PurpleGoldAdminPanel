@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./users.css";
 import { getAllUsers, UsersCount } from "../../store/actions/userActions";
 import { connect } from "react-redux";
-import Moment from 'react-moment';
 
 function Users(props) {
   const { getUsers,getCount, users, count, history } = props;
@@ -185,9 +184,7 @@ function Users(props) {
                                   fontSize: 14,
                                 }}
                               >
-                                Joined: <Moment format="MMMM Do YYYY">
-                                       {user.createdAt}
-                                        </Moment>
+                              {user.email}
                               </p>
                             </div>
                           </div>

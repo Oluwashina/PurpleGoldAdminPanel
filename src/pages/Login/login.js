@@ -11,7 +11,6 @@ function Login({isAuthenticated, history, signIn}) {
 
 
 const handleSubmit = async (values, setSubmitting) =>{
-    console.log(values)
     await signIn(values);
   }
 

@@ -6,7 +6,9 @@ import Moment from 'moment';
 
 const UsersDetails = (props) => {
 
-    const {history,getDetails, match, firstname, lastname, createdAt, 
+    const {history,getDetails, match, firstname, lastname, createdAt,
+         email, dob,
+         phoneNumber, houseOfResidence,
         walletBalance, totalAmountInvested, totalWithdrawn, susloader, HandleSuspend,
          HandleActivate, isActive, success, walletActions, withdrawals, investments, imageUrl} = props
 
@@ -194,11 +196,47 @@ const UsersDetails = (props) => {
                               >
                                 Joined: {Moment(createdAt).format('MMMM Do, YYYY')}        
                               </p>
+                              <p
+                                className="mb-0"
+                                style={{
+                                  color: "#000000",
+                                  fontWeight: 400,
+                                  fontSize: 15,
+                                }}
+                              >
+                               <span style={{fontWeight: 700}}>DOB:</span>  {Moment(dob).format('MMMM Do, YYYY')}
+                              </p>
+                              
                             </div>
                           </div>
                         </div>
 
                     </div>
+
+                    {/* other profile details */}
+
+                    <div
+                        className="mt-4"
+                        style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        }}
+                    >
+                        <div className="profile-div">
+                            {/* first part */}
+                            <div style={{borderRight: '0.2px solid #9286E9', padding: '10px 30px'}}>
+                                <p className="mb-0">{email}</p>
+                                <p className="mb-0">{phoneNumber}</p>
+                            </div>
+                            {/* second part */}
+                            <div style={{padding: '10px 30px'}}>
+                                <p className="mb-0">{!houseOfResidence ? "Address not updated yet!" : houseOfResidence}</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                                
 
                     {/* investment, withdrawal and balance table for all users */}
                     <div className="row mt-5">
@@ -490,6 +528,10 @@ const mapStateToProps = (state) => {
         firstname: state.user.firstname,
         lastname: state.user.lastname,
         createdAt: state.user.createdAt,
+        dob: state.user.dob,
+        email: state.user.email,
+        phoneNumber: state.user.phoneNumber,
+        houseOfResidence: state.user.houseOfResidence,
         totalAmountInvested: state.user.totalAmountInvested,
         totalWithdrawn: state.user.totalWithdrawn,
         walletBalance: state.user.walletBalance,

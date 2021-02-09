@@ -8,6 +8,10 @@ const initState = {
     lastname: "",
     firstname: "",
     createdAt: "",
+    dob: "",
+    email: "", 
+    phoneNumber: "",
+    houseOfResidence: "",
     totalAmountInvested: 0,
     totalWithdrawn: 0,
     walletBalance: "",
@@ -47,6 +51,10 @@ const initState = {
                 withdrawals: action.data[0].withdrawals,
                 isActive: action.data[0].isActive,
                 imageUrl: action.data[0].imageUrl,
+                dob: action.data[0].dob,
+                email: action.data[0].email,
+                phoneNumber: action.data[0].phoneNumber,
+                houseOfResidence: action.data[0].houseOfResidence,
                 success: false
             }
         case 'Suspend_Loader':

@@ -1,6 +1,5 @@
-import {apiUrl} from '../config'
-import axios from 'axios'
 import cogoToast from 'cogo-toast';
+import {GetApi, PostApi, PatchApi} from '../helpers'
 
 
 
@@ -14,19 +13,20 @@ const getToken = () => {
 export const getAllAdmin = () => {
     return async (dispatch, getState) => {
       try {
-        const res = await axios.get(apiUrl + "admin/admins", {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("admin/admins", getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "AllAdmin", data: res.data.data});
         }
+        if(res.status === 400){
+          dispatch({ type: "Admin_Error", err: res.data });
+        }
+        if(res.status === 401){
+          dispatch({type: "logout"})
+          cogoToast.info("Session Expired! Please Login again!")
+        }
       } catch (err) {
-        dispatch({ type: "Admin_Error", err: err.response?.data?.message });
+        console.log(err)
       }
     };
   };
@@ -35,19 +35,20 @@ export const getAllAdmin = () => {
 export const getSuspendedAdmin = () => {
   return async (dispatch, getState) => {
     try {
-      const res = await axios.get(apiUrl + "admin/admins?status=suspended", {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await GetApi("admin/admins?status=suspended", getToken());
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "SuspendedAdmins", data: res.data.data});
       }
+      if(res.status === 400){
+        dispatch({ type: "SuspendAdmin_Error", err: res.data });
+      }
+      if(res.status === 401){
+        dispatch({type: 'logout'})
+          cogoToast.info("Session Expired! Please Login again!")
+      }
     } catch (err) {
-      dispatch({ type: "SuspendAdmin_Error", err: err.response?.data?.message });
+      console.log(err)
     }
   };
 }
@@ -57,44 +58,44 @@ export const getAdminActivities = () => {
   return async (dispatch, getState) => {
     try {
       var userId = getState().auth.id
-      const res = await axios.get(apiUrl + "user_activities/"+userId, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await GetApi("user_activities/"+userId, getToken());
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "AdminActivities", data: res.data.data});
       }
+      if(res.status === 400){
+        dispatch({ type: "Activities_Error", err: res.data });
+      }
+      if(res.status === 401){
+        dispatch({type: 'logout'})
+        cogoToast.info("Session Expired! Please Login again!")
+      }
     } catch (err) {
-      dispatch({ type: "Activities_Error", err: err.response?.data?.message });
+      console.log(err)
     }
   };
 }
-
-
 
 
 //   create a new admin functionality
 export const AddAdmin = (user) => {
   return async (dispatch, getState) => {
     try {
-      const res = await axios.post(apiUrl + "admin/create_admin", { ...user }, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await PostApi("admin/create_admin", { ...user }, getToken(), "application/json");
       if (res.status === 201) {
           console.log(res)
         cogoToast.success('Admin created successfully!', { position: 'bottom-right', })
       }
+      if(res.status === 400){
+        cogoToast.error('User or email already exists')
+      }
+      if(res.status === 401){
+        dispatch({type: 'logout'})
+        cogoToast.info("Session Expired! Please Login again!")
+      }
     } catch (err) {
       // var message = err.response.data
-      cogoToast.error('User or email already exists')
+      console.log(err)
     }
   };
 };
@@ -105,23 +106,23 @@ export const ActivateAdmin = (user) => {
   return async (dispatch, getState) => {
     dispatch({ type: "Restore_Loader", data: user.id });
     try {
-      const res = await axios.patch(apiUrl + "admin/activate_admin", { ...user }, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await PatchApi("admin/activate_admin", { ...user }, getToken())
       if (res.status === 200) {
           console.log(res)
           dispatch({ type: "StopRestoreLoader" });
           dispatch({type: 'Process_Success'})
         cogoToast.success('Admin successfully restored!', { position: 'bottom-right', })
       }
+      if(res.status === 400){
+        dispatch({ type: "StopRestoreLoader" });
+        cogoToast.error('Error while restoring admin')
+      }
+      if(res.status === 401){
+        dispatch({type: 'logout'})
+        cogoToast.info("Session Expired! Please Login again!")
+      }
     } catch (err) {
-      // var message = err.response.data
-      dispatch({ type: "StopRestoreLoader" });
-      cogoToast.error('Error while restoring admin')
+      console.log(err)
     }
   };
 };

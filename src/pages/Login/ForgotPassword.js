@@ -11,7 +11,6 @@ function Forgot({isAuthenticated, history, handlePassword}) {
 
 
 const handleSubmit = async (values, setSubmitting) =>{
-    console.log(values)
     await handlePassword(values);
   }
 

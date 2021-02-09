@@ -14,7 +14,7 @@ const getToken = () => {
 export const loginUser = (user) => {
   return async (dispatch, getState) => {
     try {
-      const res = await PostApi("auth", {...user}, "")
+      const res = await PostApi("auth", {...user}, "", "application/json")
       console.log(res)
       if (res.status === 200) {
         console.log(res)
@@ -32,44 +32,21 @@ export const loginUser = (user) => {
 };
 
 
-// export const loginUser = (user) => {
-//     return async (dispatch, getState) => {
-//       try {
-//         const res = await axios.post(apiUrl + "auth", { ...user }, {
-//             headers: {
-//               Accept: 'application/json',
-//               appID: 'PGADMIN'
-//             }
-//           });
-//         if (res.status === 200) {
-//             console.log(res)
-//           dispatch({ type: "User_LoggedIn", data: res.data.data });
-//           cogoToast.success('Login Successful!', { position: 'bottom-right', })
-//         }
-//       } catch (err) {
-//         dispatch({ type: "User_Error", err: err.response?.data?.message });
-//         cogoToast.error('Invalid Credentials!')
-//       }
-//     };
-//   };
-
   // forgot password functionality
   export const forgotPassword = (user) => {
     return async (dispatch, getState) => {
       try {
-        const res = await axios.post(apiUrl + "forgot_password", { ...user }, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN'
-            }
-          });
+        const res = await PostApi("forgot_password", { ...user }, "", "application/json");
         if (res.status === 200) {
             console.log(res)
           cogoToast.success('Check your email for password reset instructions!', { position: 'top-center', })
         }
-      } catch (err) {
-        dispatch({ type: "Forgot_Error", err: err.response?.data?.message });
-        cogoToast.error('Email Address not valid!')
+        if(res.status === 400){
+          dispatch({ type: "Forgot_Error", err: res.data });
+          cogoToast.error('Email Address not valid!')
+        }
+      } catch (err){
+        console.log(err)
       }
     };
   };
@@ -92,21 +69,17 @@ export const ChangePassword = (user) => {
       newPassword: user.newpassword
     }
     try {
-      const res = await axios.post(apiUrl + "reset_password", { ...values }, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await PostApi("reset_password", { ...values }, getToken(), "application/json");
       if (res.status === 200) {
           console.log(res)
           dispatch({ type: "PasswordChanged"})
         cogoToast.success('Password updated successfully! Kindly Login again.', { position: 'bottom-right', })
       }
+      if(res.status === 400){
+        cogoToast.error('Check that your old password is correct!')
+      }
     } catch (err) {
-      // var message = err.response.data
-      cogoToast.error('Check that your old password is correct!')
+      console.log(err)
     }
   };
 };
@@ -118,16 +91,8 @@ export const UploadPhoto = (value) => {
       let formdata = new FormData()
       formdata.append("fileName", value);
     try {
-      const res = await axios.post(apiUrl + "files", formdata, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken(),
-            contentType: 'multipart/form-data'
-          }
-        });
+      const res = await PostApi("files", formdata, getToken(), "multipart/form-data");
       if (res.status === 200) {
-          console.log(res)
             var image = res.data.data
             // actual call to update profile 
             dispatch({type: "profilePicture", image})
@@ -154,10 +119,13 @@ export const UploadPhoto = (value) => {
                   cogoToast.error('Error while uploading picture!',{ position: 'top-center',heading: 'PurpleGold' })
               })
         }
+        if(res.status === 400 || res.status === 404){
+          cogoToast.error('Error while uploading image!')
+          dispatch({ type: "StopPhotoLoader"});
+        }
     } catch (err) {
       // var message = err.response.data
-      cogoToast.error('Error while uploading image!')
-      dispatch({ type: "StopPhotoLoader"});
+        console.log(err)
     }
   };
 };

@@ -142,20 +142,37 @@ const Processing = (props) =>{
 
      // make the call again after the paid button is done
   useEffect(() => {
+    var time;
+    switch(day){
+      case 1:
+         time = "today"
+        break;
+      case 2:
+       time = "week"
+        break;
+      case 3:
+        time = "month"
+        break;
+      case 4:
+        time = "year"
+        break;
+      default:
+        console.log("hello")
+    }
     const values = {
-        time: "today",
+        time: time,
         user: "INVESTOR",
         status: "PROCESSING",
         };
     if(success){
      getProcessed(values);
      getWithdrawCount({
-        time: "today",
+        time: time,
         user: "INVESTOR",
        }
       );
     }
-  }, [getProcessed, getWithdrawCount, success]);
+  }, [getProcessed, getWithdrawCount, success, day]);
 
     return(
         <div style={{backgroundColor: '#f5f6f8',}}>

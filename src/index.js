@@ -54,7 +54,7 @@ const composeEnhancers =
 
   
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   //  persistedState,
   enhancer

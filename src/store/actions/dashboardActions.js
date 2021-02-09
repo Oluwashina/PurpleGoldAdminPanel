@@ -1,5 +1,4 @@
-import {apiUrl} from '../config'
-import axios from 'axios'
+import {GetApi} from '../helpers'
 // import cogoToast from 'cogo-toast';
 
 
@@ -15,19 +14,16 @@ export const Funding = (values) => {
       try {
           const time = values.time
           const user = values.user
-        const res = await axios.get(apiUrl + "reports/funding?time="+time+"&user="+user+"&limit="+5, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("reports/funding?time="+time+"&user="+user+"&limit="+5, getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "Funding", data: res.data.data});
         }
+        if(res.status === 400){
+          dispatch({ type: "Funding_Error", err: res.data });
+        }
       } catch (err) {
-        dispatch({ type: "Funding_Error", err: err.response?.data?.message });
+        console.log(err)
       }
     };
   };
@@ -38,19 +34,16 @@ export const Funding = (values) => {
       try {
           const time = values.time
           const user = values.user
-        const res = await axios.get(apiUrl + "reports/funding?time="+time+"&user="+user, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("reports/funding?time="+time+"&user="+user, getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "Funding", data: res.data.data});
         }
+        if(res.status === 400){
+          dispatch({ type: "Funding_Error", err: res.data });
+        }
       } catch (err) {
-        dispatch({ type: "Funding_Error", err: err.response?.data?.message });
+        console.log(err)
       }
     };
   };
@@ -63,19 +56,16 @@ export const ChartRequest = (values) => {
         const time = values.time
         const user = values.user
         const type = values.type
-      const res = await axios.get(apiUrl + "reports/"+type+"?time="+time+"&user="+user, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await GetApi("reports/"+type+"?time="+time+"&user="+user, getToken());
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "ChartData", data: res.data.data});
       }
+      if(res.status === 400){
+        dispatch({ type: "Chart_Error", err: res.data });
+      }
     } catch (err) {
-      dispatch({ type: "Chart_Error", err: err.response?.data?.message });
+      console.log(err)
     }
   };
 };
@@ -86,20 +76,17 @@ export const ChartRequest = (values) => {
       dispatch({type: 'Start_Loader'})
       try {
           const user = values
-        const res = await axios.get(apiUrl + "dahboard_count?time=year&user="+user, {
-            headers: {
-              Accept: 'application/json',
-              appID: 'PGADMIN',
-              Authorization: getToken()
-            }
-          });
+        const res = await GetApi("dahboard_count?time=year&user="+user, getToken());
         if (res.status === 200) {
             console.log(res)
           dispatch({ type: "Dashboard_Count", data: res.data.data});
           dispatch({type: 'Stop_Loader'})
         }
+        if(res.status === 400){
+          dispatch({ type: "Count_Error", err: res.data });
+        }
       } catch (err) {
-        dispatch({ type: "Count_Error", err: err.response?.data?.message });
+        console.log(err)
       }
     };
   };
@@ -110,19 +97,16 @@ export const AllPayouts = (values) => {
     try {
         const time = values.time
         const user = values.user
-      const res = await axios.get(apiUrl + "reports/upcoming_payouts?time="+time+"&user="+user, {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await GetApi("reports/upcoming_payouts?time="+time+"&user="+user, getToken());
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "Payout", data: res.data.data});
       }
+      if(res.status === 400){
+        dispatch({ type: "Payout_Error", err: res.data });
+      }
     } catch (err) {
-      dispatch({ type: "Payout_Error", err: err.response?.data?.message });
+      console.log(err)
     }
   };
 };
@@ -133,19 +117,35 @@ export const Payouts = (values) => {
     try {
         const time = values.time
         const user = values.user
-      const res = await axios.get(apiUrl + "reports/upcoming_payouts?time="+time+"&user="+user+"&limit=5", {
-          headers: {
-            Accept: 'application/json',
-            appID: 'PGADMIN',
-            Authorization: getToken()
-          }
-        });
+      const res = await GetApi("reports/upcoming_payouts?time="+time+"&user="+user+"&limit=5", getToken());
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "Payout", data: res.data.data});
       }
+      if(res.status === 400){
+        dispatch({ type: "Payout_Error", err: res.data});
+      }
     } catch (err) {
-      dispatch({ type: "Payout_Error", err: err.response?.data?.message });
+      console.log(err)
+    }
+  };
+};
+
+// get al investments by filter functionality
+export const Investment = (values) => {
+  return async (dispatch, getState) => {
+    try {
+        const time = values.time
+      const res = await GetApi("investor/invest?time="+time+"&status=ACTIVE&limit=5", getToken());
+      if (res.status === 200) {
+          console.log(res)
+        dispatch({ type: "Investment", data: res.data.data});
+      }
+      if(res.status === 400){
+        dispatch({ type: "Investment_Error", err: res.data});
+      }
+    } catch (err) {
+      console.log(err)
     }
   };
 };

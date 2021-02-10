@@ -154,7 +154,7 @@ const Chart = (props) =>{
             <div style={{display: 'flex', justifyContent: 'flex-end', alignItems:'center'}}>
                 <div className="chart-filter">
                          {funding}
-                    </div>
+                </div>
             </div>
             {lineChart}
         </div>

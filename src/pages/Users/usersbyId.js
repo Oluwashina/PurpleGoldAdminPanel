@@ -204,7 +204,7 @@ const UsersDetails = (props) => {
                                   fontSize: 15,
                                 }}
                               >
-                               <span style={{fontWeight: 700}}>DOB:</span>  {Moment(dob).format('MMMM Do, YYYY')}
+                               <span style={{fontWeight: 700}}>DOB:</span>  {!dob ? "" : Moment(dob).format('MMMM Do, YYYY')}
                               </p>
                               
                             </div>
@@ -283,6 +283,9 @@ const UsersDetails = (props) => {
 
                                     {investments.length ? (
                                     investments.map((value, index) => {
+                                        var date;
+                                        date = Moment(value.createdAt).format('Do MMM, YYYY')
+                                       
                                         return (
                                         <div
                                             key={index}
@@ -299,11 +302,12 @@ const UsersDetails = (props) => {
 
                                             <div className="investColumn" >
                                             
-                                                {value.createdAt}
+                                                {date}
                                                 
                                             </div>
 
-                                            <div className="investColumn" style={{color: '#00B227'}}>
+                                            <div className="investColumn" 
+                                            style={{color: '#00B227'}}>
                                                 {value.status}
                                             </div>
 
@@ -374,6 +378,8 @@ const UsersDetails = (props) => {
 
                                     {withdrawals.length ? (
                                     withdrawals.map((value, index) => {
+                                        var date;
+                                        date = Moment(value.createdAt).format('Do MMM, YYYY')
                                         return (
                                         <div
                                             key={index}
@@ -387,13 +393,13 @@ const UsersDetails = (props) => {
                                             <div className="investColumn">
                                              
                                                
-                                                {value.createdAt}
+                                                {date}
                                                 
                                             </div>
 
                                             <div className="investColumn" >
                                                     <p className="mb-0"
-                                                    style={{color: '#00B227',}}
+                                                    style={ { color: value.status === "PAID" ? '#00B227' : '#ff0000' } } 
                                                     >{value.status}</p>
                                              </div>
 
@@ -459,6 +465,9 @@ const UsersDetails = (props) => {
 
                                     {walletActions.length ? (
                                     walletActions.map((data) => {
+                                        var date;
+                                        date = Moment(data.createdAt).format('Do MMM, YYYY')
+
                                         return (
                                         <div
                                             key={data.id}
@@ -471,7 +480,7 @@ const UsersDetails = (props) => {
 
                                             <div className="investColumn" style={{textAlign: 'right'}}>
                                                                                            
-                                                {data.createdAt}  
+                                                {date}  
                                                 
                                                 </div>
 

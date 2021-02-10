@@ -6,7 +6,7 @@ import { AllPayouts } from "../../store/actions/dashboardActions";
 import Moment from 'react-moment';
 
 const Payouts = (props) => {
-  const { getPayouts,  payout } = props;
+  const { getPayouts,  payout, history } = props;
 
   const [fund, setFund] = useState(1);
 
@@ -16,6 +16,11 @@ const Payouts = (props) => {
     { id: 3, name: "tab-3", text: "Month", value: "3" },
     { id: 4, name: "tab-4", text: "Year", value: "4" },
   ]);
+
+  
+  const GoBack = () =>{
+    history.push("/dashboard")
+}
 
   const FundToggle = (id) => {
     setFund(id)
@@ -85,11 +90,27 @@ const Payouts = (props) => {
             className="mt-4"
             style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "start",
               alignItems: "center",
             }}
           >
-            <div className="chart-filter">{DailyDiv}</div>
+              {/* back button layout */}
+              <div>
+                <button className="btn btn-back"
+                onClick={() => GoBack()}
+                >Back</button>
+             </div>
+
+               {/* name */}
+            <div className="mt-2"
+            style={{marginLeft: '40px'}}
+            >
+              <h5 className="allBorder" style={{ color: "#A030A8", fontWeight: "bold" }}>All Payouts</h5>
+            </div>
+
+            <div className="chart-filter"
+             style={{marginLeft: '40px'}}
+            >{DailyDiv}</div>
           </div>
 
           {/* Data tables to be populated with all admin layout */}

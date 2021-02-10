@@ -150,3 +150,10 @@
   border-radius: 50%;
   border: 2px solid #FFFFFF;
 }
+
+/* all page border */
+.allBorder{
+  border: 1px solid #9E079E;
+  border-radius: 10px;
+  padding: 10px 30px;
+}

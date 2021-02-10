@@ -6,7 +6,7 @@ import { InvestmentAll } from "../../store/actions/dashboardActions";
 import Moment from 'react-moment';
 
 const AllInvestments = (props) => {
-  const { getInvestments,  myInvestment } = props;
+  const { getInvestments,  myInvestment, history } = props;
 
   const [fund, setFund] = useState(1);
 
@@ -16,6 +16,10 @@ const AllInvestments = (props) => {
     { id: 3, name: "tab-3", text: "Month", value: "3" },
     { id: 4, name: "tab-4", text: "Year", value: "4" },
   ]);
+
+  const GoBack = () =>{
+    history.push("/dashboard")
+}
 
   const FundToggle = (id) => {
     setFund(id)
@@ -80,11 +84,28 @@ const AllInvestments = (props) => {
             className="mt-4"
             style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "start",
               alignItems: "center",
             }}
           >
-            <div className="chart-filter">{DailyDiv}</div>
+
+              {/* back button layout */}
+              <div>
+                <button className="btn btn-back"
+                onClick={() => GoBack()}
+                >Back</button>
+             </div>
+
+               {/* name */}
+            <div className="mt-2"
+            style={{marginLeft: '40px'}}
+            >
+              <h5 className="allBorder" style={{ color: "#A030A8", fontWeight: "bold" }}>All Investments</h5>
+            </div>
+
+            <div className="chart-filter"
+            style={{marginLeft: '40px'}}
+            >{DailyDiv}</div>
           </div>
 
           {/* Data tables to be populated with all admin layout */}

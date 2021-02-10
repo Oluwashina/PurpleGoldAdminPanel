@@ -21,6 +21,7 @@ import UsersDetails from './pages/Users/usersbyId'
 import Marketers from './pages/Marketers/marketers'
 import FundingAll from './pages/Dashboard/FundingAll'
 import Payouts from './pages/Dashboard/AllPayouts'
+import Investments from './pages/Dashboard/AllInvestments'
 import NotFoundPage from './pages/404/NotFound';
 import {isMobile} from 'react-device-detect'
 
@@ -55,6 +56,7 @@ const App = (props) => {
         <ProtectedRoute path="/users/:id" component={UsersDetails} />
         <ProtectedRoute path="/marketers" component={Marketers} />
         <ProtectedRoute path="/payouts/all" component={Payouts} />
+        <ProtectedRoute path="/investments/all" component={Investments} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
   </BrowserRouter>

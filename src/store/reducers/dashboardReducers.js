@@ -3,6 +3,7 @@ const initState = {
     payouts: [],
     investments: [],
     investmentSum: 0,
+    todayCount: 0,
     funding: [],
     chartData: [],
     fundingSum: 0,
@@ -42,6 +43,17 @@ const initState = {
                 investments: action.data,
                 investmentSum: investSum
             } 
+        case 'TodayInvest':
+            let todaySum;
+            todaySum = action.data.reduce((acc, cur)=>{
+               return acc + parseFloat(cur.amount)
+             },0)
+            return{
+                ...state,
+                investments: action.data,
+                investmentSum: todaySum,
+                todayCount: action.data.length
+            }
         case 'Funding':
             let fundingSum;
             let data = action.data[0].users

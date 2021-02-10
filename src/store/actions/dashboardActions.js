@@ -131,12 +131,44 @@ export const Payouts = (values) => {
   };
 };
 
-// get al investments by filter functionality
+// get all investments by filter functionality
 export const Investment = (values) => {
   return async (dispatch, getState) => {
     try {
         const time = values.time
-      const res = await GetApi("investor/invest?time="+time+"&status=ACTIVE&limit=5", getToken());
+        if(time === "today"){
+          const res = await GetApi("investor/invest?time="+time+"&status=ACTIVE&limit=5", getToken());
+          if (res.status === 200) {
+              console.log(res)
+            dispatch({ type: "TodayInvest", data: res.data.data});
+          }
+          if(res.status === 400){
+            dispatch({ type: "Investment_Error", err: res.data});
+          }
+        }
+        else{
+          const res = await GetApi("investor/invest?time="+time+"&status=ACTIVE&limit=5", getToken());
+          if (res.status === 200) {
+              console.log(res)
+            dispatch({ type: "Investment", data: res.data.data});
+          }
+          if(res.status === 400){
+            dispatch({ type: "Investment_Error", err: res.data});
+          }
+        }
+     
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};
+
+// get all investments functionlality
+export const InvestmentAll = (values) => {
+  return async (dispatch, getState) => {
+    try {
+        const time = values.time
+      const res = await GetApi("investor/invest?time="+time+"&status=ACTIVE", getToken());
       if (res.status === 200) {
           console.log(res)
         dispatch({ type: "Investment", data: res.data.data});

@@ -33,7 +33,8 @@ const Dashboard = (props) => {
     cardIndex,
     ToggleCards,
     myInvestment,
-    investmentSum
+    investmentSum,
+    todayCount
   } = props;
 
   const [isActive, setActive] = useState(false);
@@ -247,7 +248,11 @@ const Dashboard = (props) => {
       key={item.id}
       className={invest === item.id ? "filter-tab active-filter" : "filter-tab"}
       onClick={() => InvestToggle(item.id)}
+      style={{ position: "relative" }}
     >
+      <div
+       style={ { display: item.id === 1 ? 'flex' : 'none' } }
+       className="active-count">{todayCount}</div>
       <p className="mb-0">{item.text}</p>
     </div>
   ));
@@ -729,11 +734,11 @@ const Dashboard = (props) => {
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </h6>
                     </div>
-                    {/* <div className="ml-3">
-                      
+                    <div className="ml-3">
+                    <Link to="/investments/all">
                         <button className="btn btn-view">View All</button>
-                      
-                    </div> */}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -910,6 +915,7 @@ const mapStateToProps = (state) => {
     payoutSum: state.dashboard.payoutSum,
     myInvestment: state.dashboard.investments,
     investmentSum: state.dashboard.investmentSum,
+    todayCount: state.dashboard.todayCount,
     isLoading: state.dashboard.isLoading,
     chartDate: state.dashboard.chartDate,
     cardIndex: state.dashboard.cardIndex,

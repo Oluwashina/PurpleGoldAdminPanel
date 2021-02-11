@@ -3,6 +3,7 @@ const initState = {
     users: [],
     usersSearch: [],
     loading: false,
+    isLoading: false,
     susloader: false,
     usersCount: [],
     userDetails: [],
@@ -35,6 +36,16 @@ const initState = {
                  users: action.data,
                  usersSearch: action.data
              }
+        case 'User_Loader':
+            return{
+                ...state,
+                isLoading: true
+            }
+        case 'StopUser_Loader':
+            return{
+                ...state,
+                isLoading: false
+            }
         case 'SearchUser':
             var word = action.data
             let user = state.usersSearch.filter(function (item) {

@@ -11,15 +11,17 @@ const getToken = () => {
 // Get funding data for month,year, and week functionality
 export const getAllUsers = (values) => {
     return async (dispatch, getState) => {
+      dispatch({type: 'User_Loader'})
       try {
         const value = values.filter
         const res = await GetApi("admin/investors?status="+value, getToken());
         if (res.status === 200) {
-         
+          dispatch({type: 'StopUser_Loader'})
           dispatch({ type: "AllUsers", data: res.data.data});
         }
         if(res.status === 400){
           dispatch({ type: "Users_Error", err: res.data });
+          dispatch({type: 'StopUser_Loader'})
         }
       } catch (err) {
        console.log(err)

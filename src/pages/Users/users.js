@@ -5,7 +5,7 @@ import { getAllUsers, UsersCount } from "../../store/actions/userActions";
 import { connect } from "react-redux";
 
 function Users(props) {
-  const { getUsers,getCount, users, count, history } = props;
+  const { getUsers,getCount, users, count, history, isLoading } = props;
 
   const [fund, setFund] = useState(0);
 
@@ -69,6 +69,28 @@ function Users(props) {
     getUsers(values);
     getCount();
   }, [getUsers, getCount]);
+
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          minHeight: "90vh",
+          minWidth: "100vw",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          boxSizing: "border-box",
+          margin: "0",
+          padding: "20px",
+        }}
+      >
+        <div className="preloader">
+          <img src="/img/purple_fav.png" alt="PurpleGold Loader" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: "#f5f6f8", }}>
@@ -287,7 +309,8 @@ function Users(props) {
 const mapStateToProps = (state) => {
   return {
     users: state.user.users,
-    count: state.user.usersCount
+    count: state.user.usersCount,
+    isLoading: state.user.isLoading,
   };
 };
 

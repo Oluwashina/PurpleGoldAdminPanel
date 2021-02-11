@@ -16,7 +16,6 @@ export const Funding = (values) => {
           const user = values.user
         const res = await GetApi("reports/funding?time="+time+"&user="+user+"&limit="+5, getToken());
         if (res.status === 200) {
-           
           dispatch({ type: "Funding", data: res.data.data});
         }
         if(res.status === 400){
@@ -84,6 +83,7 @@ export const ChartRequest = (values) => {
         }
         if(res.status === 400){
           dispatch({ type: "Count_Error", err: res.data });
+          dispatch({type: 'Stop_Loader'})
         }
       } catch (err) {
         console.log(err)

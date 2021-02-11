@@ -230,7 +230,7 @@ const UsersDetails = (props) => {
                                 <p className="mb-0">{phoneNumber}</p>
                                 <p className="mb-0"
                                 style={{fontWeight: 600}}
-                                >{!bank ? "" : bank} : {!accountNumber ? "" : accountNumber}</p>
+                                >{!bank ? "" : bank && ":"} {!accountNumber ? "" : accountNumber}</p>
                             </div>
                             {/* second part */}
                             <div style={{padding: '10px 30px'}}>

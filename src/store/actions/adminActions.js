@@ -15,7 +15,6 @@ export const getAllAdmin = () => {
       try {
         const res = await GetApi("admin/admins", getToken());
         if (res.status === 200) {
-            console.log(res)
           dispatch({ type: "AllAdmin", data: res.data.data});
         }
         if(res.status === 400){
@@ -37,7 +36,6 @@ export const getSuspendedAdmin = () => {
     try {
       const res = await GetApi("admin/admins?status=suspended", getToken());
       if (res.status === 200) {
-          console.log(res)
         dispatch({ type: "SuspendedAdmins", data: res.data.data});
       }
       if(res.status === 400){
@@ -60,7 +58,6 @@ export const getAdminActivities = () => {
       var userId = getState().auth.id
       const res = await GetApi("user_activities/"+userId, getToken());
       if (res.status === 200) {
-          console.log(res)
         dispatch({ type: "AdminActivities", data: res.data.data});
       }
       if(res.status === 400){
@@ -83,7 +80,6 @@ export const AddAdmin = (user) => {
     try {
       const res = await PostApi("admin/create_admin", { ...user }, getToken(), "application/json");
       if (res.status === 201) {
-          console.log(res)
         cogoToast.success('Admin created successfully!', { position: 'bottom-right', })
       }
       if(res.status === 400){
@@ -108,7 +104,6 @@ export const ActivateAdmin = (user) => {
     try {
       const res = await PatchApi("admin/activate_admin", { ...user }, getToken())
       if (res.status === 200) {
-          console.log(res)
           dispatch({ type: "StopRestoreLoader" });
           dispatch({type: 'Process_Success'})
         cogoToast.success('Admin successfully restored!', { position: 'bottom-right', })

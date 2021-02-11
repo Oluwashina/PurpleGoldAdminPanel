@@ -36,7 +36,6 @@ const initState = {
                  usersSearch: action.data
              }
         case 'SearchUser':
-            console.log(action.data)
             var word = action.data
             let user = state.usersSearch.filter(function (item) {
                 return item.email.toLowerCase().includes(word.toLowerCase());

@@ -147,7 +147,7 @@ const Withdrawal = (props) => {
         time = "year"
         break;
       default:
-        console.log("hello")
+        console.log("Today")
     }
     const values = {
       time: time,

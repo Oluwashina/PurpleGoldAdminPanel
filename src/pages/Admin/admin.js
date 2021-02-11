@@ -12,7 +12,6 @@ const Admin = (props) => {
   const [fund] = useState(1);
 
   const handleSubmit = async (values, setSubmitting) => {
-    console.log(values);
     await CreateAdmin(values);
   };
 

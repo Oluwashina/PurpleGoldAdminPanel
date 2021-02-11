@@ -157,7 +157,7 @@ const Processing = (props) =>{
         time = "year"
         break;
       default:
-        console.log("hello")
+        console.log("today")
     }
     const values = {
         time: time,

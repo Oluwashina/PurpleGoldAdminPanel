@@ -40,7 +40,6 @@ const AdminProfile = (props) => {
   };
 
   const handleFile = () =>{
-    console.log(fileRef.current.files[0])
     var file = fileRef.current.files[0]
     // setfileName(fileRef.current.files[0].name)
     handlePicture(file)
@@ -48,7 +47,6 @@ const AdminProfile = (props) => {
   }
  
   const handleSubmit = async (values, setSubmitting) => {
-    console.log(values);
     await saveProfile(values);
     // history.push("/");
   };

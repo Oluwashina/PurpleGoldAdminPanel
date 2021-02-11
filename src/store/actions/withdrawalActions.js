@@ -18,7 +18,7 @@ export const NewRequest = (values) => {
           const status = values.status
         const res = await GetApi("withdrawal_request?time="+time+"&user="+user+"&status="+status, getToken());
         if (res.status === 200) {
-            console.log(res)
+            
           dispatch({ type: "WithdrawRequest", data: res.data.data});
         }
         if(res.status === 400){
@@ -39,7 +39,7 @@ export const ProcessingRequest = (values) => {
           const status = values.status
         const res = await GetApi("withdrawal_request?time="+time+"&user="+user+"&status="+status, getToken());
         if (res.status === 200) {
-            console.log(res)
+            
           dispatch({ type: "ProcessingRequest", data: res.data.data});
         }
         if(res.status === 400){
@@ -60,7 +60,7 @@ export const PaidRequest = (values) => {
           const status = values.status
         const res = await GetApi("withdrawal_request?time="+time+"&user="+user+"&status="+status, getToken());
         if (res.status === 200) {
-            console.log(res)
+           
           dispatch({ type: "PaidRequest", data: res.data.data});
         }
         if(res.status === 400){
@@ -81,7 +81,7 @@ export const DeclinedRequest = (values) => {
           const status = values.status
         const res = await GetApi("withdrawal_request?time="+time+"&user="+user+"&status="+status, getToken());
         if (res.status === 200) {
-            console.log(res)
+            
           dispatch({ type: "DeclinedRequest", data: res.data.data});
         }
         if(res.status === 400){
@@ -102,7 +102,7 @@ return async (dispatch, getState) => {
         const time = values.time
     const res = await GetApi("withdrawal_request_count?time="+time+"&user="+user,getToken());
       if (res.status === 200) {
-          console.log(res)
+          
           dispatch({ type: "Request_Count", data: res.data.data});
       }
       if(res.status === 400){

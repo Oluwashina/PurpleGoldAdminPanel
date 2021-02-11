@@ -15,9 +15,7 @@ export const loginUser = (user) => {
   return async (dispatch, getState) => {
     try {
       const res = await PostApi("auth", {...user}, "", "application/json")
-      console.log(res)
       if (res.status === 200) {
-        console.log(res)
         dispatch({ type: "User_LoggedIn", data: res.data.data });
         cogoToast.success('Login Successful!', { position: 'bottom-right', })
       }
@@ -38,7 +36,6 @@ export const loginUser = (user) => {
       try {
         const res = await PostApi("forgot_password", { ...user }, "", "application/json");
         if (res.status === 200) {
-            console.log(res)
           cogoToast.success('Check your email for password reset instructions!', { position: 'top-center', })
         }
         if(res.status === 400){
@@ -71,7 +68,6 @@ export const ChangePassword = (user) => {
     try {
       const res = await PostApi("reset_password", { ...values }, getToken(), "application/json");
       if (res.status === 200) {
-          console.log(res)
           dispatch({ type: "PasswordChanged"})
         cogoToast.success('Password updated successfully! Kindly Login again.', { position: 'bottom-right', })
       }
@@ -96,7 +92,6 @@ export const UploadPhoto = (value) => {
             var image = res.data.data
             // actual call to update profile 
             dispatch({type: "profilePicture", image})
-            console.log(getState().auth.firstname)
               const values = {
                 firstname: getState().auth.firstname,
                 lastname: getState().auth.lastname,

@@ -17,7 +17,7 @@ export const VerifyEmail = (values) => {
           const email = values.email
         const res = await GetApi("user/"+email, getToken());
         if (res.status === 200) {
-            console.log(res)
+           
           dispatch({ type: "Email_Valid", data: res.data.data });
           dispatch({ type: "Fund_Details", data: values });
         }
@@ -55,7 +55,7 @@ export const ConfirmFund = () => {
     try {
       const res = await PostApi("transactions/fund_wallet", { ...data }, getToken(), "application/json");
       if (res.status === 201) {
-          console.log(res)
+         
           dispatch({ type: "Stop_Loader" });
           dispatch({ type: "Fund_Successful" });
           cogoToast.success('Wallet has been successfully funded!', { position: 'top-center',heading: 'PurpleGold' } )

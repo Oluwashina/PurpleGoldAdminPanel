@@ -15,7 +15,7 @@ export const getAllUsers = (values) => {
         const value = values.filter
         const res = await GetApi("admin/investors?status="+value, getToken());
         if (res.status === 200) {
-            console.log(res)
+         
           dispatch({ type: "AllUsers", data: res.data.data});
         }
         if(res.status === 400){
@@ -35,7 +35,7 @@ export const getAllUsers = (values) => {
         const id = value.id
         const res = await GetApi("admin/investors/"+id+"?time="+time, getToken());
         if (res.status === 200) {
-            console.log(res)
+            
           dispatch({ type: "UserDetails", data: res.data.data});
         }
         if(res.status === 400){
@@ -54,7 +54,7 @@ export const getAllUsers = (values) => {
       try {
         const res = await PatchApi("admin/deactivate_user", { ...user }, getToken());
         if (res.status === 200) {
-            console.log(res)
+            
             dispatch({ type: "StopSuspendLoader" });
             dispatch({type: "SuccessLoad"})
           cogoToast.success('User successfully suspended!', { position: 'top-center', })
@@ -77,7 +77,7 @@ export const getAllUsers = (values) => {
       try {
         const res = await PatchApi("admin/activate_user", { ...user }, getToken());
         if (res.status === 200) {
-            console.log(res)
+            
             dispatch({ type: "StopSuspendLoader" });
             dispatch({type: "SuccessLoad"})
           cogoToast.success('User successfully activated!', { position: 'top-center', })
@@ -99,7 +99,7 @@ export const UsersCount = () => {
       try {
         const res = await GetApi("user_count?user=INVESTOR", getToken());
         if (res.status === 200) {
-            console.log(res)
+            
           dispatch({ type: "Users_Count", data: res.data.data});
         }
         if(res.status === 400){

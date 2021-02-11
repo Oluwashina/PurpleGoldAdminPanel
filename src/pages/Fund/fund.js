@@ -12,7 +12,6 @@ const Fund = ({verify, history, loading,loader}) =>{
 
     
   const handleSubmit = async (values, setSubmitting) => {
-    console.log(values);
     await verify(values)
     // history.push("/");
   };

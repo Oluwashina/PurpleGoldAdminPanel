@@ -98,7 +98,7 @@ const initState = {
                     active= "suspended_users"
                     break;    
                 default:
-                console.log("Today")
+                    active = "funding"
                     
             }
             return{

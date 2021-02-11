@@ -245,6 +245,7 @@ const Processing = (props) =>{
                                         <div className="withdrawColumn">
                                             Email
                                         </div>
+                                        <div className="withdrawColumn">Account Details</div>
                                         <div className="withdrawColumn">
                                             Date
                                         </div>
@@ -286,7 +287,7 @@ const Processing = (props) =>{
                                 className="adminColumn"
                                 style={{ padding: "18px 20px" }}
                                 >
-                                 <img className="img-fluid imageStyle" src={imageUrl} alt="" />
+                                 <img className="img-fluid withdraw-image" src={imageUrl} alt="" />
                                 </div>
                                 <div
                                 className="adminColumn"
@@ -311,6 +312,11 @@ const Processing = (props) =>{
                                 </p>
                                 </div>
                                 <div className="adminColumn">{value.email}</div>
+                                <div className="adminColumn">
+                              <p className="mb-0" style={{ color: "#9E079E" }}>
+                                {value.bank} - {value.accountNumber}
+                              </p>
+                          </div>
                                 <div
                                 className="adminColumn"
                                 style={{ padding: "18px 20px" }}
@@ -340,11 +346,12 @@ const Processing = (props) =>{
                                     <button
                                     onClick={() => ClickPaid(value.requestId)}
                                     disabled={paidloader.indexOf(value.requestId)!==-1}
+                                    style={{marginBottom: '5px'}}
                                      className="btn btn-paid">Paid</button>
                                     <button
                                      onClick={() => ClickDeclined(value.requestId)}
                                      disabled={declinedloader.indexOf(value.requestId)!==-1}
-                                     className="btn btn-decline ml-2">Decline</button>
+                                     className="btn btn-decline">Decline</button>
                             </div>
                             </div>
                             );

@@ -273,6 +273,7 @@ const Withdrawal = (props) => {
                   <div className="withdrawColumn">Name</div>
                   <div className="withdrawColumn">Amount</div>
                   <div className="withdrawColumn">Email</div>
+                  <div className="withdrawColumn">Account Details</div>
                   <div className="withdrawColumn">Date</div>
                   <div className="withdrawColumn">Status</div>
                   <div className="withdrawColumn"></div>
@@ -308,7 +309,7 @@ const Withdrawal = (props) => {
                           className="adminColumn"
                           style={{ padding: "18px 20px" }}
                         >
-                          <img className="img-fluid imageStyle" src={imageUrl} alt="" />
+                          <img className="img-fluid withdraw-image" src={imageUrl} alt="" />
                         </div>
                         <div
                           className="adminColumn"
@@ -333,6 +334,11 @@ const Withdrawal = (props) => {
                           </p>
                         </div>
                         <div className="adminColumn">{value.email}</div>
+                        <div className="adminColumn">
+                              <p className="mb-0" style={{ color: "#9E079E" }}>
+                                {value.bank} - {value.accountNumber}
+                              </p>
+                          </div>
                         <div
                           className="adminColumn"
                           style={{ padding: "18px 20px" }}

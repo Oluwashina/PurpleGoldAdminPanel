@@ -234,6 +234,7 @@ const Paid = (props) => {
                   <div className="withdrawColumn">Name</div>
                   <div className="withdrawColumn">Amount</div>
                   <div className="withdrawColumn">Email</div>
+                  <div className="withdrawColumn">Account Details</div>
                   <div className="withdrawColumn">Date</div>
                   <div className="withdrawColumn">Status</div>
                 </div>
@@ -292,6 +293,11 @@ const Paid = (props) => {
                           </p>
                         </div>
                         <div className="adminColumn">{value.email}</div>
+                        <div className="adminColumn">
+                              <p className="mb-0" style={{ color: "#9E079E" }}>
+                                {value.bank} - {value.accountNumber}
+                              </p>
+                          </div>
                         <div
                           className="adminColumn"
                           style={{ padding: "18px 20px" }}

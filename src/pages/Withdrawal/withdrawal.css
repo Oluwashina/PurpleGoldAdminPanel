@@ -17,14 +17,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    right: 15px;
+    /* width: 15px;
+    height: 15px; */
+    border-radius: 10px;
+    right: 3px;
     top: 7px;    
    background: #FF0000;
    font-size: 12px;
    color: white;
+   padding: 2px 10px;
 }
 .newRequest{
     background: #FFFFFF;
@@ -140,3 +141,10 @@
   .btn-decline:hover{
     color: white;     
 } 
+
+.withdraw-image{
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+}

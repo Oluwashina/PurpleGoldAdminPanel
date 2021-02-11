@@ -9,6 +9,7 @@ const UsersDetails = (props) => {
     const {history,getDetails, match, firstname, lastname, createdAt,
          email, dob,
          phoneNumber, houseOfResidence,
+         bank, accountNumber,
         walletBalance, totalAmountInvested, totalWithdrawn, susloader, HandleSuspend,
          HandleActivate, isActive, success, walletActions, withdrawals, investments, imageUrl} = props
 
@@ -227,6 +228,9 @@ const UsersDetails = (props) => {
                             <div style={{borderRight: '0.2px solid #9286E9', padding: '10px 30px'}}>
                                 <p className="mb-0">{email}</p>
                                 <p className="mb-0">{phoneNumber}</p>
+                                <p className="mb-0"
+                                style={{fontWeight: 600}}
+                                >{!bank ? "" : bank} : {!accountNumber ? "" : accountNumber}</p>
                             </div>
                             {/* second part */}
                             <div style={{padding: '10px 30px'}}>
@@ -540,6 +544,8 @@ const mapStateToProps = (state) => {
         dob: state.user.dob,
         email: state.user.email,
         phoneNumber: state.user.phoneNumber,
+        bank: state.user.bank,
+        accountNumber: state.user.accountNumber,
         houseOfResidence: state.user.houseOfResidence,
         totalAmountInvested: state.user.totalAmountInvested,
         totalWithdrawn: state.user.totalWithdrawn,

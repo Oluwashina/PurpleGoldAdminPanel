@@ -13,6 +13,8 @@ const initState = {
     email: "", 
     phoneNumber: "",
     houseOfResidence: "",
+    bank: "",
+    accountNumber: "",
     totalAmountInvested: 0,
     totalWithdrawn: 0,
     walletBalance: "",
@@ -66,6 +68,8 @@ const initState = {
                 dob: action.data[0].dob,
                 email: action.data[0].email,
                 phoneNumber: action.data[0].phoneNumber,
+                bank: action.data[0].bank,
+                accountNumber: action.data[0].accountNumber,
                 houseOfResidence: action.data[0].houseOfResidence,
                 success: false
             }

@@ -478,7 +478,9 @@ const UsersDetails = (props) => {
                                             className="myRow" style={{background: '#FFFFFF', boxShadow: '0px 10px 10px 10px #F4F4F5', borderRadius: '10px'}}
                                         >
                                           
-                                          <div className="investColumn" style={{color: '#FF3535', fontWeight: 600}}>
+                                          <div className="investColumn"
+                                            style={{ color: data.type === "DEBIT" ? '#FF3535' : '#00B227', fontWeight: 600 } } 
+                                            >
                                                  N {parseFloat(data.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </div>
 

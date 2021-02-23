@@ -230,7 +230,7 @@ const UsersDetails = (props) => {
                                 <p className="mb-0">{phoneNumber}</p>
                                 <p className="mb-0"
                                 style={{fontWeight: 600}}
-                                >{!bank ? "" : bank && ":"} {!accountNumber ? "" : accountNumber}</p>
+                                >{!bank ? "" : bank} : {!accountNumber ? "" : accountNumber}</p>
                             </div>
                             {/* second part */}
                             <div style={{padding: '10px 30px'}}>
@@ -481,7 +481,7 @@ const UsersDetails = (props) => {
                                           <div className="investColumn"
                                             style={{ color: data.type === "DEBIT" ? '#FF3535' : '#00B227', fontWeight: 600 } } 
                                             >
-                                                 N {parseFloat(data.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                 N { !data.balanceAfter ? "0.00" : parseFloat(data.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </div>
 
                                             <div className="investColumn" style={{textAlign: 'right'}}>

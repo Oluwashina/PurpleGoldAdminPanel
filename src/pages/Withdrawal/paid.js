@@ -8,10 +8,22 @@ import { PaidRequest, WithdrawCount } from "../../store/actions/withdrawalAction
 const Paid = (props) => {
   const { getPaid, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props;
 
-  const [isActive, setActive] = useState(false);
-
-  const handleToggle = () => {
-    setActive(!isActive);
+  
+  const handleToggle = (id) => {
+    switch(id){
+      case 1:
+        setUser(1)
+        setStyle('title-heading active-div')
+        props.history.push('/withdrawal/paid')
+        break;
+      case 2:
+        setUser(2)
+        setStyle('title-heading marketers-div')
+        props.history.push('/withdrawal/marketers/paid')
+        break;
+      default:
+        break;
+    }
   };
 
   const handleRequest = () => {
@@ -32,6 +44,25 @@ const Paid = (props) => {
     { id: 3, name: "tab-3", text: "Month", value: "3" },
     { id: 4, name: "tab-4", text: "Year", value: "4" },
   ]);
+
+  const [user, setUser] = useState(1);
+
+  const [style, setStyle] = useState('title-heading active-div')
+
+  const [userData] = useState([
+    { id: 1, name: "tab-1", text: "User"},
+    { id: 2, name: "tab-2", text: "Marketer"}
+  ])
+
+  const UserToggle = userData.map((item) => (
+    <div
+     key={item.id}
+     onClick={() => handleToggle(item.id)}
+     className={user === item.id ? style : "title-heading"}
+     >
+     <h5 className="text-center mb-0">{item.text}</h5>
+   </div>
+));
 
   const [day, setDay] = useState(1);
 
@@ -128,24 +159,7 @@ const Paid = (props) => {
         <div className="contain">
           {/* swicth between the users and markteters tab */}
           <div className="mt-3 title-div" style={{ display: "flex" }}>
-            <div
-              onClick={handleToggle}
-              className={
-                isActive ? "title-heading" : "title-heading active-div"
-              }
-              style={{ flex: 1 }}
-            >
-              <h5 className="text-center mb-0">User</h5>
-            </div>
-            <div
-              onClick={handleToggle}
-              className={
-                isActive ? "title-heading marketers-div" : "title-heading"
-              }
-              style={{ flex: 1 }}
-            >
-              <h5 className="text-center mb-0">Marketer</h5>
-            </div>
+             {UserToggle}
           </div>
 
           {/* Requests tab */}

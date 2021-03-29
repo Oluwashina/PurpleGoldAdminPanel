@@ -1,24 +1,25 @@
-import SideBar from "../../components/SideBar/SideBar";
+import SideBar from "../../../components/SideBar/SideBar";
 import React, { useState, useEffect } from "react";
-import "./withdrawal.css";
+import "../withdrawal.css";
 import { connect } from "react-redux";
 import Moment from 'react-moment';
-import { DeclinedRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
+import { PaidRequest, WithdrawCount } from "../../../store/actions/withdrawalActions";
 
-const Declined = (props) => {
-  const { getDeclined, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props;
+const Paid = (props) => {
+  const { getPaid, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props;
+
 
   const handleToggle = (id) => {
     switch(id){
       case 1:
         setUser(1)
         setStyle('title-heading active-div')
-        props.history.push('/withdrawal/declined')
+        props.history.push('/withdrawal/paid')
         break;
       case 2:
         setUser(2)
         setStyle('title-heading marketers-div')
-        props.history.push('/withdrawal/marketers/declined')
+        props.history.push('/withdrawal/marketers/paid')
         break;
       default:
         break;
@@ -26,15 +27,15 @@ const Declined = (props) => {
   };
 
   const handleRequest = () => {
-    props.history.push("/withdrawal");
+    props.history.push("/withdrawal/marketers");
   };
 
   const handleProcessing = () => {
-    props.history.push("/withdrawal/processing");
+    props.history.push("/withdrawal/marketers/processing");
   };
 
-  const handlePaid = () => {
-    props.history.push("/withdrawal/paid");
+  const handleDeclined = () => {
+    props.history.push("/withdrawal/marketers/declined");
   };
 
   const [fundData] = useState([
@@ -44,9 +45,9 @@ const Declined = (props) => {
     { id: 4, name: "tab-4", text: "Year", value: "4" },
   ]);
 
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState(2);
 
-  const [style, setStyle] = useState('title-heading active-div')
+  const [style, setStyle] = useState('title-heading marketers-div')
 
   const [userData] = useState([
     { id: 1, name: "tab-1", text: "User"},
@@ -54,14 +55,14 @@ const Declined = (props) => {
   ])
 
   const UserToggle = userData.map((item) => (
-    <div
-     key={item.id}
-     onClick={() => handleToggle(item.id)}
-     className={user === item.id ? style : "title-heading"}
-     >
-     <h5 className="text-center mb-0">{item.text}</h5>
-   </div>
-));
+       <div
+        key={item.id}
+        onClick={() => handleToggle(item.id)}
+        className={user === item.id ? style : "title-heading"}
+        >
+        <h5 className="text-center mb-0">{item.text}</h5>
+      </div>
+  ));
 
   const [day, setDay] = useState(1);
 
@@ -72,52 +73,52 @@ const Declined = (props) => {
       case 1:
         values = {
           time: "today",
-          user: "INVESTOR",
-          status: "DECLINED",
+          user: "MARKETER",
+          status: "PAID",
         };
-        getDeclined(values);
+        getPaid(values);
         getWithdrawCount({
           time: "today",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
       case 2:
         values = {
           time: "week",
-          user: "INVESTOR",
-          status: "DECLINED",
+          user: "MARKETER",
+          status: "PAID",
         };
-        getDeclined(values);
+        getPaid(values);
         getWithdrawCount({
           time: "week",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
       case 3:
         values = {
           time: "month",
-          user: "INVESTOR",
-          status: "DECLINED",
+          user: "MARKETER",
+          status: "PAID",
         };
-        getDeclined(values);
+        getPaid(values);
         getWithdrawCount({
           time: "month",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
       case 4:
         values = {
           time: "year",
-          user: "INVESTOR",
-          status: "DECLINED",
+          user: "MARKETER",
+          status: "PAID",
         };
-        getDeclined(values);
+        getPaid(values);
         getWithdrawCount({
           time: "year",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
@@ -136,20 +137,20 @@ const Declined = (props) => {
     </div>
   ));
 
-  // Get all declined data
+  // Get all withdraw data
   useEffect(() => {
     const values = {
       time: "today",
-      user: "INVESTOR",
-      status: "DECLINED",
+      user: "MARKETER",
+      status: "PAID",
     };
-    getDeclined(values);
+    getPaid(values);
     getWithdrawCount({
       time: "today",
-      user: "INVESTOR",
+      user: "MARKETER",
      }
     )
-  }, [getDeclined, getWithdrawCount]);
+  }, [getPaid, getWithdrawCount]);
 
   return (
     <div style={{ backgroundColor: "#f5f6f8" }}>
@@ -190,24 +191,7 @@ const Declined = (props) => {
                 <p className="mb-0 ml-2">Processing</p>
               </div>
             </div>
-            <div className="paid" onClick={handlePaid}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <p
-                  className="mb-0"
-                  style={{
-                    background: "#E5E3F3",
-                    borderRadius: 10,
-                    padding: "2px 10px",
-                    color: "#AAAAAA",
-                    fontSize: 12,
-                  }}
-                >
-                  {paidCount}
-                </p>
-                <p className="mb-0 ml-2">Paid</p>
-              </div>
-            </div>
-            <div className="active-declined">
+            <div className="active-paid">
               <div style={{ display: "flex", alignItems: "center" }}>
                 <p
                   className="mb-0"
@@ -216,6 +200,23 @@ const Declined = (props) => {
                     borderRadius: 10,
                     padding: "2px 10px",
                     color: "#fff",
+                    fontSize: 12,
+                  }}
+                >
+                  {paidCount}
+                </p>
+                <p className="mb-0 ml-2">Paid</p>
+              </div>
+            </div>
+            <div className="declined" onClick={handleDeclined}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p
+                  className="mb-0"
+                  style={{
+                    background: "#E5E3F3",
+                    borderRadius: 10,
+                    padding: "2px 10px",
+                    color: "#AAAAAA",
                     fontSize: 12,
                   }}
                 >
@@ -235,7 +236,7 @@ const Declined = (props) => {
           </div>
 
           {/* Data tables to be populated with the withdrawal request layout */}
-          <div className="declined-head mt-4">
+          <div className="paid-head mt-4">
             <div className="myTable" style={{ marginBottom: 0 }}>
               <div className="myHead">
                 {/* first row */}
@@ -255,23 +256,22 @@ const Declined = (props) => {
                 {request.length ? (
                   request.map((value, index) => {
 
-                     // picture
-                     var imageUrl;
-                     switch(value.imageUrl){
-                         case "":
-                         imageUrl = "../img/profile.svg"  
-                         break;
-                         case null:
-                             imageUrl = "../img/profile.svg" 
-                         break;
-                         case "/profile_pics.jpg":
-                             imageUrl = "../img/profile.svg" 
-                         break;
-                         default:
-                         imageUrl = value.imageUrl 
-                     }
+                       // picture
+                       var imageUrl;
+                       switch(value.imageUrl){
+                           case "":
+                           imageUrl = "../img/profile.svg"  
+                           break;
+                           case null:
+                               imageUrl = "../img/profile.svg" 
+                           break;
+                           case "/profile_pics.jpg":
+                               imageUrl = "../img/profile.svg" 
+                           break;
+                           default:
+                           imageUrl = value.imageUrl 
+                       }
 
-                     
                     return (
                       <div
                         key={index}
@@ -282,7 +282,7 @@ const Declined = (props) => {
                           className="adminColumn"
                           style={{ padding: "18px 20px" }}
                         >
-                            <img className="img-fluid imageStyle" src={imageUrl} alt="" />
+                          <img className="img-fluid imageStyle" src={imageUrl} alt="" />
                         </div>
                         <div
                           className="adminColumn"
@@ -349,14 +349,16 @@ const Declined = (props) => {
                   </p>
                 )}
 
-              
+          
               </div>
             </div>
           </div>
 
           <div className="text-center">
-                  {request.length ? "" :  <p style={{fontStyle: 'italic'}}>No declined request available for display</p>} 
+                  {request.length ? "" :  <p style={{fontStyle: 'italic'}}>No paid request available for display</p>} 
                   </div>
+
+
         </div>
       </div>
     </div>
@@ -365,7 +367,7 @@ const Declined = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    request: state.withdraw.declinedRequest,
+    request: state.withdraw.paidRequest,
     pendingCount:state.withdraw.pendingCount,
     processingCount: state.withdraw.processingCount,
     paidCount: state.withdraw.paidCount,
@@ -375,9 +377,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDeclined: (value) => dispatch(DeclinedRequest(value)),
+    getPaid: (value) => dispatch(PaidRequest(value)),
     getWithdrawCount: (value) => dispatch(WithdrawCount(value)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Declined);
+export default connect(mapStateToProps, mapDispatchToProps)(Paid);

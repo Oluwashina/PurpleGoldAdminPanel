@@ -9,6 +9,11 @@ import Withdrawal from './pages/Withdrawal/withdrawal'
 import Processing from './pages/Withdrawal/processing'
 import Paid from './pages/Withdrawal/paid'
 import Declined from './pages/Withdrawal/declined'
+import MarketersNewRequest from './pages/Withdrawal/Marketers/marketersNewRequest'
+import MarketersProcessing from './pages/Withdrawal/Marketers/marketersProcessing'
+import MarketersPaid from './pages/Withdrawal/Marketers/marketersPaid'
+import MarketersDeclined from './pages/Withdrawal/Marketers/marketersDeclined'
+
 import Fund from './pages/Fund/fund'
 import FundConfirm from './pages/Fund/fundConfirm'
 import Admin from './pages/Admin/admin'
@@ -44,6 +49,12 @@ const App = (props) => {
         <ProtectedRoute path="/withdrawal/processing" component={Processing} />
         <ProtectedRoute path="/withdrawal/paid" component={Paid} />
         <ProtectedRoute path="/withdrawal/declined" component={Declined} />
+
+        <ProtectedRoute exact path="/withdrawal/marketers" component={MarketersNewRequest} />
+        <ProtectedRoute path="/withdrawal/marketers/processing" component={MarketersProcessing} />
+        <ProtectedRoute path="/withdrawal/marketers/paid" component={MarketersPaid} />
+        <ProtectedRoute path="/withdrawal/marketers/declined" component={MarketersDeclined} />
+
         <ProtectedRoute exact path="/fund" component={Fund} />
         <ProtectedRoute path="/fund/confirm" component={FundConfirm} />
         <ProtectedRoute path="/fund/all" component={FundingAll} />

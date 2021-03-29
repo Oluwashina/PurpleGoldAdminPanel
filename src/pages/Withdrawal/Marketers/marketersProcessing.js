@@ -1,9 +1,9 @@
-import SideBar from '../../components/SideBar/SideBar'
+import SideBar from "../../../components/SideBar/SideBar";
 import React, {useState, useEffect} from 'react'
-import './withdrawal.css'
+import '../withdrawal.css'
 import { connect } from "react-redux";
 import Moment from 'react-moment';
-import { ProcessingRequest, WithdrawCount, ProcessPaid, ProcessDeclined} from "../../store/actions/withdrawalActions";
+import { ProcessingRequest, WithdrawCount, ProcessPaid, ProcessDeclined} from "../../../store/actions/withdrawalActions";
 
 
 const Processing = (props) =>{
@@ -29,15 +29,15 @@ const Processing = (props) =>{
     };
 
     const handleRequest = () =>{
-        props.history.push("/withdrawal");
+        props.history.push("/withdrawal/marketers");
     }
 
     const handlePaid = () =>{
-        props.history.push('/withdrawal/paid')
+        props.history.push('/withdrawal/marketers/paid')
     }
 
     const handleDeclined = () =>{
-        props.history.push('/withdrawal/declined')  
+        props.history.push('/withdrawal/marketers/declined')  
     }
 
     // paid functionality
@@ -65,24 +65,25 @@ const Processing = (props) =>{
         { id: 4, name: 'tab-4', text: 'Year', value: '4' },
     ])
 
-    const [user, setUser] = useState(1);
 
-  const [style, setStyle] = useState('title-heading active-div')
+    const [user, setUser] = useState(2);
 
-  const [userData] = useState([
-    { id: 1, name: "tab-1", text: "User"},
-    { id: 2, name: "tab-2", text: "Marketer"}
-  ])
-
-  const UserToggle = userData.map((item) => (
-    <div
-     key={item.id}
-     onClick={() => handleToggle(item.id)}
-     className={user === item.id ? style : "title-heading"}
-     >
-     <h5 className="text-center mb-0">{item.text}</h5>
-   </div>
-));
+    const [style, setStyle] = useState('title-heading marketers-div')
+  
+    const [userData] = useState([
+      { id: 1, name: "tab-1", text: "User"},
+      { id: 2, name: "tab-2", text: "Marketer"}
+    ])
+  
+    const UserToggle = userData.map((item) => (
+      <div
+       key={item.id}
+       onClick={() => handleToggle(item.id)}
+       className={user === item.id ? style : "title-heading"}
+       >
+       <h5 className="text-center mb-0">{item.text}</h5>
+     </div>
+  ));
 
     const [day, setDay] = useState(1);
 
@@ -93,52 +94,52 @@ const Processing = (props) =>{
           case 1:
             values = {
               time: "today",
-              user: "INVESTOR",
+              user: "MARKETER",
               status: "PROCESSING",
             };
             getProcessed(values);
             getWithdrawCount({
                 time: "today",
-                user: "INVESTOR",
+                user: "MARKETER",
                }
               )
             break;
           case 2:
             values = {
               time: "week",
-              user: "INVESTOR",
+              user: "MARKETER",
               status: "PROCESSING",
             };
             getProcessed(values);
             getWithdrawCount({
                 time: "week",
-                user: "INVESTOR",
+                user: "MARKETER",
                }
               )
             break;
           case 3:
             values = {
               time: "month",
-              user: "INVESTOR",
+              user: "MARKETER",
               status: "PROCESSING",
             };
             getProcessed(values);
             getWithdrawCount({
                 time: "month",
-                user: "INVESTOR",
+                user: "MARKETER",
                }
               )
             break;
           case 4:
             values = {
               time: "year",
-              user: "INVESTOR",
+              user: "MARKETER",
               status: "PROCESSING",
             };
             getProcessed(values);
             getWithdrawCount({
                 time: "year",
-                user: "INVESTOR",
+                user: "MARKETER",
                }
               )
             break;
@@ -160,13 +161,13 @@ const Processing = (props) =>{
     useEffect(() => {
         const values = {
         time: "today",
-        user: "INVESTOR",
+        user: "MARKETER",
         status: "PROCESSING",
         };
         getProcessed(values);
         getWithdrawCount({
             time: "today",
-            user: "INVESTOR",
+            user: "MARKETER",
            }
           );
     }, [getProcessed, getWithdrawCount]);
@@ -192,14 +193,14 @@ const Processing = (props) =>{
     }
     const values = {
         time: time,
-        user: "INVESTOR",
+        user: "MARKETER",
         status: "PROCESSING",
         };
     if(success){
      getProcessed(values);
      getWithdrawCount({
         time: time,
-        user: "INVESTOR",
+        user: "MARKETER",
        }
       );
     }
@@ -215,7 +216,6 @@ const Processing = (props) =>{
                     <div className="mt-3 title-div" style={{ display: "flex" }}>
                       {UserToggle}
                     </div>
-                   
                     
                     {/* Requests tab */}
                     <div className="request-div mx-auto mt-5">

@@ -20,9 +20,11 @@
     box-sizing: border-box;
     border-radius: 10px;
     cursor: pointer;
+    display: flex;
   }
   .title-heading{
       padding: 15px 0px;
+      flex: 1;
   }
   .active-div{
     background-image: url('./img/users.png');

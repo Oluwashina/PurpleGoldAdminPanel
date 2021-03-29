@@ -1,9 +1,9 @@
-import SideBar from "../../components/SideBar/SideBar";
+import SideBar from "../../../components/SideBar/SideBar";
 import React, { useState, useEffect } from "react";
-import "./withdrawal.css";
+import "../withdrawal.css";
 import { connect } from "react-redux";
 import Moment from 'react-moment';
-import { DeclinedRequest, WithdrawCount } from "../../store/actions/withdrawalActions";
+import { DeclinedRequest, WithdrawCount } from "../../../store/actions/withdrawalActions";
 
 const Declined = (props) => {
   const { getDeclined, request, getWithdrawCount, pendingCount, processingCount, paidCount, declinedCount } = props;
@@ -26,15 +26,15 @@ const Declined = (props) => {
   };
 
   const handleRequest = () => {
-    props.history.push("/withdrawal");
+    props.history.push("/withdrawal/marketers");
   };
 
   const handleProcessing = () => {
-    props.history.push("/withdrawal/processing");
+    props.history.push("/withdrawal/marketers/processing");
   };
 
   const handlePaid = () => {
-    props.history.push("/withdrawal/paid");
+    props.history.push("/withdrawal/marketers/paid");
   };
 
   const [fundData] = useState([
@@ -44,9 +44,9 @@ const Declined = (props) => {
     { id: 4, name: "tab-4", text: "Year", value: "4" },
   ]);
 
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState(2);
 
-  const [style, setStyle] = useState('title-heading active-div')
+  const [style, setStyle] = useState('title-heading marketers-div')
 
   const [userData] = useState([
     { id: 1, name: "tab-1", text: "User"},
@@ -54,14 +54,15 @@ const Declined = (props) => {
   ])
 
   const UserToggle = userData.map((item) => (
-    <div
-     key={item.id}
-     onClick={() => handleToggle(item.id)}
-     className={user === item.id ? style : "title-heading"}
-     >
-     <h5 className="text-center mb-0">{item.text}</h5>
-   </div>
-));
+       <div
+        key={item.id}
+        onClick={() => handleToggle(item.id)}
+        className={user === item.id ? style : "title-heading"}
+        >
+        <h5 className="text-center mb-0">{item.text}</h5>
+      </div>
+  ));
+
 
   const [day, setDay] = useState(1);
 
@@ -72,52 +73,52 @@ const Declined = (props) => {
       case 1:
         values = {
           time: "today",
-          user: "INVESTOR",
+          user: "MARKETER",
           status: "DECLINED",
         };
         getDeclined(values);
         getWithdrawCount({
           time: "today",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
       case 2:
         values = {
           time: "week",
-          user: "INVESTOR",
+          user: "MARKETER",
           status: "DECLINED",
         };
         getDeclined(values);
         getWithdrawCount({
           time: "week",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
       case 3:
         values = {
           time: "month",
-          user: "INVESTOR",
+          user: "MARKETER",
           status: "DECLINED",
         };
         getDeclined(values);
         getWithdrawCount({
           time: "month",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
       case 4:
         values = {
           time: "year",
-          user: "INVESTOR",
+          user: "MARKETER",
           status: "DECLINED",
         };
         getDeclined(values);
         getWithdrawCount({
           time: "year",
-          user: "INVESTOR",
+          user: "MARKETER",
          }
         )
         break;
@@ -140,13 +141,13 @@ const Declined = (props) => {
   useEffect(() => {
     const values = {
       time: "today",
-      user: "INVESTOR",
+      user: "MARKETER",
       status: "DECLINED",
     };
     getDeclined(values);
     getWithdrawCount({
       time: "today",
-      user: "INVESTOR",
+      user: "MARKETER",
      }
     )
   }, [getDeclined, getWithdrawCount]);

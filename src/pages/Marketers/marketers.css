@@ -1,0 +1,146 @@
+.box{
+background: rgba(255, 255, 255, 0.76);
+border: 1px solid #9286E9;
+box-sizing: border-box;
+box-shadow: 0px 10px 10px 10px #F4F4F5;
+border-radius: 10px;
+padding: 20px;
+}
+.box-title{
+    background: rgba(146, 134, 233, 0.12);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.suspend-box{
+    background: #FF0000;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+.suspend-box:hover{
+    color: white;
+}
+.box-p{
+    color: #8E4DE6;
+    font-size: 14px;
+}
+.box-title-p{
+    color: #7A50B9;
+    font-weight: bold;
+    font-size: 14px;
+}
+.box-subtitle{
+    color: #9E079E;
+    font-weight: bold;
+    font-size: 14px;
+}
+.green-div{
+    background: rgba(30, 182, 54, 0.33);
+border-radius: 3px;
+padding: 2px 20px;
+}
+.green-text{
+    color: #1D8C2E;
+    font-weight: 600;
+    font-size: 14px;
+}
+.pink-div{
+    background: rgba(254, 32, 190, 0.49);
+border-radius: 3px;
+padding: 2px 20px;
+}
+.pink-text{
+color: #870465;
+font-weight: 600;
+font-size: 14px;
+}
+.purple-div{
+    background: rgba(196, 158, 242, 0.67);
+border-radius: 3px;
+padding: 2px 20px;
+}
+.purple-text{
+    color: #341CBA;
+    font-weight: 600;
+    font-size: 14px;
+}
+.view-all{
+    background: rgba(219, 214, 255, 0.73);
+border: 0.5px solid #9464CE;
+box-sizing: border-box;
+border-radius: 3px;
+padding: 3px 10px;
+cursor: pointer;
+}
+.view-all p{
+    color: #7A50B9;
+    font-weight: bold;
+    font-size: 14px;
+}
+.payment-div{
+    position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   background: #7031BD;
+    border: 0.5px solid #7A50B9;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    padding: 10px 15px;
+}
+.paidAmount{  
+   position: absolute;
+   left: -1px;
+   background: rgba(219, 214, 255, 0.73);
+   border: 0.5px solid #7A50B9;
+box-sizing: border-box;
+border-radius: 10px;
+width: 45%;
+display: flex;
+padding: 10px 15px;
+}
+.processedAmount{ 
+    display: flex;
+}
+.notify_icon{
+    position: absolute;
+    top: -4px;
+    left: 15px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    display: flex;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* all marketers style */
+.marketers-row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background: rgba(146, 134, 233, 0.12);
+    border-radius: 10px;
+    padding: 10px 20px;
+    align-items: center;
+}
+.marketers-column{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+.marketers-double-column{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 2;
+}

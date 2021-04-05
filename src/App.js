@@ -24,11 +24,15 @@ import AdminProfile from './pages/Admin/AdminProfile'
 import Users from  './pages/Users/users'
 import UsersDetails from './pages/Users/usersbyId'
 import Marketers from './pages/Marketers/marketers'
+import AllMarkerters from './pages/Marketers/allMarketers'
 import FundingAll from './pages/Dashboard/FundingAll'
 import Payouts from './pages/Dashboard/AllPayouts'
 import Investments from './pages/Dashboard/AllInvestments'
 import NotFoundPage from './pages/404/NotFound';
 import {isMobile} from 'react-device-detect'
+import MarketersProfile from './pages/Marketers/MarketersProfile';
+import MarketersPerformance from './pages/Marketers/MarketersPerformance';
+import MarketersCommission from './pages/Marketers/MarketersCommission';
 
 
 
@@ -65,7 +69,13 @@ const App = (props) => {
         <ProtectedRoute path="/admin/profile" component={AdminProfile} />
         <ProtectedRoute exact path="/users" component={Users} />
         <ProtectedRoute path="/users/:id" component={UsersDetails} />
-        <ProtectedRoute path="/marketers" component={Marketers} />
+
+        <ProtectedRoute exact path="/marketers" component={Marketers} />
+        <ProtectedRoute path="/marketers/all" component={AllMarkerters} />
+        <ProtectedRoute path="/marketer/:id" component={MarketersProfile} />
+        <ProtectedRoute path="/marketers/performance" component={MarketersPerformance} />
+        <ProtectedRoute path="/marketers/commission" component={MarketersCommission} />
+
         <ProtectedRoute path="/payouts/all" component={Payouts} />
         <ProtectedRoute path="/investments/all" component={Investments} />
         <Route path="*" component={NotFoundPage} />

@@ -1,11 +1,76 @@
 import SideBar from "../../components/SideBar/SideBar";
-import React from 'react'
+import React, {useEffect} from 'react'
 import './marketers.css'
 import PurpleLogo from '../Marketers/img/purpleboxlogo.png'
-import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import { getMarketers, getMarketersProfile } from "../../store/actions/marketersActions";
 
 
-function Marketers(){
+function MarketersAll(props){
+
+    const {getAllMarketers, allMarketers, history, getProfile} = props
+
+      // Get all marketers data
+  useEffect(() => {
+    getAllMarketers()
+  }, [getAllMarketers]);
+
+
+// mapping out all marketers 
+const marketersDiv = allMarketers.length ? (
+    allMarketers.map((value) => {
+      return (
+        <div key={value.id} className="marketers-row mb-3">
+            <div className="marketers-column">
+                    <div>
+                <p className="mb-0 box-p">{value.firstname} {value.lastname}</p>
+                </div>
+            </div>
+            
+            <div className="marketers-column">
+                <div>
+                <p className="mb-0 box-p">{value.email}</p>
+                </div>
+            </div>
+
+            <div className="marketers-double-column text-center">
+                    {/* status row */}
+                    <div style={{display: 'flex'}}>
+                        <div className="green-div" style={{marginRight: '2%'}}>   
+                            <p className="mb-0 green-text" style={{fontSize: 12}}>Active ({value.activeReferrals})</p>
+                        </div>
+                        <div className="pink-div" style={{marginRight: '2%'}}>   
+                            <p className="mb-0 pink-text" style={{fontSize: 12}}>Inactive ({value.inactiveReferrals})</p>
+                        </div>
+                        <div className="purple-div">   
+                            <p className="mb-0 purple-text" style={{fontSize: 12}}>Suspended ({value.suspended})</p>
+                        </div>
+                    </div>
+            </div>
+
+            <div className="marketers-column">
+                     <div onClick={()=>{handleRoute(value.id)}}  className="view-all" style={{textDecoration: 'none', width: '100px', margin: '0 auto'}}>
+                            <p className="mb-0"><i className="mdi mdi-plus mr-1" style={{color: '#7031BD', fontWeight: 'bold', fontSize: 15}}></i>View All</p>
+                     </div>
+            </div>
+        </div>
+      );
+    })
+  ) : (
+    <p
+      className="text-center mt-3"
+      style={{ fontStyle: "italic" }}
+    >
+    </p>
+  );
+
+  const handleRoute = (id) =>{
+    //   dispatch and filter by 
+    getProfile(id)
+    history.push('/marketer/'+id)
+  }
+
+
     return(
         <div style={{backgroundColor: '#f5f6f8'}}>
              <SideBar />
@@ -30,118 +95,11 @@ function Marketers(){
                                 
                             </div>
 
-                            {/* title 2 */}
-                            <div className="marketers-row mb-3">
-                                <div className="marketers-column">
-                                     <div>
-                                    <p className="mb-0 box-p">Olosunde Oluwatobiloba</p>
-                                    </div>
-                                </div>
-                               
-                                <div className="marketers-column">
-                                    <div>
-                                    <p className="mb-0 box-p">akinlade3195@gmail.com</p>
-                                    </div>
-                                </div>
 
-                                <div className="marketers-double-column text-center">
-                                        {/* status row */}
-                                        <div style={{display: 'flex'}}>
-                                            <div className="green-div" style={{marginRight: '2%'}}>   
-                                                <p className="mb-0 green-text" style={{fontSize: 12}}>Active (5,032)</p>
-                                            </div>
-                                            <div className="pink-div" style={{marginRight: '2%'}}>   
-                                                <p className="mb-0 pink-text" style={{fontSize: 12}}>Inactive (210,000)</p>
-                                            </div>
-                                            <div className="purple-div">   
-                                                <p className="mb-0 purple-text" style={{fontSize: 12}}>Suspended (576)</p>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                <div className="marketers-column">
-                                         <Link to="/marketer/1" className="view-all" style={{textDecoration: 'none', width: '100px', margin: '0 auto'}}>
-                                                <p className="mb-0"><i className="mdi mdi-plus mr-1" style={{color: '#7031BD', fontWeight: 'bold', fontSize: 15}}></i>View All</p>
-                                        </Link>
-                                </div>
-                            </div>
-
-                            {/* title 3 */}
-                            <div className="marketers-row mb-3">
-                                <div className="marketers-column">
-                                     <div>
-                                    <p className="mb-0 box-p">Olosunde Oluwatobiloba</p>
-                                    </div>
-                                </div>
-                               
-                                <div className="marketers-column">
-                                    <div>
-                                    <p className="mb-0 box-p">akinlade3195@gmail.com</p>
-                                    </div>
-                                </div>
-
-                                <div className="marketers-double-column text-center">
-                                        {/* status row */}
-                                        <div style={{display: 'flex'}}>
-                                            <div className="green-div" style={{marginRight: '2%'}}>   
-                                                <p className="mb-0 green-text" style={{fontSize: 12}}>Active (500)</p>
-                                            </div>
-                                            <div className="pink-div" style={{marginRight: '2%'}}>   
-                                                <p className="mb-0 pink-text" style={{fontSize: 12}}>Inactive (20)</p>
-                                            </div>
-                                            <div className="purple-div">   
-                                                <p className="mb-0 purple-text" style={{fontSize: 12}}>Suspended (6)</p>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                <div className="marketers-column">
-                                         <Link to="/marketer/2" className="view-all" style={{textDecoration: 'none', width: '100px', margin: '0 auto'}}>
-                                                <p className="mb-0"><i className="mdi mdi-plus mr-1" style={{color: '#7031BD', fontWeight: 'bold', fontSize: 15}}></i>View All</p>
-                                            </Link>
-                                </div>
-                            </div>
-                          
-
-                                {/* title 4 */}
-                                <div className="marketers-row mb-3">
-                                <div className="marketers-column">
-                                     <div>
-                                    <p className="mb-0 box-p">Olosunde Oluwatobiloba</p>
-                                    </div>
-                                </div>
-                               
-                                <div className="marketers-column">
-                                    <div>
-                                    <p className="mb-0 box-p">olosundetobiloba@gmail.com</p>
-                                    </div>
-                                </div>
-
-                                <div className="marketers-double-column text-center">
-                                        {/* status row */}
-                                        <div style={{display: 'flex'}}>
-                                            <div className="green-div" style={{marginRight: '2%'}}>   
-                                                <p className="mb-0 green-text" style={{fontSize: 12}}>Active (5,032)</p>
-                                            </div>
-                                            <div className="pink-div" style={{marginRight: '2%'}}>   
-                                                <p className="mb-0 pink-text" style={{fontSize: 12}}>Inactive (210,000)</p>
-                                            </div>
-                                            <div className="purple-div">   
-                                                <p className="mb-0 purple-text" style={{fontSize: 12}}>Suspended (5)</p>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                <div className="marketers-column">
-                                         <Link to="/marketer/3" className="view-all" style={{textDecoration: 'none', width: '100px', margin: '0 auto'}}>
-                                                <p className="mb-0"><i className="mdi mdi-plus mr-1" style={{color: '#7031BD', fontWeight: 'bold', fontSize: 15}}></i>View All</p>
-                                            </Link>
-                                </div>
-                            </div>
-                               
+                            {/* All marketers */}
+                            {marketersDiv}  
 
                         </div>
-
             
 
                     </div>
@@ -156,4 +114,17 @@ function Marketers(){
     )
 }
 
-export default  Marketers;
+const mapStateToProps = (state) =>{
+    return{
+        allMarketers: state.marketer.allMarketers
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        getAllMarketers: () => dispatch(getMarketers()),
+        getProfile: (id) => dispatch(getMarketersProfile(id))
+    }
+}
+
+export default  connect(mapStateToProps, mapDispatchToProps)(MarketersAll);

@@ -144,3 +144,28 @@ padding: 10px 15px;
     flex-basis: 100%;
     flex: 2;
 }
+
+.inflow-div{
+    background: rgba(146, 134, 233, 0.12);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+    /* width: 335px; */
+}
+
+.inflow-tab {
+    padding: 10px 15px;
+}
+
+.inflow-tab p{
+    color: #7A50B9;
+    font-weight: bold;
+}
+
+.active-inflow{
+    border-radius: 10px;
+    background: rgba(219, 214, 255, 0.73);
+    border: 0.5px solid #9464CE;
+}

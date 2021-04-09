@@ -114,7 +114,7 @@ function SideBar({Logout, firstname,lastname, image, Search}){
 
 
                   {/* Marketers */}
-                  <div className={isActive === "/marketers"  ? "text-center activeNav" : "text-center Nav"}>
+                  <div className={isActive.includes("/marketers")  ? "text-center activeNav" : "text-center Nav"}>
                     <Link to="/marketers" style={{textDecoration: 'none'}}>
                     <img  alt=""  src="/img/marketers.svg" className="img-fluid" />
                     <p className="mb-0" style={{fontSize: 10, color: '#000000'}}>Marketers</p>

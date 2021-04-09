@@ -1,9 +1,60 @@
 import SideBar from "../../components/SideBar/SideBar";
-import React from 'react'
+import React, {useEffect} from 'react'
 import './marketers.css'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import { getMarketersLimit, TotalDetails} from '../../store/actions/marketersActions'
+import Moment from "react-moment";
+import Skeleton from 'react-loading-skeleton'
 
-function Marketers(){
+// let data = [];
+// const getValueByName = name => data?.find(a => a.name === name)??{};
+
+// const montT = getValueByName("month_total_commission")
+
+function Marketers(props){
+
+    const {getTotalDetails, marketersSummary, getAllMarketers, marketers} = props
+
+
+     // Get all total details data
+  useEffect(() => {
+    const values = {
+      time: "year",
+      user: "MARKETER",
+    };
+    getTotalDetails(values.user);
+    getAllMarketers()
+  }, [getTotalDetails,getAllMarketers]);
+
+//   map marketers performance layout
+const marketersPerformance = marketers.length ? (
+    marketers.map((value) => {
+      return (
+     <div key={value.id} className="box-title mb-3">
+        <div>
+            <p className="mb-0 box-p">{value.firstname} {value.lastname}</p>
+        </div>
+        <div className="green-div">   
+            <p className="mb-0 green-text" style={{fontSize: 12}}>{value.referralPercent}% Referral ({value.referral})</p>
+        </div>
+        <div className="pink-div">   
+            <p className="mb-0 pink-text" style={{fontSize: 12}}>Commission({value.commission})</p>
+        </div>
+        <div className="purple-div">   
+            <p className="mb-0 purple-text" style={{fontSize: 12}}>Active Customers ({value.activeCustomers})</p>
+        </div>
+     </div>
+      );
+    })
+  ) : (
+    <p
+      className="text-center mt-3"
+      style={{ fontStyle: "italic" }}
+    >
+    </p>
+  );
+
 
     return(
         <div style={{backgroundColor: '#f5f6f8'}}>
@@ -40,7 +91,7 @@ function Marketers(){
                                                 <p className="mb-0 box-p">Total No. of Marketers</p>
                                             </div>
                                             <div className="green-div">   
-                                                <p className="mb-0 green-text">1928</p>
+                                                <p className="mb-0 green-text">{marketersSummary.marketersCount ||  <Skeleton /> }</p>
                                             </div>
                                         </div>
 
@@ -50,7 +101,7 @@ function Marketers(){
                                                 <p className="mb-0 box-p">Total No. of Referred Investors</p>
                                             </div>
                                             <div className="pink-div">   
-                                                <p className="mb-0 pink-text">329</p>
+                                                <p className="mb-0 pink-text">{marketersSummary.referredInvestorsCount || <Skeleton />}</p>
                                             </div>
                                         </div>
 
@@ -60,7 +111,7 @@ function Marketers(){
                                                 <p className="mb-0 box-p">No. of Suspended Marketers</p>
                                             </div>
                                             <div className="purple-div">   
-                                                <p className="mb-0 purple-text">1,329,928</p>
+                                                <p className="mb-0 purple-text">{marketersSummary.suspendedMarketersCount || <Skeleton />}</p>
                                             </div>
                                         </div>
 
@@ -90,7 +141,7 @@ function Marketers(){
                                                 <p className="mb-0 box-p">Total Commission Paid</p>
                                             </div>
                                             <div className="green-div">   
-                                                <p className="mb-0 green-text">1928</p>
+                                                <p className="mb-0 green-text">{marketersSummary.paidCommissionSum}</p>
                                             </div>
                                         </div>
 
@@ -100,7 +151,7 @@ function Marketers(){
                                                 <p className="mb-0 box-p">Total Commission</p>
                                             </div>
                                             <div className="pink-div">   
-                                                <p className="mb-0 pink-text">329</p>
+                                                <p className="mb-0 pink-text">{marketersSummary.totalCommissionSum }</p>
                                             </div>
                                         </div>
 
@@ -110,7 +161,7 @@ function Marketers(){
                                                 <p className="mb-0 box-p">This Month Commission</p>
                                             </div>
                                             <div className="purple-div">   
-                                                <p className="mb-0 purple-text">1,329,928</p>
+                                                <p className="mb-0 purple-text">{marketersSummary.thisMonthTotalCommission}</p>
                                             </div>
                                         </div>
 
@@ -138,52 +189,9 @@ function Marketers(){
                             </div>
 
                             {/* title 2 */}
-                            <div className="box-title mb-3">
-                                <div>
-                                    <p className="mb-0 box-p">Olosunde Oluwatobiloba</p>
-                                </div>
-                                <div className="green-div">   
-                                    <p className="mb-0 green-text" style={{fontSize: 12}}>50% Referral (5,032)</p>
-                                </div>
-                                <div className="pink-div">   
-                                    <p className="mb-0 pink-text" style={{fontSize: 12}}>Commission(531,032)</p>
-                                </div>
-                                <div className="purple-div">   
-                                    <p className="mb-0 purple-text" style={{fontSize: 12}}>Active Customers (2039)</p>
-                                </div>
-                            </div>
 
-                            {/* title 3 */}
-                            <div className="box-title mb-3">
-                                    <div>
-                                    <p className="mb-0 box-p">Ogungbaro Akinyemi</p>
-                                </div>
-                                <div className="green-div">   
-                                    <p className="mb-0 green-text" style={{fontSize: 12}}>20% Referral (5,032)</p>
-                                </div>
-                                <div className="pink-div">   
-                                    <p className="mb-0 pink-text" style={{fontSize: 12}}>Commission(210,000)</p>
-                                </div>
-                                <div className="purple-div">   
-                                    <p className="mb-0 purple-text" style={{fontSize: 12}}>Active Customers (576)</p>
-                                </div>
-                            </div>
-
-                                {/* title 4 */}
-                                <div className="box-title">
-                                    <div>
-                                    <p className="mb-0 box-p">Oluwashina Kure-Ojo</p>
-                                </div>
-                                <div className="green-div">   
-                                    <p className="mb-0 green-text" style={{fontSize: 12}}>20% Referral (5,032)</p>
-                                </div>
-                                <div className="pink-div">   
-                                    <p className="mb-0 pink-text" style={{fontSize: 12}}>Commission(210,000)</p>
-                                </div>
-                                <div className="purple-div">   
-                                    <p className="mb-0 purple-text" style={{fontSize: 12}}>Active Customers (576)</p>
-                                </div>
-                            </div>
+                            {/* ALL marketers layout */}
+                            {marketersPerformance}
 
                         </div>
 
@@ -196,7 +204,10 @@ function Marketers(){
                             {/* title 1 */}
                             <div className="box-title mb-3">
                                 <div style={{display: 'flex', alignItems: 'center'}}>
-                                        <img src="img/purpleboxlogo.png" className="img-fluid" alt="logo" />
+                                    <Link to='/marketers/inflow'>
+                                    <img src="img/purpleboxlogo.png" className="img-fluid" alt="logo" />
+                                    </Link>
+                                   
                                         <div className="ml-3">
                                             <p className="mb-0 box-title-p">Purple Gold</p>
                                             <p className="mb-0 box-subtitle">Inflow</p>
@@ -204,17 +215,21 @@ function Marketers(){
                                 </div>
                                 <div className="">
                                     <p className="mb-0" style={{fontSize: 12, color: '#8E4DE6'}}>Total Inflow this year</p>
-                                    <p className="mb-0" style={{fontSize: 14, color: '#8E4DE6', fontWeight: 'bold'}}>N 3,102,992,80</p>
+                                    <p className="mb-0" style={{fontSize: 14, color: '#8E4DE6', fontWeight: 'bold'}}>N {marketersSummary.inflowForYear || <Skeleton />}</p>
                                 </div>
                             </div>
 
                             {/* title 2 */}
                             <div className="box-title">
                                 <div>
-                                    <p className="mb-0 box-p">Total Inflow <span style={{fontWeight: 'bold'}}>(March)</span> </p>
+                                    <p className="mb-0 box-p">Total Inflow <span style={{fontWeight: 'bold'}}>( 
+                                        <Moment format="MMMM">
+                                            {new Date()}
+                                        </Moment>
+                                    ) </span> </p>
                                 </div>
                                 <div className="green-div">   
-                                    <p className="mb-0 green-text">N 1,234,928</p>
+                                    <p className="mb-0 green-text">N {marketersSummary.inflowForMonth}</p>
                                 </div>
                             </div>
 
@@ -240,9 +255,9 @@ function Marketers(){
                             {/* title 2 */}
                             <div className="box-title mb-3" style={{padding: '15px 60px'}}>
                                 <div style={{position: 'relative'}}>
-                                  <img src="img/notifications.svg" className="img-fluid" width="25" height="25" alt="logo" />
+                                  <img src="img/notification-01.svg" className="img-fluid" width="25" height="25" alt="logo" />
                                     <div className="notify_icon">
-                                        5
+                                        {marketersSummary.pendingWithdarawalRequests}
                                     </div>
                                 </div>
                                 <div>
@@ -257,7 +272,7 @@ function Marketers(){
                                     <p className="mb-0 box-p">Total Withdrawn</p>
                                 </div>
                                 <div className="green-div">   
-                                    <p className="mb-0 green-text">N 1,234,928</p>
+                                    <p className="mb-0 green-text">N {marketersSummary.paidWithdrawalRequests}</p>
                                 </div>
                             </div>
 
@@ -268,7 +283,7 @@ function Marketers(){
                                         <p className="mb-0" style={{color: 'white', fontSize: 14, fontWeight: 'bold'}}>Processing</p>
                                     </div>
                                     <div>
-                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N685,297</p>
+                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N {marketersSummary.processingWithdrawalRequests}</p>
                                     </div>
                                 </div>
                                 <div className="paidAmount">
@@ -276,7 +291,7 @@ function Marketers(){
                                         <p className="mb-0 text-white" style={{color: 'white', fontSize: 14, fontWeight: 'bold'}}>Paid</p>
                                     </div>
                                     <div>
-                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N685,297</p>
+                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N {marketersSummary.paidWithdrawalRequests}</p>
                                     </div>  
                                 </div>
                             </div>
@@ -293,4 +308,18 @@ function Marketers(){
     )
 }
 
-export default  Marketers;
+const mapStateToProps = (state) =>{
+    return{
+        marketersSummary: state.marketer.marketersSummary,
+        marketers: state.marketer.marketers
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        getTotalDetails: (value) => dispatch(TotalDetails(value)),
+        getAllMarketers: () => dispatch(getMarketersLimit()),
+    }
+}
+
+export default  connect(mapStateToProps, mapDispatchToProps)(Marketers);

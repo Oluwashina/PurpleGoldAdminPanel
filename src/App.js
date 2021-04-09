@@ -33,7 +33,8 @@ import {isMobile} from 'react-device-detect'
 import MarketersProfile from './pages/Marketers/MarketersProfile';
 import MarketersPerformance from './pages/Marketers/MarketersPerformance';
 import MarketersCommission from './pages/Marketers/MarketersCommission';
-
+import MarketersCommissionbyId from './pages/Marketers/MarketersCommissionbyId';
+import MarketersInflow from './pages/Marketers/Inflow'
 
 
 const App = (props) => {
@@ -75,6 +76,8 @@ const App = (props) => {
         <ProtectedRoute path="/marketer/:id" component={MarketersProfile} />
         <ProtectedRoute path="/marketers/performance" component={MarketersPerformance} />
         <ProtectedRoute path="/marketers/commission" component={MarketersCommission} />
+        <ProtectedRoute path="/commission/marketer/:id" component={MarketersCommissionbyId} />
+        <ProtectedRoute path="/marketers/inflow" component={MarketersInflow} />
 
         <ProtectedRoute path="/payouts/all" component={Payouts} />
         <ProtectedRoute path="/investments/all" component={Investments} />

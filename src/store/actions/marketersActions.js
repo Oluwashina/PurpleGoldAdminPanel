@@ -185,17 +185,41 @@ export const getInactive = (status, id) => {
   // suspend a marketer functionality
   export const SuspendMarketer = (user) =>{
     return async (dispatch, getState) => {
-      dispatch({ type: "Suspend_Loader", });
+      dispatch({ type: "marketerSuspendLoader", });
       try {
         const res = await PatchApi("admin/deactivate_user", { ...user }, getToken());
         if (res.status === 200) {
             
-            dispatch({ type: "StopSuspendLoader" });
-            dispatch({type: "SuccessLoad"})
+          dispatch({ type: "stopMarketerSuspendLoader" });
+          dispatch({type: 'successSuspend'})
           cogoToast.success('Marketer successfully suspended!', { position: 'top-center', })
         }
         if(res.status === 400){
-          dispatch({ type: "StopSuspendLoader" });
+          dispatch({ type: "stopMarketerSuspendLoader" });
+          cogoToast.error('Error while suspending user')
+        }
+      } catch (err) {
+        // var message = err.response.data
+        console.log(err)
+      }
+    };
+  }
+
+
+  // restore a marketer functionality
+  export const ActivateMarketer = (user) =>{
+    return async (dispatch, getState) => {
+      dispatch({ type: "marketerSuspendLoader", });
+      try {
+        const res = await PatchApi("admin/activate_user", { ...user }, getToken());
+        if (res.status === 200) {
+            
+            dispatch({ type: "stopMarketerSuspendLoader" });
+            dispatch({type: 'successSuspend'})
+          cogoToast.success('Marketer successfully activated!', { position: 'top-center', })
+        }
+        if(res.status === 400){
+          dispatch({ type: "stopMarketerSuspendLoader" });
           cogoToast.error('Error while suspending user')
         }
       } catch (err) {

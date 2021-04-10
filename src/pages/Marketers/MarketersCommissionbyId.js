@@ -4,12 +4,12 @@ import './marketers.css'
 // import {Link} from 'react-router-dom'
 import PurpleLogo from '../Marketers/img/purpleboxlogo.png'
 import {connect} from 'react-redux'
-import { getActive, getMarketerCommission, getMarketerInflow, SuspendMarketer } from "../../store/actions/marketersActions";
+import { getActive, getMarketerCommission, getMarketerInflow, SuspendMarketer, ActivateMarketer } from "../../store/actions/marketersActions";
 
 
 function MarketersCommissionById(props){
 
-    const {profile, getActiveCustomers, id, activeCustomers, getInflow, getCommission, totalInflow, totalCommission} = props
+    const {profile, getActiveCustomers, id, activeCustomers, getInflow, getCommission, totalInflow, totalCommission, HandleSuspend, HandleActivate, susloader} = props
   
 
       // Get all marketers customers, active or inactive
@@ -71,14 +71,17 @@ const activeLayout = activeCustomers.length ? (
 
 
 //   suspend a marketer
-  const Suspend = (id) =>{
-    if(profile.isActive){
-       alert(id)
-    }
-    else{
-       alert(id)
-    }   
+const Suspend = (id) =>{
+  const values = {
+      id
   }
+  if(profile.isActive){
+      HandleSuspend(values)
+  }
+  else{
+     HandleActivate(values)
+  } 
+}
 
   const [inflow, setFund] = useState(1);
   const [commission, setCommission] = useState(1);
@@ -228,6 +231,7 @@ const activeLayout = activeCustomers.length ? (
                                          {/* title 4 */}
                                          <div>
                                             <button
+                                            disabled={susloader}
                                              className={ profile.isActive ? 'btn btn-suspend btn-block' : 'btn btn-active btn-block'}
                                              onClick={() => Suspend(id)}
                                              >
@@ -312,7 +316,7 @@ const mapStateToProps = (state, ownProps) =>{
     return{
         profile: state.marketer.marketersProfile,
         id: id,
-        susloader: state.marketer.susloader,
+        susloader: state.marketer.marketersuspendloader,
         activeCustomers: state.marketer.activeCustomers,
         totalInflow: state.marketer.totalInflow,
         totalCommission: state.marketer.totalCommission
@@ -323,6 +327,7 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         getActiveCustomers: (status, id) => dispatch(getActive(status, id)),
         HandleSuspend: (value) => dispatch(SuspendMarketer(value)),
+        HandleActivate: (value) => dispatch(ActivateMarketer(value)),
         getInflow: (value) => dispatch(getMarketerInflow(value)),
         getCommission: (value) => dispatch(getMarketerCommission(value)),
     }

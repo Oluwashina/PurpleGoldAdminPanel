@@ -7,7 +7,7 @@ const initState = {
     marketersProfile: {},
     activeCustomers: [],
     inactiveCustomers: [],
-    susloader: false,
+    marketersuspendloader: false,
     totalInflow: [],
     totalCommission: []
  };
@@ -59,6 +59,37 @@ const initState = {
             return{
                 ...state,
                 totalCommission: action.data
+            }
+        case 'marketerSuspendLoader':
+            return{
+                ...state,
+                marketersuspendloader: true
+            }
+        case 'stopMarketerSuspendLoader':
+            return{
+                ...state,
+                marketersuspendloader: false
+            }
+        case 'successSuspend':
+            let newStatus;
+            let res = state.marketersProfile.isActive
+                switch(res){
+                    case 1:
+                        newStatus = 0;
+                    break;
+                    case 0:
+                        newStatus = 1;
+                        break;
+                    default:
+                        break;
+                }
+            return{
+                ...state,
+                marketersProfile: {
+                    ...state.marketersProfile,
+                    isActive: newStatus
+                }
+
             }
          default:
              return state

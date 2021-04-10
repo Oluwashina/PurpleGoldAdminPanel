@@ -80,6 +80,7 @@ export const PatchApi = async (url,payload,token) => {
     const data  = await axios.patch(apiUrl + `${url}`, payload, {
         headers: {
             Accept: 'application/json',
+            appID: 'PGADMIN',
             Authorization: token,
           }
     });

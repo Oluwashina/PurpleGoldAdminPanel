@@ -7,12 +7,12 @@ import Midas from '../Marketers/img/midas.svg'
 import Honorable from '../Marketers/img/honorable.svg'
 import Gelato from '../Marketers/img/gelato.svg'
 import {connect} from 'react-redux'
-import { getActive, getInactive, SuspendMarketer } from "../../store/actions/marketersActions";
+import { getActive, getInactive, SuspendMarketer, ActivateMarketer } from "../../store/actions/marketersActions";
 import Moment from "react-moment";
 
 function MarketersProfile(props){
 
-    const {profile, getActiveCustomers, getInActiveCustomers, id, activeCustomers, inactiveCustomers} = props
+    const {profile, getActiveCustomers, getInActiveCustomers, id, activeCustomers, inactiveCustomers, HandleSuspend, HandleActivate, susloader} = props
   
 
       // Get all marketers customers, active or inactive
@@ -151,12 +151,15 @@ const activeLayout = activeCustomers.length ? (
 
 //   suspend a marketer
   const Suspend = (id) =>{
+    const values = {
+        id
+    }
     if(profile.isActive){
-       alert(id)
+        HandleSuspend(values)
     }
     else{
-       alert(id)
-    }   
+       HandleActivate(values)
+    } 
   }
 
 
@@ -205,6 +208,7 @@ const activeLayout = activeCustomers.length ? (
                                          {/* title 4 */}
                                          <div>
                                             <button
+                                             disabled={susloader}
                                              className={ profile.isActive ? 'btn btn-suspend btn-block' : 'btn btn-active btn-block'}
                                              onClick={() => Suspend(id)}
                                              >
@@ -274,7 +278,7 @@ const mapStateToProps = (state, ownProps) =>{
     return{
         profile: state.marketer.marketersProfile,
         id: id,
-        susloader: state.marketer.susloader,
+        susloader: state.marketer.marketersuspendloader,
         activeCustomers: state.marketer.activeCustomers,
         inactiveCustomers: state.marketer.inactiveCustomers
     }
@@ -285,6 +289,7 @@ const mapDispatchToProps = (dispatch) =>{
         getActiveCustomers: (status, id) => dispatch(getActive(status, id)),
         getInActiveCustomers: (status, id) => dispatch(getInactive(status, id)),
         HandleSuspend: (value) => dispatch(SuspendMarketer(value)),
+        HandleActivate: (value) => dispatch(ActivateMarketer(value)),
     }
 }
 

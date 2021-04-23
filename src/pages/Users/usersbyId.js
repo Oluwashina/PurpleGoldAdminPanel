@@ -124,7 +124,7 @@ const UsersDetails = (props) => {
 
 
     return (  
-        <div style={{ backgroundColor: "#f5f6f8", }}>
+        <div>
              <SideBar />
           <div className="main">
               <div className="contain">
@@ -230,7 +230,7 @@ const UsersDetails = (props) => {
                                 <p className="mb-0">{phoneNumber}</p>
                                 <p className="mb-0"
                                 style={{fontWeight: 600}}
-                                >{!bank ? "" : bank} : {!accountNumber ? "" : accountNumber}</p>
+                                >{!bank ? "Bank details not updated yet" : `${bank} : `}  {!accountNumber ? "" : accountNumber}</p>
                             </div>
                             {/* second part */}
                             <div style={{padding: '10px 30px'}}>
@@ -245,7 +245,7 @@ const UsersDetails = (props) => {
                     {/* investment, withdrawal and balance table for all users */}
                     <div className="row mt-5">
                         {/* investments */}
-                        <div className="col-lg-5">
+                        <div className="col-lg-4">
                             <div className="investment">
                                 <div>
                                     <div style={{ display: "flex" }}>
@@ -271,9 +271,9 @@ const UsersDetails = (props) => {
                                         <div className="withdrawColumn">
                                             Amount
                                             </div>
-                                    <div className="withdrawColumn">
+                                    {/* <div className="withdrawColumn">
                                             Plan
-                                    </div>
+                                    </div> */}
                                     
                                     <div className="withdrawColumn">
                                         Date
@@ -298,11 +298,13 @@ const UsersDetails = (props) => {
                                           
                                           <div className="investColumn" style={{color: '#A030A8', fontWeight: 600}}>
                                                  N {parseFloat(value.amount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                 <br />
+                                                <span style={{fontSize: 12, color: '#000000'}}> {value.planName} ({value.duration} {value.duration > 1 ? "months" : "month"})</span>
                                             </div>
 
-                                            <div className="investColumn">
+                                            {/* <div className="investColumn">
                                                 {value.planName} ({value.duration} {value.duration > 1 ? "months" : "month"})
-                                                </div>
+                                                </div> */}
 
                                             <div className="investColumn" >
                                             
@@ -434,7 +436,7 @@ const UsersDetails = (props) => {
                         </div>
 
                         {/* balance */}
-                        <div className="col-lg-3">
+                        <div className="col-lg-4">
                             <div className="balance">
                                 <div>
                                     <div style={{ display: "flex" }}>
@@ -484,11 +486,14 @@ const UsersDetails = (props) => {
                                                  N { !data.balanceAfter ? "0.00" : parseFloat(data.balanceAfter).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </div>
 
-                                            <div className="investColumn" style={{textAlign: 'right'}}>
+                                            <div className="investColumn" style={{textAlign: 'right', fontSize: 12}}>
                                                                                            
-                                                {date}  
+                                                {date} 
+
+                                                <br />
+                                                <span style={{fontSize: 12, fontWeight: 'bold'}}>({data.refDesc})</span> 
                                                 
-                                                </div>
+                                            </div>
 
                                          
                                         </div>

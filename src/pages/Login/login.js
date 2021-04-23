@@ -115,7 +115,11 @@ const handleSubmit = async (values, setSubmitting) =>{
         </div>
         <div className="col-lg-6 d-none d-md-block">
           <div style={{ position: "relative" }}>
-            <img src="img/woman.png" className="img-fluid" alt="login" />
+            <img src="img/woman.png" className="img-fluid"
+            style={{width: 'calc(100vw - 385px)',
+                  height: '100%'
+              }}
+             alt="login" />
 
             <div className="whiteLogo">
               <img src="img/logo-white.png" className="img-fluid" alt="logo" />

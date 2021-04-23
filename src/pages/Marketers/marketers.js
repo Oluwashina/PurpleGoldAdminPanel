@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { getMarketersLimit, TotalDetails} from '../../store/actions/marketersActions'
 import Moment from "react-moment";
-import Skeleton from 'react-loading-skeleton'
+
 
 // let data = [];
 // const getValueByName = name => data?.find(a => a.name === name)??{};
@@ -57,7 +57,7 @@ const marketersPerformance = marketers.length ? (
 
 
     return(
-        <div style={{backgroundColor: '#f5f6f8'}}>
+        <div >
              <SideBar />
              <div className="main">
                 <div className="contain">
@@ -91,7 +91,7 @@ const marketersPerformance = marketers.length ? (
                                                 <p className="mb-0 box-p">Total No. of Marketers</p>
                                             </div>
                                             <div className="green-div">   
-                                                <p className="mb-0 green-text">{marketersSummary.marketersCount ||  <Skeleton /> }</p>
+                                                <p className="mb-0 green-text">{marketersSummary.marketersCount ? marketersSummary.marketersCount : 0  }</p>
                                             </div>
                                         </div>
 
@@ -101,7 +101,7 @@ const marketersPerformance = marketers.length ? (
                                                 <p className="mb-0 box-p">Total No. of Referred Investors</p>
                                             </div>
                                             <div className="pink-div">   
-                                                <p className="mb-0 pink-text">{marketersSummary.referredInvestorsCount || <Skeleton />}</p>
+                                                <p className="mb-0 pink-text">{marketersSummary.referredInvestorsCount ? marketersSummary.referredInvestorsCount : 0 }</p>
                                             </div>
                                         </div>
 
@@ -111,7 +111,7 @@ const marketersPerformance = marketers.length ? (
                                                 <p className="mb-0 box-p">No. of Suspended Marketers</p>
                                             </div>
                                             <div className="purple-div">   
-                                                <p className="mb-0 purple-text">{marketersSummary.suspendedMarketersCount || <Skeleton />}</p>
+                                                <p className="mb-0 purple-text">{marketersSummary.suspendedMarketersCount ? marketersSummary.suspendedMarketersCount : 0}</p>
                                             </div>
                                         </div>
 
@@ -215,7 +215,7 @@ const marketersPerformance = marketers.length ? (
                                 </div>
                                 <div className="">
                                     <p className="mb-0" style={{fontSize: 12, color: '#8E4DE6'}}>Total Inflow this year</p>
-                                    <p className="mb-0" style={{fontSize: 14, color: '#8E4DE6', fontWeight: 'bold'}}>N {marketersSummary.inflowForYear || <Skeleton />}</p>
+                                    <p className="mb-0" style={{fontSize: 14, color: '#8E4DE6', fontWeight: 'bold'}}>N {marketersSummary.inflowForYear }</p>
                                 </div>
                             </div>
 

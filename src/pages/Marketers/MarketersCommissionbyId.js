@@ -187,7 +187,7 @@ const Suspend = (id) =>{
 
 
     return(
-        <div style={{backgroundColor: '#f5f6f8', height: '100vh'}}>
+        <div>
              <SideBar />
              <div className="main">
                 <div className="contain">

@@ -1,6 +1,7 @@
 /* navbar styles */
-body{
-    /* background-color: #e5e5e5; */
+
+.sidebarBg{
+    background-color: #f5f6f8; 
 }
 .navbar-bg{
     background: #A030A8;

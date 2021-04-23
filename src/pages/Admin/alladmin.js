@@ -53,7 +53,7 @@ const AllAdmin = (props) => {
   }, [getAdmin]);
 
   return (
-    <div style={{ backgroundColor: "#f5f6f8" }}>
+    <div>
       <SideBar />
       <div className="main">
         <div className="contain">
@@ -69,7 +69,7 @@ const AllAdmin = (props) => {
           </div>
 
           {/* Data tables to be populated with all admin layout */}
-          <div className="admin-head mt-5">
+          <div className="admin-head mt-4">
             <div className="myTable" style={{ marginBottom: 0 }}>
               <div className="myHead">
                 {/*heading row */}

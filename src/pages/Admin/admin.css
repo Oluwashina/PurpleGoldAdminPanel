@@ -72,7 +72,7 @@
     color: white;
   }
   .profileImage{
-    border-radius: 41px;
+    border-radius: 50%;
     width: 120px;
     height: 120px;
   }
@@ -80,7 +80,7 @@
   /* input tye file styles */
   .file{
     display: table;
-    width: 40%;
+    width: 50%;
     margin: auto;
     background: #7031D8;
     border-radius: 10px;

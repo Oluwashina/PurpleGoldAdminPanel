@@ -37,7 +37,7 @@ const Dashboard = (props) => {
     todayCount
   } = props;
 
-  const [isActive, setActive] = useState(false);
+  
 
   const [fund, setFund] = useState(1);
 
@@ -54,9 +54,7 @@ const Dashboard = (props) => {
     { id: 4, name: "tab-4", text: "Year", value: "4" },
   ]);
 
-  const handleToggle = () => {
-    setActive(!isActive);
-  };
+ 
 
   const handleCardToggle = (index) => {
     ToggleCards(index);
@@ -292,32 +290,11 @@ const Dashboard = (props) => {
   }
 
   return (
-    <div style={{ backgroundColor: "#f5f6f8" }}>
+    <div>
       <SideBar />
       <div className="main">
         <div className="contain">
-          {/* swicth between the users and markteters tab */}
-          <div className="mt-3 title-div" style={{ display: "flex" }}>
-            <div
-              onClick={handleToggle}
-              className={
-                isActive ? "title-heading" : "title-heading active-div"
-              }
-              style={{ flex: 1 }}
-            >
-              <h5 className="text-center mb-0">User</h5>
-            </div>
-            <div
-              onClick={handleToggle}
-              className={
-                isActive ? "title-heading marketers-div" : "title-heading"
-              }
-              style={{ flex: 1 }}
-            >
-              <h5 className="text-center mb-0">Marketer</h5>
-            </div>
-          </div>
-
+         
           <div className="row mt-3">
             {count.length ? (
               count.map((card, index) => {
@@ -398,7 +375,7 @@ const Dashboard = (props) => {
                             className="mb-0"
                             style={{ color: "#000000", fontSize: 14 }}
                           >
-                            0 New
+                          
                           </p>
                         ) : (
                           ""
@@ -408,7 +385,7 @@ const Dashboard = (props) => {
                             className="mb-0"
                             style={{ color: "#000000", fontSize: 14 }}
                           >
-                            0 New
+                            
                           </p>
                         ) : (
                           ""

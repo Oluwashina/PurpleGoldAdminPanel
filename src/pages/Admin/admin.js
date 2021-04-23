@@ -53,7 +53,7 @@ const Admin = (props) => {
   ));
 
   return (
-    <div style={{ backgroundColor: "#f5f6f8" }}>
+    <div>
       <SideBar />
       <div className="main">
         <div className="contain">
@@ -70,7 +70,7 @@ const Admin = (props) => {
 
           {/* Fund user design layout */}
 
-          <div className="admin-card mt-5 mb-5">
+          <div className="admin-card mt-4 mb-5">
             <div className="admin-div">
               <div>
                 <h5

@@ -207,7 +207,7 @@ const Processing = (props) =>{
   }, [getProcessed, getWithdrawCount, success, day]);
 
     return(
-        <div style={{backgroundColor: '#f5f6f8',}}>
+        <div>
         <SideBar />
             <div className="main">
                 <div className="contain">

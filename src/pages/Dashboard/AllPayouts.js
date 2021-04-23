@@ -81,7 +81,7 @@ const Payouts = (props) => {
   }, [getPayouts]);
 
   return (
-    <div style={{ backgroundColor: "#f5f6f8" }}>
+    <div>
       <SideBar />
       <div className="main">
         <div className="contain">

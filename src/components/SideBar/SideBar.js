@@ -3,10 +3,14 @@ import {Link, useLocation} from 'react-router-dom'
 import { connect } from 'react-redux';
 import { logOut } from "../../store/actions/authActions";
 import { SearchUser } from '../../store/actions/userActions';
+import React,{useEffect} from 'react';
 
 
 function SideBar({Logout, firstname,lastname, image, Search}){
 
+    useEffect(() =>{
+        document.body.classList.add('sidebarBg');
+     }, [])
 
         // check for which path you are on
     const isActive = useLocation().pathname

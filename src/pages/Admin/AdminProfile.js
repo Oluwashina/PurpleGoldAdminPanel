@@ -91,7 +91,7 @@ const AdminProfile = (props) => {
 },[loading, history])
 
   return (
-    <div style={{ backgroundColor: "#f5f6f8" }}>
+    <div>
       <SideBar />
       <div className="main">
         <div className="contain">
@@ -107,7 +107,7 @@ const AdminProfile = (props) => {
           </div>
 
           {/* profile div */}
-          <div className="mt-5" style={{ width: "50%", margin: "auto" }}>
+          <div className="mt-4" style={{ width: "50%", margin: "auto" }}>
             <div
               style={{
                 borderRadius: "5px",
@@ -204,7 +204,7 @@ const AdminProfile = (props) => {
                 }) => (
                   <Form onSubmit={handleSubmit}>
                     {/* current password */}
-                    <div style={{ width: "55%", margin: "auto" }}>
+                    <div style={{ width: "60%", margin: "auto" }}>
                       <div
                         className="form-group mt-2"
                         style={{ position: "relative" }}
@@ -236,7 +236,7 @@ const AdminProfile = (props) => {
                     </div>
 
                     {/* new password */}
-                    <div style={{ width: "55%", margin: "auto" }}>
+                    <div style={{ width: "60%", margin: "auto" }}>
                       <div
                         className="form-group mt-3"
                         style={{ position: "relative" }}
@@ -268,7 +268,7 @@ const AdminProfile = (props) => {
                     </div>
 
                     {/* confirm password */}
-                    <div style={{ width: "55%", margin: "auto" }}>
+                    <div style={{ width: "60%", margin: "auto" }}>
                       <div
                         className="form-group mt-3"
                         style={{ position: "relative" }}

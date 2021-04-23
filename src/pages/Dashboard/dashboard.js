@@ -89,7 +89,7 @@ const Dashboard = (props) => {
         values = {
           time: chartDate,
           user: "INVESTOR",
-          type: "active_users",
+          type: "net",
         };
         getChartData(values);
         break;
@@ -97,7 +97,7 @@ const Dashboard = (props) => {
         values = {
           time: chartDate,
           user: "INVESTOR",
-          type: "inactive_users",
+          type: "active_users",
         };
         getChartData(values);
         break;
@@ -319,6 +319,9 @@ const Dashboard = (props) => {
                   case "suspendedUsers":
                     name = "Suspended";
                     break;
+                  case 'net':
+                    name = 'ROI';
+                    break;
                   default:
                     name = "";
                 }
@@ -347,12 +350,26 @@ const Dashboard = (props) => {
                         >
                           {name}
                         </p>
-                        <p
+                        {index === 4 ? (
+                          <p
+                          className="mb-0"
+                          style={{
+                            color: "#A030A8",
+                            fontSize: 14,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Inactive
+                        </p>
+                        ) : (
+                          <p
                           className="mb-0"
                           style={{ color: "#000000", fontSize: 14 }}
                         >
                           Today
                         </p>
+                        )}
+                        
                       </div>
                       <div
                         className="mt-4"
@@ -362,7 +379,7 @@ const Dashboard = (props) => {
                         }}
                       >
                         <h5 className={index === 5 ? "value-suspend" : "value"}>
-                          {index < 3 && "N "}
+                          {index < 4 && "N "}
                           <CountUp
                             start={0}
                             end={card.value}
@@ -370,26 +387,17 @@ const Dashboard = (props) => {
                             separator=","
                           />
                         </h5>
-                        {index === 3 ? (
-                          <p
-                            className="mb-0"
-                            style={{ color: "#000000", fontSize: 14 }}
-                          >
-                          
-                          </p>
-                        ) : (
-                          ""
-                        )}
                         {index === 4 ? (
-                          <p
-                            className="mb-0"
-                            style={{ color: "#000000", fontSize: 14 }}
-                          >
+                          <h5
+                            className="mb-0 value"
                             
-                          </p>
+                          >
+                          {card.inactiveUsers}
+                          </h5>
                         ) : (
                           ""
                         )}
+                       
                       </div>
                     </div>
                   </div>

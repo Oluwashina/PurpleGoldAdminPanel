@@ -89,10 +89,10 @@ const initState = {
                     active= "out_flow"
                     break;
                 case 3:
-                    active= "active_users"
+                    active= "net"
                     break;
                 case 4:
-                    active= "inactive_users"
+                    active= "active_users"
                     break;
                 case 5:
                     active= "suspended_users"
@@ -108,9 +108,10 @@ const initState = {
 
             } 
         case 'Dashboard_Count':
+            let res = action.data.filter((val) => val.name !== 'inactiveUsers' )
             return{
                 ...state,
-                count: action.data
+                count: res
             }
         case 'Start_Loader':
             return{

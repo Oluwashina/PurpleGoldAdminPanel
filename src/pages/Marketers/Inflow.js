@@ -97,8 +97,9 @@ const marketersInflowLayout = getInflow.length ? (
   ) : (
     <p
       className="text-center mt-3"
-      style={{ fontStyle: "italic" }}
+      style={{ fontStyle: "normal" }}
     >
+      No marketer's inflow yet!
     </p>
   );
 
@@ -127,26 +128,6 @@ const marketersInflowLayout = getInflow.length ? (
 
                                     {marketersInflowLayout}
 
-                                <div className="mt-4" style={{background: 'rgba(146, 134, 233, 0.12)', borderRadius: '10px', padding: '15px 20px', display: 'flex', justifyContent: 'space-between'}}>
-
-                                    {/* name  */}
-                                    <div style={{background: 'rgba(219, 214, 255, 0.73)', border: '0.5px solid #9464CE', borderRadius: '10px', padding: '5px 25px'}}>
-                                        <p className="mb-0" style={{fontSize: 14, color: '#7A50B9', fontWeight: 'bold'}}>Akinyemi Ogungbaro</p>
-                                    </div>
-
-                                    <div style={{background: 'rgba(219, 214, 255, 0.73)', border: '0.5px solid #9464CE', borderRadius: '10px', padding: '5px 25px'}}>
-                                        <p className="mb-0" style={{fontSize: 14, color: '#7A50B9', fontWeight: 'bold'}}>akinyemiogungbaro@gmail.com</p>
-                                    </div>
-
-                                    <div style={{background: 'rgba(219, 214, 255, 0.73)', border: '0.5px solid #9464CE', borderRadius: '10px', padding: '5px 25px'}}>
-                                        <p className="mb-0" style={{fontSize: 14, color: '#9E079E', fontWeight: 'bold'}}>PG-01928</p>
-                                    </div>
-
-                                    <div style={{background: 'rgba(219, 214, 255, 0.73)', border: '0.5px solid #9464CE', borderRadius: '10px', padding: '5px 25px'}}> 
-                                        <p className="mb-0" style={{fontSize: 14, color: '#7A50B9', fontWeight: 'bold'}}>N 128,576 </p>
-                                    </div>
-
-                                </div>
 
                                 </div>
                             </div>

@@ -50,8 +50,9 @@ const marketersPerformance = marketers.length ? (
   ) : (
     <p
       className="text-center mt-3"
-      style={{ fontStyle: "italic" }}
+      style={{ fontStyle: "normal" }}
     >
+        No marketer's performance yet!
     </p>
   );
 
@@ -141,7 +142,7 @@ const marketersPerformance = marketers.length ? (
                                                 <p className="mb-0 box-p">Total Commission Paid</p>
                                             </div>
                                             <div className="green-div">   
-                                                <p className="mb-0 green-text">{marketersSummary.paidCommissionSum}</p>
+                                                <p className="mb-0 green-text">{marketersSummary.paidCommissionSum ? marketersSummary.paidCommissionSum : 0}</p>
                                             </div>
                                         </div>
 
@@ -151,7 +152,7 @@ const marketersPerformance = marketers.length ? (
                                                 <p className="mb-0 box-p">Total Commission</p>
                                             </div>
                                             <div className="pink-div">   
-                                                <p className="mb-0 pink-text">{marketersSummary.totalCommissionSum }</p>
+                                                <p className="mb-0 pink-text">{marketersSummary.totalCommissionSum ? marketersSummary.totalCommissionSum : 0 }</p>
                                             </div>
                                         </div>
 
@@ -161,7 +162,7 @@ const marketersPerformance = marketers.length ? (
                                                 <p className="mb-0 box-p">This Month Commission</p>
                                             </div>
                                             <div className="purple-div">   
-                                                <p className="mb-0 purple-text">{marketersSummary.thisMonthTotalCommission}</p>
+                                                <p className="mb-0 purple-text">{marketersSummary.thisMonthTotalCommission ? marketersSummary.thisMonthTotalCommission : 0}</p>
                                             </div>
                                         </div>
 
@@ -215,7 +216,7 @@ const marketersPerformance = marketers.length ? (
                                 </div>
                                 <div className="">
                                     <p className="mb-0" style={{fontSize: 12, color: '#8E4DE6'}}>Total Inflow this year</p>
-                                    <p className="mb-0" style={{fontSize: 14, color: '#8E4DE6', fontWeight: 'bold'}}>N {marketersSummary.inflowForYear }</p>
+                                    <p className="mb-0" style={{fontSize: 14, color: '#8E4DE6', fontWeight: 'bold'}}>N {marketersSummary.inflowForYear ? marketersSummary.inflowForYear : 0 }</p>
                                 </div>
                             </div>
 
@@ -229,7 +230,7 @@ const marketersPerformance = marketers.length ? (
                                     ) </span> </p>
                                 </div>
                                 <div className="green-div">   
-                                    <p className="mb-0 green-text">N {marketersSummary.inflowForMonth}</p>
+                                    <p className="mb-0 green-text">N {marketersSummary.inflowForMonth ? marketersSummary.inflowForMonth : 0}</p>
                                 </div>
                             </div>
 
@@ -257,7 +258,7 @@ const marketersPerformance = marketers.length ? (
                                 <div style={{position: 'relative'}}>
                                   <img src="img/notification-01.svg" className="img-fluid" width="25" height="25" alt="logo" />
                                     <div className="notify_icon">
-                                        {marketersSummary.pendingWithdarawalRequests}
+                                        {marketersSummary.pendingWithdarawalRequests ? marketersSummary.pendingWithdarawalRequests : 0}
                                     </div>
                                 </div>
                                 <div>
@@ -272,7 +273,7 @@ const marketersPerformance = marketers.length ? (
                                     <p className="mb-0 box-p">Total Withdrawn</p>
                                 </div>
                                 <div className="green-div">   
-                                    <p className="mb-0 green-text">N {marketersSummary.paidWithdrawalRequests}</p>
+                                    <p className="mb-0 green-text">N {marketersSummary.paidWithdrawalRequests ? marketersSummary.paidWithdrawalRequests : 0}</p>
                                 </div>
                             </div>
 
@@ -283,7 +284,7 @@ const marketersPerformance = marketers.length ? (
                                         <p className="mb-0" style={{color: 'white', fontSize: 14, fontWeight: 'bold'}}>Processing</p>
                                     </div>
                                     <div>
-                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N {marketersSummary.processingWithdrawalRequests}</p>
+                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N {marketersSummary.processingWithdrawalRequests ? marketersSummary.processingWithdrawalRequests : 0}</p>
                                     </div>
                                 </div>
                                 <div className="paidAmount">
@@ -291,7 +292,7 @@ const marketersPerformance = marketers.length ? (
                                         <p className="mb-0 text-white" style={{color: 'white', fontSize: 14, fontWeight: 'bold'}}>Paid</p>
                                     </div>
                                     <div>
-                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N {marketersSummary.paidWithdrawalRequests}</p>
+                                    <p className="mb-0 ml-3" style={{color: 'white', fontSize: 14}}>N {marketersSummary.paidWithdrawalRequests ? marketersSummary.paidWithdrawalRequests : 0}</p>
                                     </div>  
                                 </div>
                             </div>

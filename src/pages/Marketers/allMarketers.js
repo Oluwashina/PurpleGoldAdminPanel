@@ -59,8 +59,9 @@ const marketersDiv = allMarketers.length ? (
   ) : (
     <p
       className="text-center mt-3"
-      style={{ fontStyle: "italic" }}
+      style={{ fontStyle: "normal" }}
     >
+        No marketer registered yet!
     </p>
   );
 
